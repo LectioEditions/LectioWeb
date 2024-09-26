@@ -1,19 +1,19 @@
-import { deletePodcast, getPodcastById, getPodcastByUserId, getPodcasts, getUserByClerkId } from '@/server/db';
+import { deletecours, getCoursById, getCoursByUserId, getCourses, getUserByClerkId } from '@/src/server/db';
 import { Loader } from 'lucide-react';
 import React from 'react'
 import Image from 'next/image'
-import PodcastdetailPlayer from '@/components/PodcastdetailPlayer';
-import PodcastCard from '@/components/PodcastCard';
-import EmptyState from '@/components/EmptyState';
+import CoursdetailPlayer from '@/src/components/CoursdetailPlayer';
+import CoursCard from '@/src/components/CoursCard';
+import EmptyState from '@/src/components/EmptyState';
 import { QueryResult } from '@vercel/postgres';
-import ProfileDisplay from '@/components/ProfileDisplay';
+import ProfileDisplay from '@/src/components/ProfileDisplay';
 
  const Profile= async({params}:{
   params:{profileId : string}
 }) => {
   
   const user = await getUserByClerkId(params.profileId);
-  const userPodcasts = await getPodcastByUserId(params.profileId);
+  const usercourss = await getCoursByUserId(params.profileId);
   if(!user) return(<div className='w-full h-screen flex justify-center items-center'>
     <Loader size={30} className="animate-spin  text-orange-1"/>
     </div>
@@ -22,14 +22,14 @@ import ProfileDisplay from '@/components/ProfileDisplay';
   return (
      <section className=' flex w-full flex-col '>
       <header className=' mt-9 flex items-center justify-between'>
-      <ProfileDisplay user={user} podcasts={userPodcasts}/>
+      <ProfileDisplay user={user} courses={usercourss}/>
       
       </header>
      <section className='flex flex-col gap-8'>
-      <h1 className='text-xl font-bold text-white-1 '> All Podcasts</h1>
-     {userPodcasts && userPodcasts.length>0 ?(
-      <div className='podcast_grid'>{userPodcasts.map((podcast,index)=>(
-        <PodcastCard key={index} title={podcast.title} imgURL={podcast.imageURL} description={podcast.description} id={podcast.id} />
+      <h1 className='text-xl font-bold text-white-1 '> All courss</h1>
+     {usercourss && usercourss.length>0 ?(
+      <div className='cours_grid'>{usercourss.map((cours,index)=>(
+        <CoursCard key={index} title={cours.Titre} imgURL={cours.imageURL} description={cours.description} id={cours.id} />
       ))}
       </div>
      ):(
@@ -37,7 +37,7 @@ import ProfileDisplay from '@/components/ProfileDisplay';
       <EmptyState
       title={"No podasts found"}
       buttonLink={"/discover"}
-      buttonText={"Discover more podcasts"}/>
+      buttonText={"Discover more courss"}/>
       </>
      )}
      </section>

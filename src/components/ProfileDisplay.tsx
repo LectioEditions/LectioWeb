@@ -3,36 +3,22 @@
 import React from 'react'
 import Image from "next/image";
 
-import { useAudio } from '@/providers/AudioProvider';
-import { Podcasts, User } from "@/types";
+import { Courss, User } from "@/src/types";
 
 import { Loader } from "lucide-react";
 import { Button } from "./ui/button";
 //import { useToast } from "./ui/use-toast";
 const ProfileDisplay = ({
-    user ,podcasts
+    user ,courses
 
-    }: {user:User , podcasts : Podcasts[]}) => {
-      const { setAudio } = useAudio();
-      const podcast = podcasts[0];
+    }: {user:User , courses : Courss[]}) => {
+      const cours = courses[0];
 
     
       
 
-      const handlePlay = () => {
-        if (!podcast)  throw new Error("No podcast found");
-        const podcastId = podcast.id.toString();
-        const author = user?.name || "";
-        setAudio({
-          title: podcast.title,
-          audioUrl: podcast.audioURL,
-          imageUrl: podcast.imageURL,
-          author:author,
-          podcastId,
-        });
-      };
     
-      if (!user || !podcasts ) return <Loader />;
+      if (!user || !courses ) return <Loader />;
     
       return (
         <div className="mb-6 flex w-full justify-between max-md:justify-center">
@@ -41,7 +27,7 @@ const ProfileDisplay = ({
               src={user.image}
               width={250}
               height={250}
-              alt="Podcast image"
+              alt="cours image"
               className="aspect-square rounded-lg"
             />
             <div className="flex w-full flex-col gap-5 max-md:items-center md:gap-9">
@@ -56,14 +42,13 @@ const ProfileDisplay = ({
                     height={24}
                     alt="headphone"/>
                     <h2 className='text-lg font-bold text-white-1'>
-                        {user?.views} 
+                        {user?.impression} 
                     </h2>
                     <p className='text-lg font-inter font-thin text-white-1'>monthely listeners</p>
                 </figure>
               </article>
     
               <Button
-                onClick={handlePlay}
                 className="text-16 w-full max-w-[250px] bg-orange-1 font-extrabold text-white-1 gap-3"
               >
                 <Image
@@ -72,7 +57,7 @@ const ProfileDisplay = ({
                   height={20}
                   alt="random play"
                 />{" "}
-                 Play a random podcast
+                 Play a random cours
               </Button>
             </div>
           </div>
