@@ -3,7 +3,8 @@
 import { Dispatch, SetStateAction } from "react";
 import * as schema from "@/src/server/schema"
 
-export type User = typeof schema.Users.$inferSelect;
+export type User = typeof schema.Users.$inferInsert;
+export type Users = typeof schema.Users.$inferSelect;
 export type Cours = typeof schema.cours.$inferInsert;
 export type Courss = typeof schema.cours.$inferSelect;
 

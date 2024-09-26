@@ -2,8 +2,8 @@
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { Webhook } from "svix";
-import {Users} from "@/server/schema";
-import * as queries from "@/server/db";
+import {Users} from "@/src/server/schema";
+import * as queries from "@/src/server/db";
 import { NextResponse } from "next/server";
 
 
