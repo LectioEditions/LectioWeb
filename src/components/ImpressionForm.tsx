@@ -93,10 +93,10 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
 
               <Select onValueChange={(value) => {form.setValue("Commune", value);
                 form.trigger("Commune")}}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-black-3 text-gray-1 focus-visible:ring-offset-green-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-white-6 dark:bg-black-3 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Selectionner votre Commune" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-3 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                <SelectContent className="text-16 border-none bg-white-6 dark:bg-white-6 dark:bg-black-3 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Communes.map((category) => (
                     <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
                       {category}
@@ -178,7 +178,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
             <div className="">
               <Button
                 type="submit"
-                className="text-base w-full bg-green-1 py-4 font-extrabold text-black-1 dark:text-white-1 transition-all duration-500 hover:bg-black-1"
+                className="text-base w-full bg-green-1 py-4 font-extrabold text-black-1 dark:text-white-1 transition-all duration-500 hover:bg-white-1 dark:bg-black-1"
               >
                 {isLoading ? (
                   <>

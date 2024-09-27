@@ -121,10 +121,10 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
               </Label>
 
               <Select onValueChange={(value) => form.setValue("Category",value)}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-black-3 text-gray-1 focus-visible:ring-offset-green-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-white-6 dark:bg-black-3 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-3 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                <SelectContent className="text-16 border-none bg-white-6 dark:bg-white-6 dark:bg-black-3 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Categories.map((category) => (
                     <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
                       {category}
@@ -162,7 +162,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
             <div className="">
               <Button
                 type="submit"
-                className="text-base w-full bg-green-1 py-4 font-extrabold text-black-1 dark:text-white-1 transition-all duration-500 hover:bg-black-1"
+                className="text-base w-full bg-green-1 py-4 font-extrabold text-black-1 dark:text-white-1 transition-all duration-500 hover:bg-white-1 dark:bg-black-1"
               >
                 {isLoading ? (
                   <>

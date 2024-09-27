@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { sidebarLinks } from '@/src/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/src/lib/utils'
+import ThemeSwitch from './ThemeSwitch';
 
 
 const MobileNav = () => {
@@ -31,14 +32,13 @@ const MobileNav = () => {
         alt="menu"
         />
       </SheetTrigger>
-      <SheetContent side="left" className='border-none bg-white-6 dark:bg-black-1'>
+      <SheetContent side="left" className='border-none bg-black-6  dark:bg-black-2'>
       <Link  href={"/"} className='flex cursor-pointer items-center gap-1 pb-10 pl-4'>
-             <Image src='/icons/logo.svg' alt='logo' width={23} height={27} />
-             <h1 className='text-2xl font-extrabold ml-2 text-black-1 dark:text-white-1 '>Podcaster</h1>
-             </Link>
+      <Image src='/icons/lectio_logo-04.png' alt='logo' width={100} height={27} />
+      </Link>
       <div className='h-[calc(100vh - 72px)] flex-col justify-between overflow-auto'>
        <SheetClose asChild>
-        <nav className='flex flex-col gap-6 h-full text-black-1 dark:text-white-1'>
+        <nav className='flex flex-col gap-6 h-full text-white-1'>
         {sidebarLinks.map((route,index)=>{
                 const isActive = Pathname === route.route || Pathname.startsWith('${route.route}/')   ;
                 return(
@@ -50,6 +50,7 @@ const MobileNav = () => {
                     </Link>
                     </SheetClose>
                 ) })}
+                <ThemeSwitch/>
         </nav>
        </SheetClose>
         </div>       

@@ -17,13 +17,13 @@ const RightSideBar = async () => {
     <Loader size={30} className="animate-spin  text-green-1"/>
     </div>)
   return (
-    <section className='right_sidebar text-black-1 dark:text-white-1'>
+    <section className='right_sidebar text-white-1 dark:text-white-1'>
 
       <SignedIn>
         <Link href={ `/profile/${userData?.id}`} className='flex gap-3 pb-12'>
         <UserButton/>
         <div className='flex w-full items-center justify-between '>
-          <h1 className='text-lg truncate font-semibold text-black-1 dark:text-white-1'>
+          <h1 className='text-lg truncate font-semibold text-white-1 dark:text-white-1'>
             {userData?.name}
           </h1>
           <Image
@@ -53,7 +53,7 @@ const RightSideBar = async () => {
           width={44}
           height={44}
           className='rounded-lg aspect-square'/>
-          <h2 className='text-sm text-black-1 dark:text-white-1 font-semibold'>{user.name}</h2>
+          <h2 className='text-sm text-white-1 dark:text-white-1 font-semibold'>{user.name}</h2>
           </div>
           <div className='flex items-center'>
           <p className='text-xs font-normal'>{user.CoursCount} Cours</p>

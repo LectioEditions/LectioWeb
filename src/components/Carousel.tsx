@@ -51,8 +51,8 @@ const EmblaCarousel= ({TopUsers ,Cours}:{TopUsers:User[],Cours:Cours[]}) => {
               className="absolute size-full rounded-xl border-none"
               />
               <div className='glassmorphism-black relative z-10 flex flex-col p-4 rounded-b-xl '>
-                <h2 className='text-sm font-bold text-black-1 dark:text-white-1'>{index.Titre}</h2>
-                <h2 className='text-sm text-black-1 dark:text-white-1'>{index.description}</h2>
+                <h2 className='text-sm font-bold text-white-1'>{index.Titre}</h2>
+                <h2 className='text-sm text-white-1'>{index.description}</h2>
                 
               </div>
               </figure>

@@ -84,7 +84,7 @@ getUserByClerkId
                 alt="Caster icon"
                 className="size-[30px] rounded-full object-cover"
               />
-              <h2 className="text-16 font-normal text-white-3">{owner.name}</h2>
+              <h2 className="text-16 font-normal text-black-1 dark:text-white-3 ">{owner.name}</h2>
             </figure>
           </article>
 
@@ -92,7 +92,7 @@ getUserByClerkId
             onClick={() => {
               router.push(`/impression/${Cours.id}`);
             }}
-            className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-black-1 dark:text-white-1"
+            className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-white-1"
           >
             
             Imprimer
