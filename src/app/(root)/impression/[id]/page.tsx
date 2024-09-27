@@ -9,6 +9,7 @@ import { deletecours,getUserByClerkId } from '@/src/server/db';
 import { QueryResult } from '@vercel/postgres';
 import { ImpressionForm } from '@/src/components/ImpressionForm';
 import { Cours } from '@/src/types';
+import { cours } from '@/src/server/schema';
 
 async function handleCours(Cours:Cours) :Promise<Cours | undefined>{ 
     "use server";
@@ -42,7 +43,6 @@ const CoursDetails = async({params}:{
     "use server";
     return await getUserByClerkId(id);
   }
-
   return (
      <section className=' flex w-full flex-col '>
       <header className=' mt-9 flex items-center justify-between'>

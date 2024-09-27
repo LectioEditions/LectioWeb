@@ -23,6 +23,7 @@ getUserByClerkId
   const [isOwner, setIsOwner] = useState(false);
   const Pathname = usePathname();
   const showBtn= Pathname.includes("impression");
+  console.log(Cours);
   useEffect(() => {
   
     const fetchOwner = async () => {

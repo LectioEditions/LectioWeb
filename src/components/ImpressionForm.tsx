@@ -14,11 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/src/components/ui/form";
-import { Textarea } from "@/src/components/ui/textarea";
 import { Input } from "@/src/components/ui/input";
-import MyDropzone from "./DropZone";
 import { Cours, Impression } from "@/src/types";
-import { redirect, usePathname, useRouter } from "next/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { cn } from "../lib/utils";
 import { Label } from "./ui/label";
@@ -69,10 +66,7 @@ export function ImpressionForm({ insertCours , Cours}: {Cours:Cours, insertCours
           };
           try {
              console.log(form.getValues());
-            const newImpression = await insertImpression(impression);
-            if (!newImpression) {
-              throw new Error("Failed to submit the Impression.");
-            }
+            
             toast.success("impression submitted successfully!");
             
             form.reset(); // Reset the form
