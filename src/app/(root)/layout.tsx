@@ -15,8 +15,10 @@ export default function RootLayout({
           <section className="flex min-h-screen flex-1 flex-col px-4 sm:px-14">
             <div className="mx-auto flex w-full max-w-5xl flex-col max-sm:px-4">
             <div className="flex h-16 items-center justify-between md:hidden">
-              <Image src="/icons/logo.svg" alt="logo" width={30} height={30} />
-              <MobileNav/>
+            <Image className="hidden dark:block" src='/icons/lectio_logo-04.png' alt='logo' width={100} height={27} />
+            <Image className="dark:hidden" src='/icons/lectio_logo-02.png' alt='logo' width={100} height={27} />
+
+            <MobileNav/>
             </div>
             <div className="flex flex-col md:pb-14">
             <Toaster />
