@@ -71,11 +71,16 @@ export async function insertcours  (cours: Cours): Promise<Cours|undefined> {
   if (!user.userId) throw new Error("Unauthorized");
   if(!cours) throw new Error('cours is required');
   cours.userId = user.userId;
-  console.log(cours);
+  const newuser= await getUserByClerkId(user.userId);
+  if(!newuser) throw new Error('user not found');
+  
   
   const newCours = await db.insert(schema.cours).values(cours);
-  if(newCours) return cours;
-  return;
+  if(!newCours) return ;
+  newuser.CoursCount = newuser.CoursCount + 1;
+  await UpdateUser(newuser);
+
+  return cours;
  }
 
 export async function Updatecours (cours:Courss){
@@ -110,14 +115,33 @@ export async function deletecours (id?: number)  {
 
 
 
-export async function insertImpression (impression: Impression): Promise<Impression|undefined> {
+export async function insertImpression(impression: Impression): Promise<Impression | undefined> {
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
-  if(!impression) throw new Error('cours is required');
+  if (!impression) throw new Error('Cours is required');
+  
   impression.userId = user.userId;
   console.log(impression);
   
-  const newCours = await db.insert(schema.impression).values(impression);
-  if(newCours) return impression;
-  return;
- }
+  // Execute independent async calls concurrently
+  const [newUser, newImpression, newCours] = await Promise.all([
+    getUserByClerkId(user.userId),
+    db.insert(schema.impression).values(impression),
+    getCoursByURL(impression.PdfUrl)
+  ]);
+
+  if (!newImpression) return;
+  if (!newUser || !newCours) throw new Error('User or Cours not found');
+
+  // Update user and cours counts
+  newUser.impression += 1;
+  newCours.Impression += 1;
+
+  // Execute update operations concurrently
+  await Promise.all([
+    UpdateUser(newUser),
+    Updatecours(newCours)
+  ]);
+
+  return impression;
+}

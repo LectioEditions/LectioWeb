@@ -2,18 +2,18 @@ import React from 'react'
 import Image from 'next/image'
 import { Loader } from "lucide-react";
 
-import { getCoursById, getCourses } from '@/src/server/db'
+import { getCoursById, getCourses, insertImpression } from '@/src/server/db'
 import CoursdetailPlayer from '@/src/components/CoursdetailPlayer';
 import { insertcours } from '@/src/server/db';
 import { deletecours,getUserByClerkId } from '@/src/server/db';
 import { QueryResult } from '@vercel/postgres';
 import { ImpressionForm } from '@/src/components/ImpressionForm';
-import { Cours } from '@/src/types';
+import { Impression } from '@/src/types';
 import { cours } from '@/src/server/schema';
 
-async function handleCours(Cours:Cours) :Promise<Cours | undefined>{ 
+async function handleImpression(Impression:Impression) :Promise<Impression | undefined>{ 
     "use server";
-    return await insertcours(Cours);
+    return await insertImpression(Impression);
   }
 
 const CoursDetails = async({params}:{
@@ -63,7 +63,7 @@ const CoursDetails = async({params}:{
       <CoursdetailPlayer Cours={Cours} deleteCours={handleDeleteCours} getUserByClerkId={handleGetUserByClerkId}/>
       <p className='text-white-1 text-lg pb-8 pt-11 font-medium max-md:text-center'>{Cours?.description}</p>
      <section className='flex flex-col gap-8'>
-     <ImpressionForm  insertCours={handleCours} Cours={Cours}/>
+     <ImpressionForm  insertImpression={handleImpression} Cours={Cours}/>
      </section>
      
      </section>)

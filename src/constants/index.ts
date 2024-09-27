@@ -1,3 +1,26 @@
+export const Communes = [
+  "Alger-Centre",
+  "Bab El Oued",
+  "El Biar",
+  "Kouba",
+  "Hydra",
+  "Belouizdad",
+  "El Harrach",
+  "Birkhadem",
+  "Hussein Dey",
+  "Sidi M'Hamed",
+  "Beni Messous",
+  "Bordj El Kiffan",
+  "Baraki",
+  "Mohammadia",
+  "Ain Benian",
+  "Staoueli",
+  "Cheraga",
+  "Draria",
+  "Baba Hassen",
+  "El Marsa"
+];
+
 
 export const Categories = [
   "science",

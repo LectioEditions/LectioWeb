@@ -102,7 +102,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
               name="CoursTitle"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-white-1">Cours Title </FormLabel>
+                  <FormLabel className="text-base font-bold text-white-1">Title </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -117,12 +117,12 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
             />
             <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-white-1">
-                Select Cours category
+                Category
               </Label>
 
               <Select onValueChange={(value) => setCoursType(value)}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1')}>
-                  <SelectValue placeholder="Select AI Voice" className="placeholder:text-gray-1 " />
+                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-orange-1">
                   {Categories.map((category) => (

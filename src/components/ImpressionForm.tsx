@@ -19,7 +19,7 @@ import { Cours, Impression } from "@/src/types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { cn } from "../lib/utils";
 import { Label } from "./ui/label";
-import { Categories } from "../constants";
+import { Categories, Communes } from "../constants";
 import "@/src/app/globals.css";
 import { insertImpression } from "../server/db";
 // Updated form schema
@@ -30,20 +30,21 @@ const formSchema = z.object({
   Commune: z.string().min(2, {
     message: "Description must be at least 2 characters.",
   }),
-  Quantite: z.number(),
-  NumTel: z.number(),
+  Quantite:  z.number().gt(0, { message: "The number must be greater than 0" }), // Ensures number is greater than 0
+  
+  NumTel: z.string().regex(/^0[5-7][0-9]{8}$/, { message: "Invalid phone number format" }),
+  
 });
 
-export function ImpressionForm({ insertCours , Cours}: {Cours:Cours, insertCours: (Cours: Cours) => Promise<Cours | undefined> }) {
+export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insertImpression: (Impression: Impression) => Promise<Impression | undefined> }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [Commune, setCommune] = useState<string>("");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       adress: "",
       Commune: "",
       Quantite: 0,
-      NumTel: 0,
+      NumTel: "0",
     },
   });
 
@@ -65,8 +66,9 @@ export function ImpressionForm({ insertCours , Cours}: {Cours:Cours, insertCours
 
           };
           try {
-             console.log(form.getValues());
-            
+             console.log(impression);
+            const newImpression = await insertImpression(impression);
+            if (!newImpression) throw new Error("Failed to submit impression");
             toast.success("impression submitted successfully!");
             
             form.reset(); // Reset the form
@@ -86,15 +88,16 @@ export function ImpressionForm({ insertCours , Cours}: {Cours:Cours, insertCours
         >
             <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-white-1">
-                Selectionner votre Commune
+                Commune
               </Label>
 
-              <Select onValueChange={(value) => setCommune(value)}>
+              <Select onValueChange={(value) => {form.setValue("Commune", value);
+                form.trigger("Commune")}}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1')}>
-                  <SelectValue placeholder="Dar El Beida" className="placeholder:text-gray-1 " />
+                  <SelectValue placeholder="Selectionner votre Commune" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-orange-1">
-                  {Categories.map((category) => (
+                  {Communes.map((category) => (
                     <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
                       {category}
                     </SelectItem>
@@ -105,14 +108,14 @@ export function ImpressionForm({ insertCours , Cours}: {Cours:Cours, insertCours
           <div className="flex flex-col gap-[30px] border-b border-black-5 pb-10">
             <FormField
               control={form.control}
-              name="Commune"
+              name="adress"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
                   <FormLabel className="text-base font-bold text-white-1">Adress</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
-                      onBlur={() => form.trigger("Commune")} // Validate on blur
+                      onBlur={() => form.trigger("adress")} // Validate on blur
                       className="input-class focus-visible:ring-offset-orange-1"
                       placeholder="Rue xxxxxxxx"
                     />
@@ -132,7 +135,8 @@ export function ImpressionForm({ insertCours , Cours}: {Cours:Cours, insertCours
                      inputMode="numeric"
                      type="number"
                      {...field}
-                      onBlur={() => form.trigger("Quantite")} // Validate on blur
+                      onBlur={(e) => {    form.setValue("Quantite", parseInt(e.target.value)); // or parseInt(field.value) for whole numbers
+                        form.trigger("Quantite");}} // Validate on blur
                      className="input-class focus-visible:ring-offset-orange-1 no-arrows" // Add a custom class to hide arrows
                      placeholder="1234"
                      pattern="[0-9]*"
@@ -153,8 +157,9 @@ export function ImpressionForm({ insertCours , Cours}: {Cours:Cours, insertCours
                   <FormControl>
                   <Input
                     {...field}
-                     type="number" // Allows phone numbers
-                     onBlur={() => form.trigger("NumTel")} // Validate on blur
+                     type="tel" // Allows phone numbers
+                     onBlur={(e) => {   ; // or parseInt(field.value) for whole numbers
+                      form.trigger("NumTel");}} // Validate on blur
                      className="input-class focus-visible:ring-offset-orange-1"
                      pattern="0[5-7][0-9]{8}" // Pattern to match a valid phone number format
                     placeholder="05000000"
