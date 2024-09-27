@@ -68,7 +68,7 @@ getUserByClerkId
         />
         <div className="flex w-full flex-col gap-5 max-md:items-center md:gap-9">
           <article className="flex flex-col gap-2 max-md:items-center">
-            <h1 className="text-32 font-extrabold tracking-[-0.32px] text-white-1">
+            <h1 className="text-32 font-extrabold tracking-[-0.32px] text-black-1 dark:text-white-1">
               {Cours.Titre}
             </h1>
             <figure
@@ -92,7 +92,7 @@ getUserByClerkId
             onClick={() => {
               router.push(`/impression/${Cours.id}`);
             }}
-            className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-white-1"
+            className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-black-1 dark:text-white-1"
           >
             
             Imprimer
@@ -111,7 +111,7 @@ getUserByClerkId
           />
           {isDeleting && (
             <form action = {async ()=>{await handleDelete()}} 
-              className="absolute -left-32 -top-2 z-10 flex w-32 cursor-pointer justify-center gap-2 rounded-md bg-black-6 py-1.5 hover:bg-black-2"
+              className="absolute -left-32 -top-2 z-10 flex w-32 cursor-pointer justify-center gap-2 rounded-md bg-white-6 derk:bg-black-6 py-1.5 hover:bg-black-2"
             >
               <Image
                 src="/icons/delete.svg"
@@ -119,7 +119,7 @@ getUserByClerkId
                 height={16}
                 alt="Delete icon"
               />
-              <h2 className="text-16 font-normal text-white-1">Delete</h2>
+              <h2 className="text-16 font-normal text-black-1 dark:text-white-1">Delete</h2>
             </form>
           )}
         </div>

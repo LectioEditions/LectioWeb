@@ -35,7 +35,7 @@ const LeftSideBar = () => {
               <div className='flex justify-center items-center w-full pb-14
               max-lg:px-4 lg:pr-8 '>
                 <Link href={"/sign-in"} className='w-full'>
-                <Button className='bg-green-1 text-white-1 font-semibold text-lg w-full'>
+                <Button className='bg-green-1 text-black-1 dark:text-white-1 font-semibold text-lg w-full'>
                   Sign In
                 </Button>
                 </Link>
@@ -44,7 +44,7 @@ const LeftSideBar = () => {
       <SignedIn>
      <div className='w-full flex justify-center items-center pr-8' >
       <SignOutButton >
-        <Button className='bg-green-1 text-white-1 font-semibold text-lg w-full'>Sign out</Button>
+        <Button className='bg-green-1 text-black-1 dark:text-white-1 font-semibold text-lg w-full'>Sign out</Button>
       </SignOutButton>
       </div>
       </SignedIn>

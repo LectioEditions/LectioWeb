@@ -32,7 +32,7 @@ const ProfileDisplay = ({
             />
             <div className="flex w-full flex-col gap-5 max-md:items-center md:gap-9">
               <article className="flex flex-col justify-between h-1/2 gap-2 max-md:items-center">
-                <h1 className="text-32 font-extrabold tracking-[-0.32px] text-white-1">
+                <h1 className="text-32 font-extrabold tracking-[-0.32px] text-black-1 dark:text-white-1">
                   {user.name}
                 </h1>
                 <figure className='flex gap-3 '>
@@ -41,15 +41,15 @@ const ProfileDisplay = ({
                     width={24}
                     height={24}
                     alt="headphone"/>
-                    <h2 className='text-lg font-bold text-white-1'>
+                    <h2 className='text-lg font-bold text-black-1 dark:text-white-1'>
                         {user?.impression} 
                     </h2>
-                    <p className='text-lg font-inter font-thin text-white-1'>monthely listeners</p>
+                    <p className='text-lg font-inter font-thin text-black-1 dark:text-white-1'>monthely listeners</p>
                 </figure>
               </article>
     
               <Button
-                className="text-16 w-full max-w-[250px] bg-orange-1 font-extrabold text-white-1 gap-3"
+                className="text-16 w-full max-w-[250px] bg-orange-1 font-extrabold text-black-1 dark:text-white-1 gap-3"
               >
                 <Image
                   src="/icons/randomPlay.svg"

@@ -61,7 +61,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
 
   return (
     <section className="mt-10 flex flex-col">
-      <h1 className='text-xl font-bold text-white-1'>Create Cours</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Create Cours</h1>
       <Form {...form}>
         <form
          onSubmit={form.handleSubmit(async (data) => {
@@ -102,7 +102,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
               name="CoursTitle"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-white-1">Title </FormLabel>
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Title </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -111,20 +111,20 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
                       placeholder="Enter Cours title"
                     />
                   </FormControl>
-                  <FormMessage className="text-white-1" />
+                  <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
             />
             <div className="flex flex-col gap-2.5">
-              <Label className="text-16 font-bold text-white-1">
+              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Category
               </Label>
 
               <Select onValueChange={(value) => form.setValue("Category",value)}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-green-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-black-3 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-green-1">
+                <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-3 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Categories.map((category) => (
                     <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
                       {category}
@@ -138,7 +138,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
               name="Description"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-white-1">Description</FormLabel>
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Description</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
@@ -147,7 +147,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
                       placeholder="Enter Cours description"
                     />
                   </FormControl>
-                  <FormMessage className="text-white-1" />
+                  <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
             />
@@ -162,7 +162,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
             <div className="">
               <Button
                 type="submit"
-                className="text-base w-full bg-green-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1"
+                className="text-base w-full bg-green-1 py-4 font-extrabold text-black-1 dark:text-white-1 transition-all duration-500 hover:bg-black-1"
               >
                 {isLoading ? (
                   <>

@@ -110,7 +110,7 @@ export default function MyDropzone({ setCoursURL, setImageURL }: DropProps) {
         <button
          type="button"
          onClick={handleReset}
-         className="mt-4 px-4 py-2 bg-red-500 text-white-1 rounded-lg hover:bg-red-600 transition"
+         className="mt-4 px-4 py-2 bg-red-500 text-black-1 dark:text-white-1 rounded-lg hover:bg-red-600 transition"
        >
          Reset Files
        </button>

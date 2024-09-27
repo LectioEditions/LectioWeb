@@ -51,7 +51,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
 
   return (
     <section className="mt-10 flex flex-col pb-10">
-      <h1 className='text-xl font-bold text-white-1'>Ajouter une Impression</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Ajouter une Impression</h1>
       <Form {...form}>
         <form
          onSubmit={form.handleSubmit(async (data) => {
@@ -87,16 +87,16 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
           className="space-y-8 mt-12 flex flex-col w-full"
         >
             <div className="flex flex-col gap-2.5">
-              <Label className="text-16 font-bold text-white-1">
+              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Commune
               </Label>
 
               <Select onValueChange={(value) => {form.setValue("Commune", value);
                 form.trigger("Commune")}}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-green-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-black-3 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Selectionner votre Commune" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-green-1">
+                <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-3 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Communes.map((category) => (
                     <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
                       {category}
@@ -111,7 +111,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
               name="adress"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-white-1">Adress</FormLabel>
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Adress</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -120,7 +120,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
                       placeholder="Rue xxxxxxxx"
                     />
                   </FormControl>
-                  <FormMessage className="text-white-1" />
+                  <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
             />
@@ -129,7 +129,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
               name="Quantite"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-white-1">Quantité</FormLabel>
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Quantité</FormLabel>
                   <FormControl>
                   <Input
                      inputMode="numeric"
@@ -144,7 +144,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
 
 
                   </FormControl>
-                  <FormMessage className="text-white-1" />
+                  <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
             />
@@ -153,7 +153,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
               name="NumTel"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-white-1">Télephone</FormLabel>
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Télephone</FormLabel>
                   <FormControl>
                   <Input
                     {...field}
@@ -166,7 +166,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
                     />
 
                   </FormControl>
-                  <FormMessage className="text-white-1" />
+                  <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
             />
@@ -178,7 +178,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
             <div className="">
               <Button
                 type="submit"
-                className="text-base w-full bg-green-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1"
+                className="text-base w-full bg-green-1 py-4 font-extrabold text-black-1 dark:text-white-1 transition-all duration-500 hover:bg-black-1"
               >
                 {isLoading ? (
                   <>

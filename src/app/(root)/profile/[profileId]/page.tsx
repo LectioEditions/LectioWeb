@@ -26,7 +26,7 @@ import ProfileDisplay from '@/src/components/ProfileDisplay';
       
       </header>
      <section className='flex flex-col gap-8'>
-      <h1 className='text-xl font-bold text-white-1 '> All courss</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> All courss</h1>
      {usercourss && usercourss.length>0 ?(
       <div className='cours_grid'>{usercourss.map((cours,index)=>(
         <CoursCard key={index} title={cours.Titre} imgURL={cours.imageURL} description={cours.description} id={cours.id} />

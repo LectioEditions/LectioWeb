@@ -32,7 +32,7 @@ const CoursDetails = async({params}:{
   return (
      <section className=' flex w-full flex-col '>
       <header className=' mt-9 flex items-center justify-between'>
-      <h1 className='text-xl font-bold text-white-1'>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>
       Currently playing 
       </h1>
       <figure className='flex gap-3 '>
@@ -41,15 +41,15 @@ const CoursDetails = async({params}:{
         width={24}
         height={24}
         alt="headphone"/>
-      <h2 className='text-lg font-bold text-white-1'>
+      <h2 className='text-lg font-bold text-black-1 dark:text-white-1'>
         {Cours?.Impression}
       </h2>
       </figure>
       </header>
       <CoursdetailPlayer Cours={Cours} deleteCours={handleDeleteCours} getUserByClerkId={handleGetUserByClerkId}/>
-      <p className='text-white-1 text-lg pb-8 pt-11 font-medium max-md:text-center'>{Cours?.description}</p>
+      <p className='text-black-1 dark:text-white-1 text-lg pb-8 pt-11 font-medium max-md:text-center'>{Cours?.description}</p>
      <section className='flex flex-col gap-8'>
-      <h1 className='text-xl font-bold text-white-1 '> Similar Courss:</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> Similar Courss:</h1>
      {similarCourss && similarCourss.length>0 ?(
       <div className='Cours_grid'>{similarCourss.map((Cours,index)=>(
         <CoursCard key={index} title={Cours.Titre} imgURL={Cours.imageURL} description={Cours.description} id={Cours.id} />

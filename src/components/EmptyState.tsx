@@ -13,7 +13,7 @@ const EmptyState = ({title,buttonLink,buttonText ,search}:EmptyStateProps) => {
     alt='empty state'
     />
     <div className='flex-center w-full max-w-64 flex-col gap-3'>
-    <h1 className='text-lg text-center font-medium text-white-1'>
+    <h1 className='text-lg text-center font-medium text-black-1 dark:text-white-1'>
       {title}
     </h1>
     {
@@ -30,7 +30,7 @@ const EmptyState = ({title,buttonLink,buttonText ,search}:EmptyStateProps) => {
         width={20}
         height={20}
         alt='discover'/>
-          <h1 className='text-lg font-extrabold text-white-1'>{buttonText}</h1>
+          <h1 className='text-lg font-extrabold text-black-1 dark:text-white-1'>{buttonText}</h1>
         </Link>
       </Button>
     }
