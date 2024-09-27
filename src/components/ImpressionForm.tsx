@@ -178,7 +178,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
             <div className="">
               <Button
                 type="submit"
-                className="text-base w-full bg-green-1 py-4 font-extrabold text-black-1 dark:text-white-1 transition-all duration-500 hover:bg-white-1 dark:bg-black-1"
+                className="text-base w-full bg-green-1 py-4 font-extrabold text-white-1 transition-all duration-500 "
               >
                 {isLoading ? (
                   <>
