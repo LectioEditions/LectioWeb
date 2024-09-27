@@ -16,7 +16,7 @@ const CoursDetails = async({params}:{
   const Cours = await getCoursById(params.id);
   const similarCourss = await getCourses();
   if(!Cours) return(<div className='w-full h-screen flex justify-center items-center'>
-    <Loader size={30} className="animate-spin  text-orange-1"/>
+    <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
   async function handleDeleteCours(id:number | undefined) :Promise<QueryResult<never>>{ 
@@ -24,16 +24,7 @@ const CoursDetails = async({params}:{
     return await deletecours(id);
   }
 
-  async function handleGetUserByClerkId(id:string | null | undefined) :Promise<{
-    id: number;
-    name: string;
-    email: string;
-    image: string;
-    clerkId: string;
-    createdAt: Date;
-    CoursCount: number;
-    views: number;
-} | undefined>{ 
+  async function handleGetUserByClerkId(id:string | null | undefined) :Promise<User | undefined>{ 
     "use server";
     return await getUserByClerkId(id);
   }
@@ -51,7 +42,7 @@ const CoursDetails = async({params}:{
         height={24}
         alt="headphone"/>
       <h2 className='text-lg font-bold text-white-1'>
-        {Cours?.views}
+        {Cours?.Impression}
       </h2>
       </figure>
       </header>
@@ -61,7 +52,7 @@ const CoursDetails = async({params}:{
       <h1 className='text-xl font-bold text-white-1 '> Similar Courss:</h1>
      {similarCourss && similarCourss.length>0 ?(
       <div className='Cours_grid'>{similarCourss.map((Cours,index)=>(
-        <CoursCard key={index} title={Cours.title} imgURL={Cours.imageURL} description={Cours.description} id={Cours.id} />
+        <CoursCard key={index} title={Cours.Titre} imgURL={Cours.imageURL} description={Cours.description} id={Cours.id} />
       ))}
       </div>
      ):(

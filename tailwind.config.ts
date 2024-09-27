@@ -40,6 +40,10 @@ const config = {
         gray: {
           1: "#71788B",
         },
+        green:{
+          1:"#319075"
+        }
+        
       },
       backgroundImage: {
         "nav-focus":

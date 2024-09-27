@@ -22,7 +22,7 @@ const CoursDetails = async({params}:{
   
   const Cours = await getCoursById(params.id);
   if(!Cours) return(<div className='w-full h-screen flex justify-center items-center'>
-    <Loader size={30} className="animate-spin  text-orange-1"/>
+    <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
   async function handleDeleteCours(id:number | undefined) :Promise<QueryResult<never>>{ 

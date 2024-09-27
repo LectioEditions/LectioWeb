@@ -1,12 +1,11 @@
 "use client";
 import React, { useCallback } from 'react'
-import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel'
+import {  EmblaCarouselType } from 'embla-carousel'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
-import { CarouselProps, Cours } from '@/src/types';
+import {  Cours } from '@/src/types';
 import { useRouter } from 'next/navigation';
-import { tree } from 'next/dist/build/templates/app-page';
 import { User } from '@/src/types/index';
 import Image from 'next/image';
 import { Loader } from 'lucide-react';
@@ -34,7 +33,7 @@ const EmblaCarousel= ({TopUsers ,Cours}:{TopUsers:User[],Cours:Cours[]}) => {
   const slides = TopUsers && TopUsers?.filter((item : User)=>{if(item.CoursCount) item.CoursCount > 0})
 
  if(!Cours) return(<div className='w-full h-screen flex justify-center items-center'>
-  <Loader size={30} className="animate-spin  text-orange-1"/>
+  <Loader size={30} className="animate-spin  text-green-1"/>
   </div>
 )
     return (

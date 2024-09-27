@@ -15,7 +15,7 @@ import ProfileDisplay from '@/src/components/ProfileDisplay';
   const user = await getUserByClerkId(params.profileId);
   const usercourss = await getCoursByUserId(params.profileId);
   if(!user) return(<div className='w-full h-screen flex justify-center items-center'>
-    <Loader size={30} className="animate-spin  text-orange-1"/>
+    <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
 

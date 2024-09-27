@@ -14,7 +14,7 @@ const RightSideBar = async () => {
   const Cours= await getCourses();
   if (user.userId) var userData= await getUserByClerkId(user.userId);
   if(!topUsers || !Cours) return(<div className='w-full h-screen flex justify-center items-center'>
-    <Loader size={30} className="animate-spin  text-orange-1"/>
+    <Loader size={30} className="animate-spin  text-green-1"/>
     </div>)
   return (
     <section className='right_sidebar text-white-1'>

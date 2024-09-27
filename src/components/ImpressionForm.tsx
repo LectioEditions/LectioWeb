@@ -93,12 +93,12 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
 
               <Select onValueChange={(value) => {form.setValue("Commune", value);
                 form.trigger("Commune")}}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Selectionner votre Commune" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-orange-1">
+                <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-green-1">
                   {Communes.map((category) => (
-                    <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
+                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
                       {category}
                     </SelectItem>
                   ))}
@@ -116,7 +116,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
                     <Input
                       {...field}
                       onBlur={() => form.trigger("adress")} // Validate on blur
-                      className="input-class focus-visible:ring-offset-orange-1"
+                      className="input-class focus-visible:ring-offset-green-1"
                       placeholder="Rue xxxxxxxx"
                     />
                   </FormControl>
@@ -137,7 +137,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
                      {...field}
                       onBlur={(e) => {    form.setValue("Quantite", parseInt(e.target.value)); // or parseInt(field.value) for whole numbers
                         form.trigger("Quantite");}} // Validate on blur
-                     className="input-class focus-visible:ring-offset-orange-1 no-arrows" // Add a custom class to hide arrows
+                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
                      placeholder="1234"
                      pattern="[0-9]*"
                     />
@@ -160,7 +160,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
                      type="tel" // Allows phone numbers
                      onBlur={(e) => {   ; // or parseInt(field.value) for whole numbers
                       form.trigger("NumTel");}} // Validate on blur
-                     className="input-class focus-visible:ring-offset-orange-1"
+                     className="input-class focus-visible:ring-offset-green-1"
                      pattern="0[5-7][0-9]{8}" // Pattern to match a valid phone number format
                     placeholder="05000000"
                     />
@@ -178,7 +178,7 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
             <div className="">
               <Button
                 type="submit"
-                className="text-base w-full bg-orange-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1"
+                className="text-base w-full bg-green-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1"
               >
                 {isLoading ? (
                   <>

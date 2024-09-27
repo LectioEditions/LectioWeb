@@ -1,4 +1,4 @@
-import { EmptyStateProps } from '@/types'
+import { EmptyStateProps } from '@/src/types'
 import React from 'react'
 import Image from 'next/image'
 import { Button } from './ui/button'
@@ -23,7 +23,7 @@ const EmptyState = ({title,buttonLink,buttonText ,search}:EmptyStateProps) => {
         </p>
       )
     }
-    {buttonLink && <Button className='bg-orange-1'>
+    {buttonLink && <Button className='bg-green-1'>
         <Link href={buttonLink} className='gap-1 flex'>
         <Image
         src=" /icons/discover.svg"

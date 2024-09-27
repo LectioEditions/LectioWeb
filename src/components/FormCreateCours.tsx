@@ -107,7 +107,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
                     <Input
                       {...field}
                       onBlur={() => form.trigger("CoursTitle")} // Validate on blur
-                      className="input-class focus-visible:ring-offset-orange-1"
+                      className="input-class focus-visible:ring-offset-green-1"
                       placeholder="Enter Cours title"
                     />
                   </FormControl>
@@ -121,12 +121,12 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
               </Label>
 
               <Select onValueChange={(value) => form.setValue("Category",value)}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-orange-1">
+                <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-green-1">
                   {Categories.map((category) => (
-                    <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">
+                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
                       {category}
                     </SelectItem>
                   ))}
@@ -143,7 +143,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
                     <Textarea
                       {...field}
                       onBlur={() => form.trigger("Description")} // Validate on blur
-                      className="input-class focus-visible:ring-offset-orange-1"
+                      className="input-class focus-visible:ring-offset-green-1"
                       placeholder="Enter Cours description"
                     />
                   </FormControl>
@@ -162,7 +162,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
             <div className="">
               <Button
                 type="submit"
-                className="text-base w-full bg-orange-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1"
+                className="text-base w-full bg-green-1 py-4 font-extrabold text-white-1 transition-all duration-500 hover:bg-black-1"
               >
                 {isLoading ? (
                   <>

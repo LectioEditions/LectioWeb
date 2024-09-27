@@ -7,14 +7,15 @@ import {
 import {NextSSRPlugin} from '@uploadthing/react/next-ssr-plugin'
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { Providers } from "./providers";
 
 
 const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Podcaster",
-  description: "Generate your podcast using AI",
-  icons: [{ rel: "icon", url: "/icons/logo.svg" }],}
+  title: "Lction",
+  description: "Vous donner les moyens d'atteindre l'excellence",
+  icons: [{ rel: "icon", url: "/icons/lectio_logo-04.png" }],}
 
 export default function RootLayout({
   children,
@@ -43,10 +44,12 @@ export default function RootLayout({
                   colorInputBackground: "#1b1f29",
                   colorInputText: "white",}}
     }}>
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}/>
-      <body className={manrope.className}>{children}
-     
+      <body className={manrope.className}>
+      <Providers>
+        {children}
+        </Providers>
 
       </body>
     </html>

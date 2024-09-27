@@ -9,7 +9,7 @@ const Header = ({headerTitle, titleClassName}:{headerTitle :string , titleClassN
         <h1 className={cn('text-lg font-bold text-white-1', titleClassName)}
         >{headerTitle}</h1>
     ): <div/>}
-    <Link href="/discover" className='text-lg font-semibold text-orange-1'>
+    <Link href="/discover" className='text-lg font-semibold text-green-1'>
     See All
     </Link>
     </header>

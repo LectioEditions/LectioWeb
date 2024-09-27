@@ -92,7 +92,7 @@ getUserByClerkId
             onClick={() => {
               router.push(`/impression/${Cours.id}`);
             }}
-            className="text-16 w-full max-w-[250px] bg-orange-1 font-extrabold text-white-1"
+            className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-white-1"
           >
             
             Imprimer

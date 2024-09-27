@@ -44,7 +44,7 @@ const MobileNav = () => {
                 return(
                   <SheetClose asChild key={route.route}> 
                   <Link key={index} href={route.route} className={cn('flex cursor-pointer items-center gap-3 py-4 max-lg:px-4 justify-start',
-                    isActive?'bg-nav-focus border-r-4 border-orange-1': '')}>
+                    isActive?'bg-nav-focus border-r-4 border-green-1': '')}>
                     <Image src={route.imgURL} alt={route.label} width={24} height={24} />
                     <p>{route.label}</p>
                     </Link>

@@ -3,7 +3,6 @@ import React, { use, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation';
 import { Input } from './ui/input';
-import { useDebounce } from '@/lib/useDebounce';
 
 const SearchBar = () => {
     const [search, setSearch] = useState('')
@@ -19,7 +18,7 @@ const SearchBar = () => {
   return (
 <div className="relative mt-8 block">
       <Input 
-        className="input-class py-6 pl-12 focus-visible:ring-offset-orange-1"
+        className="input-class py-6 pl-12 focus-visible:ring-offset-green-1"
         placeholder='Search for podcasts'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
