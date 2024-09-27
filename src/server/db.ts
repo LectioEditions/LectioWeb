@@ -5,7 +5,7 @@ import { sql , desc ,like} from 'drizzle-orm'
 import * as schema from './schema';
 import { eq } from "drizzle-orm";
 import { sql as pg, QueryResult } from '@vercel/postgres';
-import { Cours, Courss, Impression } from '@/src/types';
+import { Cours, Courss, Impression, Upload } from '@/src/types';
 import { User as NewUser } from '@/src/types';
 import { auth } from '@clerk/nextjs/server';
 export const db =  drizzle(pg, { schema });
@@ -144,4 +144,11 @@ export async function insertImpression(impression: Impression): Promise<Impressi
   ]);
 
   return impression;
+}
+
+
+
+
+export async function insertUpload({uploadURL }:Upload){
+  return await db.insert(schema.Uploads).values({uploadURL});
 }

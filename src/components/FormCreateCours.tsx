@@ -32,6 +32,7 @@ const formSchema = z.object({
   Description: z.string().min(2, {
     message: "Description must be at least 2 characters.",
   }),
+  Category: z.string(),
   CoursURL: z.string().url("Invalid Cours URL").nonempty("Cours URL is required"),
   imageURL: z.string().url("Invalid image URL").nonempty("Image URL is required"),
 });
@@ -40,14 +41,13 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [CoursURL, setCoursURL] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
-  const [reset,setReset] = useState<boolean>(false);
-  const [coursType, setCoursType] = useState<string>("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       CoursTitle: "",
       Description: "",
+      Category: "",
       CoursURL: "",
       imageURL: "",
     },
@@ -69,6 +69,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
           const Cours: Cours = {
             Titre: data.CoursTitle,
             description: data.Description,
+            Category: data.Category,
             PdfUrl: data.CoursURL,
             imageURL: data.imageURL,
 
@@ -89,7 +90,6 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
           } finally {
             // Reset loading state
             setIsLoading(false);
-            setReset(false); // Reset the dropzone
 
           }
           
@@ -120,7 +120,7 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
                 Category
               </Label>
 
-              <Select onValueChange={(value) => setCoursType(value)}>
+              <Select onValueChange={(value) => form.setValue("Category",value)}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
@@ -154,10 +154,11 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
           </div>
 
           <div className="flex flex-col">
-          {!reset && <MyDropzone 
+           <MyDropzone 
               setCoursURL={setCoursURL} 
               setImageURL={setImageURL} 
-            />}
+              
+            />
             <div className="">
               <Button
                 type="submit"

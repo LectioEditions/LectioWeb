@@ -11,6 +11,8 @@ export type Courss = typeof schema.cours.$inferSelect;
 export type Impression = typeof schema.impression.$inferInsert;
 export type Impressions = typeof schema.impression.$inferSelect;
 
+
+export type Upload = typeof schema.Uploads.$inferInsert;
 export interface SoundModel {
   name: string; // The name of the sound model
   url: string;  // The URL to the model for generating sound

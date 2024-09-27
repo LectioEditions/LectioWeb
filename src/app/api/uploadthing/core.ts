@@ -1,6 +1,7 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import {auth} from "@clerk/nextjs/server"
+import { insertUpload } from "@/src/server/db";
 
 const f = createUploadthing();
  
@@ -33,7 +34,8 @@ export const ourFileRouter = {
     // Whatever is returned here is accessible in onUploadComplete as `metadata`
     return { userId: user.userId};
   }).onUploadComplete(async ({ metadata, file }) =>{ console.log("file",file );
-     
+    await insertUpload({  uploadURL: file.url });
+    console.log("metadata upload");
    }),
  
  

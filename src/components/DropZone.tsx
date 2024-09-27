@@ -76,7 +76,6 @@ export default function MyDropzone({ setCoursURL, setImageURL }: DropProps) {
   };
 
 
-
   return (
     <div
       {...getRootProps()}

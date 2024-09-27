@@ -23,7 +23,7 @@ export const Users = createTable(
       clerkId: text('clerkId').notNull(),
       createdAt: timestamp('createdAt').defaultNow().notNull(),
       CoursCount: integer('CoursCount').default(0).notNull(),
-      impression: integer('views').default(0).notNull(),
+      impression: integer('impression').default(0).notNull(),
     },
     (users) => {
       return {
@@ -36,6 +36,7 @@ export const cours = createTable(
   'cours',
   {id : serial('id').primaryKey(),
     Titre: text('title').notNull(),
+    Category: text('Category').notNull(),
     description: text('description').notNull(),
     PdfUrl : text('PdfUrl').notNull(),
     userId: text('userId').references(()=>Users.clerkId),
