@@ -1,17 +1,16 @@
 
 import {FormCreateCours} from "@/src/components/FormCreateCours"
-import { insertcours } from "@/src/server/db";
-import { Cours, Courss } from "@/src/types";
-import { QueryResult } from "@vercel/postgres";
+import { insertItem } from "@/src/server/db";
+import { Item, Items } from "@/src/types";
 export default async function Home () {
   
-  async function handleCours(Cours:Cours) :Promise<Cours | undefined>{ 
+  async function handleCours(Item:Item) :Promise<Item | undefined>{ 
     "use server";
-    return await insertcours(Cours);
+    return await insertItem(Item);
   }
   return (
   <div>
-    <FormCreateCours insertCours={handleCours}
+    <FormCreateCours insertItem={handleCours}
     />
     </div>);
 }

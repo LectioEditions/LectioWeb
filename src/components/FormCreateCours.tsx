@@ -17,47 +17,50 @@ import {
 import { Textarea } from "@/src/components/ui/textarea";
 import { Input } from "@/src/components/ui/input";
 import MyDropzone from "./DropZone";
-import { Cours } from "@/src/types";
+import { Item } from "@/src/types";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Categories } from "../constants";
+import { Categories, Types } from "../constants";
 import { cn } from "../lib/utils";
-import { QueryResult } from "@vercel/postgres";
 
 // Updated form schema
 const formSchema = z.object({
-  CoursTitle: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
-  Description: z.string().min(2, {
-    message: "Description must be at least 2 characters.",
-  }),
-  Category: z.string(),
-  CoursURL: z.string().url("Invalid Cours URL").nonempty("Cours URL is required"),
-  imageURL: z.string().url("Invalid image URL").nonempty("Image URL is required"),
+  Title: z.string().min(1, 'Title is required'),
+  Description: z.string().min(1, 'Description is required'),
+  Category: z.string().min(1, 'Category is required'),
+  CoursURL: z.string(),
+  imageURL: z.string(),
+  Annee: z.string().min(1, 'Year is required'),
+  Module: z.string().min(1, 'Module is required'),
+  Type: z.string().min(1, 'Type is required'),
+  Prix: z.number(), // Adjust regex for the format you expect
 });
 
-export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) => Promise<Cours | undefined> }) {
+export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Promise<Item | undefined> }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [CoursURL, setCoursURL] = useState<string>("");
+  const [Type, setType] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      CoursTitle: "",
+      Title: "",
       Description: "",
       Category: "",
       CoursURL: "",
       imageURL: "",
+      Annee: "",
+      Module: "",
+      Type: "",
+      Prix: 0,
     },
   });
 
   // Update form values when CoursURL or imageURL changes
   useEffect(() => {
-    form.setValue("CoursURL", CoursURL);
     form.setValue("imageURL", imageURL);
-  }, [CoursURL, imageURL, form]);
+  }, [ imageURL, form]);
 
   return (
     <section className="mt-10 flex flex-col">
@@ -66,16 +69,23 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
         <form
          onSubmit={form.handleSubmit(async (data) => {
           setIsLoading(true);
-          const Cours: Cours = {
-            Titre: data.CoursTitle,
-            description: data.Description,
+          toast.success("Item is beeing submitted wait a moment");
+          const item: Item = {
+            Titre: data.Title,
+            Module: data.Module,
+            Annee: data.Annee,
             Category: data.Category,
+            description: data.Description,
+            Type: data.Type,
             PdfUrl: data.CoursURL,
-            imageURL: data.imageURL,
+            imageURL: data.imageURL === "" ? "/icons/player1.png" : data.imageURL,
+            Prix: data.Prix,
+            Achat: 0,
+            etat: "Disponible",
 
           };
           try {
-            const newCours = await insertCours(Cours);
+            const newCours = await insertItem(item);
             console.log(newCours);
             if (!newCours) throw new Error("No Cours returned");
             
@@ -99,16 +109,56 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
           <div className="flex flex-col gap-[30px] border-b border-black-5 pb-10">
             <FormField
               control={form.control}
-              name="CoursTitle"
+              name="Title"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
                   <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Title </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
-                      onBlur={() => form.trigger("CoursTitle")} // Validate on blur
+                      onBlur={() => form.trigger("Title")} // Validate on blur
                       className="input-class focus-visible:ring-offset-green-1"
                       placeholder="Enter Cours title"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-black-1 dark:text-white-1" />
+                </FormItem>
+              )}
+            />
+              <FormField
+              control={form.control}
+              name="Module"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Module </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      onBlur={() => form.trigger("Module")} // Validate on blur
+                      className="input-class focus-visible:ring-offset-green-1"
+                      placeholder="Enter Module"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-black-1 dark:text-white-1" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="Annee"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Année </FormLabel>
+                  <FormControl>
+                  <Input
+                     inputMode="numeric"
+                     type="number"
+                     {...field}
+                      onBlur={(e) => {    
+                        form.trigger("Annee");}} // Validate on blur
+                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
+                     placeholder="1234"
+                     pattern="[0-9]*"
                     />
                   </FormControl>
                   <FormMessage className="text-black-1 dark:text-white-1" />
@@ -121,10 +171,10 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
               </Label>
 
               <Select onValueChange={(value) => form.setValue("Category",value)}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-white-6 dark:bg-black-3 text-gray-1 focus-visible:ring-offset-green-1')}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-white-6 dark:bg-white-6 dark:bg-black-3 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Categories.map((category) => (
                     <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
                       {category}
@@ -152,13 +202,72 @@ export function FormCreateCours({ insertCours }: { insertCours: (Cours: Cours) =
               )}
             />
           </div>
+          <div className="flex flex-col gap-2.5">
+              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
+                Type
+              </Label>
 
-          <div className="flex flex-col">
+              <Select onValueChange={(value) => {form.setValue("Type",value);setType(value) }}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {Types.map((Type) => (
+                    <SelectItem key={Type} value={Type} className="capitalize focus:bg-green-1">
+                      {Type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {Type ==="Cours" && <FormField
+              control={form.control}
+              name="CoursURL"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">URL du Cours </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      onBlur={() => form.trigger("CoursURL")} // Validate on blur
+                      className="input-class focus-visible:ring-offset-green-1"
+                      placeholder="Enter Cours URL"
+                    />
+                  </FormControl>
+                  <FormMessage className="text-black-1 dark:text-white-1" />
+                </FormItem>
+              )}
+            />}
+           {Type === "Livre" && <div>
            <MyDropzone 
-              setCoursURL={setCoursURL} 
               setImageURL={setImageURL} 
               
             />
+            <FormField
+              control={form.control}
+              name="Prix"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Prix</FormLabel>
+                  <FormControl>
+                  <Input
+                     inputMode="numeric"
+                     type="number"
+                     {...field}
+                      onBlur={(e) => {    form.setValue("Prix", parseInt(e.target.value)); 
+                        form.trigger("Prix");}} // Validate on blur
+                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
+                     placeholder="1234"
+                     pattern="[0-9]*"
+                    />
+
+
+                  </FormControl>
+                  <FormMessage className="text-black-1 dark:text-white-1" />
+                </FormItem>
+              )}
+            /></div>}
+          <div className="flex flex-col">
             <div className="">
               <Button
                 type="submit"

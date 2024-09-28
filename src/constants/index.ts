@@ -21,6 +21,11 @@ export const Communes = [
   "El Marsa"
 ];
 
+export const Types = [
+  "Cours",
+  "Livre",
+
+];
 
 export const Categories = [
   "science",

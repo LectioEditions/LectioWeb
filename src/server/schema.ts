@@ -8,8 +8,11 @@ import {
   serial,
   text,
   timestamp,
-  uniqueIndex,
+  uniqueIndex,PgArray
 } from 'drizzle-orm/pg-core';
+import { boolean } from "drizzle-orm/pg-core";
+
+import { foreignKey } from 'drizzle-orm/pg-core';
 
 export const createTable = pgTableCreator((name) => `lection_${name}`);
 
@@ -22,8 +25,8 @@ export const Users = createTable(
       image: text('image').notNull(),
       clerkId: text('clerkId').notNull(),
       createdAt: timestamp('createdAt').defaultNow().notNull(),
-      CoursCount: integer('CoursCount').default(0).notNull(),
-      impression: integer('impression').default(0).notNull(),
+      ItemCount: integer('ItemCount').default(0).notNull(),
+      Achat: integer('Achat').default(0).notNull(),
     },
     (users) => {
       return {
@@ -32,17 +35,22 @@ export const Users = createTable(
     },
   );
 
-export const cours = createTable(
-  'cours',
+export const Item = createTable(
+  'Item',
   {id : serial('id').primaryKey(),
     Titre: text('title').notNull(),
     Category: text('Category').notNull(),
     description: text('description').notNull(),
+    Annee: text('Annee').notNull(),
+    Module: text('Module').notNull(),
+    Type: text('Type').notNull(),
     PdfUrl : text('PdfUrl').notNull(),
     userId: text('userId').references(()=>Users.clerkId),
     imageURL: text('imageURL').notNull(),
+    Prix: integer('Prix'),
+    etat: text('etat'),
     createdAt: timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
-    Impression: integer('Impression').default(0).notNull(),
+    Achat: integer('Achat').default(0).notNull(),
 
   },
   (example) => ({
@@ -50,20 +58,38 @@ export const cours = createTable(
   })
 );
 
-export const impression = createTable(
-  'impression',
+export const CartItem = createTable(
+  'CartItem',
   {id : serial('id').primaryKey(),
-    Adress: text('Adress').notNull(),
-    Commune: text('Commune').notNull(),
     Quantite: integer('Quantite').notNull(),
-    NumTel: text('NumTel').notNull(),
     PdfUrl : text('PdfUrl').notNull(),
+    idItem: integer('idItem').references(()=>Item.id),
+    OrderId: integer('OrderId').references(()=>Order.id),
     userId: text('userId').references(()=>Users.clerkId),
-    imageURL: text('imageURL').notNull(),
-    createdAt: timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
+    Type: text('Type').notNull(),
+    Prix: integer('Prix'),
 
+
+    
   },
 
+);
+
+export const Order = createTable(
+  'Order',
+  {
+    id: serial('id').primaryKey(),
+    Prix: integer('Prix'),
+    NumTel: text('NumTel').notNull(),
+    Adress: text('PdfUrl').notNull(),
+    Traite: boolean('Traite').default(false).notNull(),
+    etat: text('etat').notNull(),
+    userId: text('userId').references(() => Users.clerkId),
+    imageURL: text('imageURL').notNull(),
+    createdAt: timestamp('createdAt', { withTimezone: true }).defaultNow().notNull(),
+    
+
+  }
 );
 
 

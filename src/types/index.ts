@@ -5,11 +5,14 @@ import * as schema from "@/src/server/schema"
 
 export type User = typeof schema.Users.$inferInsert;
 export type Users = typeof schema.Users.$inferSelect;
-export type Cours = typeof schema.cours.$inferInsert;
-export type Courss = typeof schema.cours.$inferSelect;
+export type Item = typeof schema.Item.$inferInsert;
+export type Items = typeof schema.Item.$inferSelect;
 
-export type Impression = typeof schema.impression.$inferInsert;
-export type Impressions = typeof schema.impression.$inferSelect;
+export type CartItem = typeof schema.CartItem.$inferInsert;
+export type CartItems = typeof schema.CartItem.$inferSelect;
+
+export type Order = typeof schema.Order.$inferInsert;
+export type Orders = typeof schema.Order.$inferSelect;
 
 
 export type Upload = typeof schema.Uploads.$inferInsert;

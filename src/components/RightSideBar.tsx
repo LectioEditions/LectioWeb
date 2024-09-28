@@ -1,4 +1,4 @@
-import {  getCourses, getTopUserBycoursCount, getUserByClerkId } from '@/src/server/db';
+import {  getItemes, getTopUserByItemCount, getUserByClerkId } from '@/src/server/db';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link';
@@ -10,8 +10,11 @@ import { Loader } from 'lucide-react';
 
 const RightSideBar = async () => {
   const user = auth();
-  const topUsers = await getTopUserBycoursCount();
-  const Cours= await getCourses();
+  const [topUsers, Cours] = await Promise.all([
+    getTopUserByItemCount(),
+    getItemes()  // Ensure you have the correct function name here
+  ]);
+  
   if (user.userId) var userData= await getUserByClerkId(user.userId);
   if(!topUsers || !Cours) return(<div className='w-full h-screen flex justify-center items-center'>
     <Loader size={30} className="animate-spin  text-green-1"/>
@@ -20,7 +23,7 @@ const RightSideBar = async () => {
     <section className='right_sidebar text-white-1 dark:text-white-1'>
 
       <SignedIn>
-        <Link href={ `/profile/${userData?.id}`} className='flex gap-3 pb-12'>
+        <Link href={ `/profile/${userData?.clerkId}`} className='flex gap-3 pb-12'>
         <UserButton/>
         <div className='flex w-full items-center justify-between '>
           <h1 className='text-lg truncate font-semibold text-white-1 dark:text-white-1'>
@@ -56,7 +59,7 @@ const RightSideBar = async () => {
           <h2 className='text-sm text-white-1 dark:text-white-1 font-semibold'>{user.name}</h2>
           </div>
           <div className='flex items-center'>
-          <p className='text-xs font-normal'>{user.CoursCount} Cours</p>
+          <p className='text-xs font-normal'>{user.Achat} Vente</p>
           </div>
         </div>
         </Link>

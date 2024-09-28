@@ -1,9 +1,9 @@
 import React from 'react'
 import CoursCard from '@/src/components/CoursCard'
-import { getCourses } from '@/src/server/db';
+import { getItemes } from '@/src/server/db';
 import "@/src/app/globals.css"
 async function  Cours(){
-  const Cours = await getCourses();
+  const Cours = await getItemes();
 return Cours;
 
 

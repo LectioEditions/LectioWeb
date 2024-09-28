@@ -14,14 +14,13 @@ function UploadSvg() {
 }
 
 type DropProps = {
-  setCoursURL: Dispatch<SetStateAction<string>>;
   setImageURL: Dispatch<SetStateAction<string>>;
 };
 
-export default function MyDropzone({ setCoursURL, setImageURL }: DropProps) {
+export default function MyDropzone({  setImageURL }: DropProps) {
   const [uploadedFiles, setUploadedFiles] = useState<{ name: string; url: string }[]>([]);
   const [isUploading, setIsUploading] = useState(false);
-  const { startUpload } = useUploadThing("cours", {
+  const { startUpload } = useUploadThing("thumbnail", {
     onClientUploadComplete: () => {
       setIsUploading(false);
       toast.success("Upload completed successfully!");
@@ -35,10 +34,9 @@ export default function MyDropzone({ setCoursURL, setImageURL }: DropProps) {
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
-      const pdfFile = acceptedFiles.find(file => file.type === 'application/pdf');
       const imageFile = acceptedFiles.find(file => file.type.startsWith('image/'));
       
-      if (!(pdfFile && imageFile)) {
+      if (!( imageFile)) {
         toast.error("Please upload one PDF and one image.");
         return;
       }
@@ -51,15 +49,13 @@ export default function MyDropzone({ setCoursURL, setImageURL }: DropProps) {
           setUploadedFiles((prev) => [...prev, { name: file.name, url: result[0].url }]);
           if (result[0].type.startsWith('image/')) {
             setImageURL(result[0].url);
-          } else if (result[0].type === 'application/pdf') {
-            setCoursURL(result[0].url);
-          }
+          } 
         } catch (error) {
           console.error("Error uploading file:", error);
         }
       });
     },
-    [startUpload, setCoursURL, setImageURL]
+    [startUpload, setImageURL]
   );
 
   const { getRootProps, getInputProps, open } = useDropzone({

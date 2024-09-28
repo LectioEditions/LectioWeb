@@ -3,15 +3,16 @@
 import React from 'react'
 import Image from "next/image";
 
-import { Courss, User } from "@/src/types";
+import { Courss, Users } from "@/src/types";
 
 import { Loader } from "lucide-react";
 import { Button } from "./ui/button";
-//import { useToast } from "./ui/use-toast";
-const ProfileDisplay = ({
-    user ,courses
+import { User } from '@clerk/nextjs/server';
 
-    }: {user:User , courses : Courss[]}) => {
+const ProfileDisplay = ({
+    user ,courses,agent
+
+    }: {agent:boolean,user : Users, courses : Courss[]}) => {
       const cours = courses[0];
 
     
@@ -49,7 +50,7 @@ const ProfileDisplay = ({
               </article>
     
               <Button
-                className="text-16 w-full max-w-[250px] bg-orange-1 font-extrabold text-black-1 dark:text-white-1 gap-3"
+                className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-black-1 dark:text-white-1 gap-3"
               >
                 <Image
                   src="/icons/randomPlay.svg"

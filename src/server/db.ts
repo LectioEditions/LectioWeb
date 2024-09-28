@@ -5,9 +5,9 @@ import { sql , desc ,like} from 'drizzle-orm'
 import * as schema from './schema';
 import { eq } from "drizzle-orm";
 import { sql as pg, QueryResult } from '@vercel/postgres';
-import { Cours, Courss, Impression, Upload } from '@/src/types';
+import { Item, Items, Upload ,CartItem,CartItems, Order } from '@/src/types';
 import { User as NewUser } from '@/src/types';
-import { auth } from '@clerk/nextjs/server';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 export const db =  drizzle(pg, { schema });
  
 
@@ -39,114 +39,248 @@ export async function deleteUser (clerkId?: string)  {
   if(!clerkId) throw new Error('clerkId is required');
   return await db.delete(schema.Users).where(eq(schema.Users.clerkId, clerkId));
 }
-export async function getTopUserBycoursCount() {
-  return await db.select().from(schema.Users).orderBy(desc(schema.Users.CoursCount)).limit(6).execute();
+
+
+
+
+export async function getTopUserByItemCount() {
+  return await db.select().from(schema.Users).orderBy(desc(schema.Users.ItemCount)).limit(6).execute();
 }
-  export async function getCoursById (id?: number)  {
+
+
+
+
+  export async function getItemById (id?: number)  {
     if(!id) throw new Error('id is required');
-    return await db.query.cours.findFirst(
+    return await db.query.Item.findFirst(
       {where:(model,{eq})=>eq(model.id,id),}
      );
   }
-  export async function getCoursByURL  (url: string ) {
+
+  export async function getItemByURL  (url: string ) {
     if(!url) throw new Error("no url");
-    return await db.query.cours.findFirst({where:(eq(schema.cours.PdfUrl,url))})
+    return await db.query.Item.findFirst({where:(eq(schema.Item.PdfUrl,url))})
     }
 
-export async function getCourses() {
-  return await db.query.cours.findMany();
+export async function getItemes() {
+  return await db.query.Item.findMany();
 }
 
-export async function getCoursBySearch (search?: string)  {
-  if(search === '') return; 
-  if(!search) throw new Error('search is required');
-  const ByTitle =  await db.select().from(schema.cours).where(like(schema.cours.Titre, `%${search}%`)).execute();
-  if(ByTitle.length > 0) return ByTitle;
-  const ByDescription = await db.select().from(schema.cours).where(like(schema.cours.description, `%${search}%`)).execute();
-  if(ByDescription.length > 0) return ByDescription;
-  return ;
+export async function getItemBySearch(search?: string) {
+  if (search === '') return;
+  if (!search) throw new Error('search is required');
+
+  const [ByTitle, ByModule, ByDescription, ByAnnee] = await Promise.all([
+    db.select().from(schema.Item).where(like(schema.Item.Titre, `%${search}%`)).execute(),
+    db.select().from(schema.Item).where(like(schema.Item.Module, `%${search}%`)).execute(),
+    db.select().from(schema.Item).where(like(schema.Item.description, `%${search}%`)).execute(),
+    db.select().from(schema.Item).where(like(schema.Item.Annee, `%${search}%`)).execute()
+  ]);
+
+  // Use a Set to track unique items by ID to avoid duplicates
+  const seenIds = new Set<number>();
+  const orderedResults = [
+    ...ByTitle.filter(item => {
+      if (!seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        return true;
+      }
+      return false;
+    }),
+    ...ByModule.filter(item => {
+      if (!seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        return true;
+      }
+      return false;
+    }),
+    ...ByDescription.filter(item => {
+      if (!seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        return true;
+      }
+      return false;
+    }),
+    ...ByAnnee.filter(item => {
+      if (!seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        return true;
+      }
+      return false;
+    })
+  ];
+
+  return orderedResults;
 }
-export async function insertcours  (cours: Cours): Promise<Cours|undefined> {
+
+export async function insertItem  (Item: Item): Promise<Item|undefined> {
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
-  if(!cours) throw new Error('cours is required');
-  cours.userId = user.userId;
+  const agent = await clerkClient.users.getUser(user.userId);
+  if (!agent) throw new Error("Unauthorized");
+  if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
+  if(!Item) throw new Error('Item is required');
+  Item.userId = user.userId;
   const newuser= await getUserByClerkId(user.userId);
   if(!newuser) throw new Error('user not found');
   
   
-  const newCours = await db.insert(schema.cours).values(cours);
-  if(!newCours) return ;
-  newuser.CoursCount = newuser.CoursCount + 1;
+  const newItem = await db.insert(schema.Item).values(Item);
+  if(!newItem) return ;
+  newuser.ItemCount = newuser.ItemCount + 1;
   await UpdateUser(newuser);
 
-  return cours;
+  return Item;
  }
 
-export async function Updatecours (cours:Courss){
-  return await db.update(schema.cours).set(cours).where(eq(schema.cours.PdfUrl, cours.PdfUrl));
-}
- 
-export async function getCoursByUserId (userId: string | null)  {
-  if(!userId) throw new Error('author is required');
-  return  await db.select().from(schema.cours).where(eq(schema.cours.userId, userId)).execute();
-}
-export async function getCoursByTitle (title?: string)  {
-  if(!title) throw new Error('title is required');
-  return  await db.select().from(schema.cours).where(eq(schema.cours.PdfUrl, title)).execute();
-}
-export async function getCoursByDescription (description?: string)  {
-  if(!description) throw new Error('description is required');
-  return  await db.select().from(schema.cours).where(eq(schema.cours.description, description)).execute();
-}
-
-
-export async function getCoursMaxViews() {
-  return  await db.select().from(schema.cours).orderBy(desc(schema.cours.Impression)).limit(1).execute();
-}
-
-export async function deletecours (id?: number)  {
-  if(!id) throw new Error('id is required');
-  // add deleting the audio and the image from uploadthing
-  return await db.delete(schema.cours).where(eq(schema.cours.id, id));
-}
-
-
-
-
-
-export async function insertImpression(impression: Impression): Promise<Impression | undefined> {
+export async function UpdateItem (Item:Items){
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
-  if (!impression) throw new Error('Cours is required');
+  const agent = await clerkClient.users.getUser(user.userId);
+  if (!agent) throw new Error("Unauthorized");
+  if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
+  return await db.update(schema.Item).set(Item).where(eq(schema.Item.PdfUrl, Item.PdfUrl));
+}
+ 
+export async function getItemByUserId (userId: string | null)  {
+  if(!userId) throw new Error('author is required');
+  return  await db.select().from(schema.Item).where(eq(schema.Item.userId, userId)).execute();
+}
+export async function getItemByTitle (title?: string)  {
+  if(!title) throw new Error('title is required');
+  return  await db.select().from(schema.Item).where(eq(schema.Item.PdfUrl, title)).execute();
+}
+export async function getItemByDescription (description?: string)  {
+  if(!description) throw new Error('description is required');
+  return  await db.select().from(schema.Item).where(eq(schema.Item.description, description)).execute();
+}
+
+
+export async function getItemMaxViews() {
+  return  await db.select().from(schema.Item).orderBy(desc(schema.Item.Achat)).limit(1).execute();
+}
+
+export async function deleteItem (id?: number)  {
+const user = auth();
+if (!user.userId) throw new Error("Unauthorized");
+const agent = await clerkClient.users.getUser(user.userId);
+if (!agent) throw new Error("Unauthorized");
+if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
+  if(!id) throw new Error('id is required');
+
+  return await db.delete(schema.Item).where(eq(schema.Item.id, id));
+}
+
+
+
+
+
+export async function insertCartItem(CartItem: CartItem): Promise<CartItem | undefined> {
+  const user = auth();
+  if (!user.userId) throw new Error("Unauthorized");
+  if (!CartItem) throw new Error('Item is required');
   
-  impression.userId = user.userId;
-  console.log(impression);
+  CartItem.userId = user.userId;
   
   // Execute independent async calls concurrently
-  const [newUser, newImpression, newCours] = await Promise.all([
+  const [newUser, newCartItem, newItem] = await Promise.all([
     getUserByClerkId(user.userId),
-    db.insert(schema.impression).values(impression),
-    getCoursByURL(impression.PdfUrl)
+    db.insert(schema.CartItem).values(CartItem),
+    getItemByURL(CartItem.PdfUrl)
   ]);
 
-  if (!newImpression) return;
-  if (!newUser || !newCours) throw new Error('User or Cours not found');
+  if (!newCartItem) return;
+  if (!newUser || !newItem) throw new Error('User or Item not found');
 
-  // Update user and cours counts
-  newUser.impression += 1;
-  newCours.Impression += 1;
+  // Update user and Item counts
+  newUser.Achat += 1;
+  newItem.Achat += 1;
 
   // Execute update operations concurrently
   await Promise.all([
     UpdateUser(newUser),
-    Updatecours(newCours)
+    UpdateItem(newItem)
   ]);
 
-  return impression;
+  return CartItem;
 }
 
 
+export async function deleteCartItem(cartItemId: number): Promise<CartItems> {
+  const user = auth();
+  if (!user.userId) throw new Error("Unauthorized");
+  if (!cartItemId) throw new Error('CartItem ID is required');
+
+  // Fetch the CartItem, associated User, and Item concurrently
+  const [cartItem, userRecord, item] = await Promise.all([
+    db.query.CartItem.findFirst({ where: (model, { eq }) => eq(model.id, cartItemId) }),
+    getUserByClerkId(user.userId),
+    db.query.Item.findFirst({ where: (model, { eq }) => eq(model.id, cartItemId) })
+  ]);
+
+  if (!cartItem) throw new Error('CartItem not found');
+  if (!userRecord || !item) throw new Error('User or Item not found');
+
+  // Execute the deletion of the CartItem
+  const deleteCartItemResult = await db.delete(schema.CartItem).where(eq(schema.CartItem.id, cartItemId)).execute();
+  if (!deleteCartItemResult) throw new Error('Error deleting CartItem');
+
+  // Update the User's and Item's Achat counts after deletion
+  userRecord.Achat -= 1;
+  item.Achat -= 1;
+
+  // Execute the update operations concurrently
+  await Promise.all([
+    UpdateUser(userRecord),
+    UpdateItem(item)
+  ]);
+
+  return cartItem 
+}
+
+export async function getCartItems() {
+  return await db.query.CartItem.findMany();
+}
+
+export async function getCartItemsByUserId(userId: string | null) {
+  if (!userId) throw new Error('userId is required');
+  return await db.query.CartItem.findMany({ where: (model, { eq }) => eq(model.userId, userId) });
+}
+
+export async function getCartItemsByOrderId(orderId: number) {
+  return await db.query.CartItem.findMany({ where: (model, { eq }) => eq(model.OrderId, orderId) });
+}
+
+export async function insertOrder( order : Order){
+  const user = auth();
+  if (!user.userId) throw new Error("Unauthorized");
+  if(!order) throw new Error('order is required');
+  const newOrder =  await db.insert(schema.Order).values(order);
+   if(!newOrder) return ;
+    return order;
+
+}
+
+export async function deleteOrder(orderId: number) {
+  const user = auth();
+  if (!user.userId) throw new Error("Unauthorized");
+  const agent = await clerkClient.users.getUser(user.userId);
+  if (!agent) throw new Error("Unauthorized");
+  if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
+  if(!orderId) throw new Error('order is required');
+  const deleted = await db.delete(schema.Order).where(eq(schema.Order.id, orderId));
+  if(!deleted) throw new Error('order not deleted');
+  return deleted;
+}
+
+export async function getOrders() {
+  const user = auth();
+  if (!user.userId) throw new Error("Unauthorized");
+  const agent = await clerkClient.users.getUser(user.userId);
+  if (!agent) throw new Error("Unauthorized");
+  if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
+  return await db.query.Order.findMany();
+}
 
 
 export async function insertUpload({uploadURL }:Upload){
