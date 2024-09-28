@@ -50,7 +50,7 @@ export async function getTopUserByItemCount() {
 
 
 
-  export async function getItemById (id?: number)  {
+  export async function getItemById (id: number | null | undefined)  {
     if(!id) throw new Error('id is required');
     return await db.query.Item.findFirst(
       {where:(model,{eq})=>eq(model.id,id),}
@@ -186,7 +186,7 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
   const [newUser, newCartItem, newItem] = await Promise.all([
     getUserByClerkId(user.userId),
     db.insert(schema.CartItem).values(CartItem),
-    getItemByURL(CartItem.PdfUrl)
+    getItemById(CartItem.idItem)
   ]);
 
   if (!newCartItem) return;

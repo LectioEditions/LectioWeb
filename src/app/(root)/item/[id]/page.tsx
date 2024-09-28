@@ -2,24 +2,42 @@ import React from 'react'
 import Image from 'next/image'
 import { Loader } from "lucide-react";
 
-import { getItemById, getItemes } from '@/src/server/db'
+import { getItemById, getItemes, insertCartItem } from '@/src/server/db'
 import CoursdetailPlayer from '@/src/components/CoursdetailPlayer';
 import CoursCard from '@/src/components/CoursCard';
 import EmptyState from '@/src/components/EmptyState';
-import { Item, User } from '@/src/types';
+import { CartItem, CartItems, Item, Items, User } from '@/src/types';
 import { deleteItem,getUserByClerkId } from '@/src/server/db';
 import { QueryResult } from '@vercel/postgres';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 const CoursDetails = async({params}:{
   params:{id : number}
 }) => {
-  
+  const user = auth();
+  if(!user.userId) return;
+  const agent = await clerkClient.users.getUser(user.userId);
+  const isAgent  = agent.publicMetadata.agent === true;
   const Item = await getItemById(params.id);
   const similarItem = await getItemes();
   if(!Item) return(<div className='w-full h-screen flex justify-center items-center'>
     <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
-  async function handleDeleteCours(id:number | undefined) :Promise<QueryResult<never>>{ 
+  async function handleAddTCart(item :Items) :Promise<CartItem | undefined>
+  {
+    "use server";
+    console.log(item);
+    const cartItem :CartItem ={
+      idItem: item.id,
+      userId: item.userId,
+      Prix: item.Prix,
+      Type: item.Type,
+      PdfUrl: item.PdfUrl,
+      Quantite : 0,
+    }
+    return await insertCartItem(cartItem);
+  }
+  async function handleDeleteItem(id:number | undefined) :Promise<QueryResult<never>>{ 
     "use server";
     return await deleteItem(id);
   }
@@ -44,7 +62,7 @@ const CoursDetails = async({params}:{
       </h2>
       </figure>
       </header>
-      <CoursdetailPlayer Cours={Item} deleteCours={handleDeleteCours} getUserByClerkId={handleGetUserByClerkId}/>
+      <CoursdetailPlayer Item={Item} deleteItem={handleDeleteItem} getUserByClerkId={handleGetUserByClerkId} agent={isAgent} addCartItem={handleAddTCart}/>
       <p className='text-black-1 dark:text-white-1 text-lg pb-8 pt-11 font-medium max-md:text-center'>{Item?.description}</p>
      <section className='flex flex-col gap-8'>
       <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> Similar Courss:</h1>

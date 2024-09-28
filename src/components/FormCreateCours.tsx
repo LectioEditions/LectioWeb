@@ -90,7 +90,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             if (!newCours) throw new Error("No Cours returned");
             
             // Success feedback
-            toast.success("Cours submitted successfully!");
+            toast.success("Item submitted successfully!");
             
             form.reset(); // Reset the form
           } catch (error) {

@@ -3,50 +3,58 @@ import Image from "next/image";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Cours, CoursDetailPlayerProps, Courss, User } from "@/src/types";
+import { CartItem, Item, Items, User } from "@/src/types";
 
 import { Loader } from "lucide-react";
 import { Button } from "./ui/button";
 //import { useToast } from "./ui/use-toast";
 import { QueryResult } from "@vercel/postgres";
+import { toast } from "sonner";
 
-const CoursDetailPlayer = ({
-Cours , 
-deleteCours,
-getUserByClerkId
-}: {Cours:Courss , deleteCours:(id?: number | undefined) => Promise<QueryResult<never>>,
-   getUserByClerkId:(clerkId: string | null | undefined) => Promise<User | undefined> }) => {
+interface ItemDetailPlayerProps {
+  Item: Items;
+  deleteItem: (id?: number) => Promise<QueryResult<never>>;
+  addCartItem: (item: Items)=> Promise<CartItem | undefined>;
+  getUserByClerkId: (clerkId: string | null | undefined) => Promise<User | undefined>;
+  agent: boolean;
+}
+
+const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
+  Item,
+  deleteItem,
+  agent,
+  addCartItem,
+  getUserByClerkId,
+}) => {
   const router = useRouter();
   //const { toast } = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
   const [owner, setOwner] = useState<User |null>(null);
-  const [isOwner, setIsOwner] = useState(false);
   const Pathname = usePathname();
   const showBtn= Pathname.includes("impression");
-  console.log(Cours);
   useEffect(() => {
   
     const fetchOwner = async () => {
-      if (!Cours.userId) return;
-      const ownerData = await getUserByClerkId(Cours.userId);
+      if (!Item.userId) return;
+      const ownerData = await getUserByClerkId(Item.userId);
       if(ownerData) setOwner(ownerData);
-      if(owner?.clerkId === Cours.userId) setIsOwner(true);
+     
     };
   
     fetchOwner();
-  }, [Cours.userId]);
+  }, [Item.userId]);
 
   
   const handleDelete = async () => {
     try {
-     if(!Cours.id) throw new Error("Cours id is missing")
-      await deleteCours(Cours.id);
-     // toast({   title: "Cours deleted", });
+     if(!Item.id) throw new Error("Item id is missing")
+      await deleteItem(Item.id);
+     // toast({   title: "Item deleted", });
       router.push("/");
     } catch (error) {
-      console.error("Error deleting Cours", error);
+      console.error("Error deleting Item", error);
     //  toast({
-      //  title: "Error deleting Cours",
+      //  title: "Error deleting Item",
       //  variant: "destructive",
      // });
     }
@@ -54,27 +62,27 @@ getUserByClerkId
 
  
 
-  if (!Cours || ! owner ) return <Loader />;
+  if (!Item || ! owner ) return <Loader />;
 
   return (
     <div className="mt-6 flex w-full justify-between max-md:justify-center">
       <div className="flex flex-col gap-8 max-md:items-center md:flex-row">
         <Image
-          src={Cours.imageURL}
+          src={Item.imageURL}
           width={250}
           height={250}
-          alt="Cours image"
+          alt="Item image"
           className="aspect-square rounded-lg"
         />
         <div className="flex w-full flex-col gap-5 max-md:items-center md:gap-9">
           <article className="flex flex-col gap-2 max-md:items-center">
             <h1 className="text-32 font-extrabold tracking-[-0.32px] text-black-1 dark:text-white-1">
-              {Cours.Titre}
+              {Item.Titre}
             </h1>
             <figure
               className="flex cursor-pointer items-center gap-2"
               onClick={() => {
-                router.push(`/profile/${Cours.userId}`);
+                router.push(`/profile/${Item.userId}`);
               }}
             >
               <Image
@@ -90,16 +98,20 @@ getUserByClerkId
 
         { !showBtn &&  <Button
             onClick={() => {
-              router.push(`/impression/${Cours.id}`);
+              toast.success("item is beig treated please wait a moment...");
+
+             addCartItem(Item);
+             toast.success("Item  is added successfully!");
+
             }}
             className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-white-1"
           >
             
-            Imprimer
+            Ajouter au panier
           </Button>}
         </div>
       </div>
-      {isOwner && (
+      {agent && (
         <div className="relative mt-2">
           <Image
             src="/icons/three-dots.svg"
@@ -128,4 +140,4 @@ getUserByClerkId
   );
 };
 
-export default CoursDetailPlayer;
+export default ItemDetailPlayer;
