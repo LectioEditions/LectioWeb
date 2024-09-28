@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction } from "react";
 import * as schema from "@/src/server/schema"
+import { int } from "drizzle-orm/mysql-core";
 
 export type User = typeof schema.Users.$inferInsert;
 export type Users = typeof schema.Users.$inferSelect;
@@ -14,6 +15,10 @@ export type CartItems = typeof schema.CartItem.$inferSelect;
 export type Order = typeof schema.Order.$inferInsert;
 export type Orders = typeof schema.Order.$inferSelect;
 
+export interface OrderProps {
+  order: Order;
+  cartItems: CartItems[];
+}
 
 export type Upload = typeof schema.Uploads.$inferInsert;
 export interface SoundModel {

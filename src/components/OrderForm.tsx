@@ -15,13 +15,12 @@ import {
   FormMessage,
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
-import { Cours, Impression } from "@/src/types";
+import { CartItems, Order, OrderProps } from "@/src/types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { cn } from "../lib/utils";
 import { Label } from "./ui/label";
 import { Categories, Communes } from "../constants";
 import "@/src/app/globals.css";
-import { insertImpression } from "../server/db";
 // Updated form schema
 const formSchema = z.object({
   adress: z.string().min(2, {
@@ -36,7 +35,7 @@ const formSchema = z.object({
   
 });
 
-export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insertImpression: (Impression: Impression) => Promise<Impression | undefined> }) {
+export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], insertOrder: (cart: OrderProps) => Promise<Order | undefined> }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,26 +55,26 @@ export function ImpressionForm({ insertImpression , Cours}: {Cours:Cours, insert
         <form
          onSubmit={form.handleSubmit(async (data) => {
           setIsLoading(true);
-          const impression: Impression = {
+          const Order: Order = {
             Adress: data.adress,
             Commune: data.Commune,
-            PdfUrl: Cours.PdfUrl,
-            imageURL: Cours.imageURL,
-            Quantite: data.Quantite,
+            imageURL: "",
             NumTel: data.NumTel,
-
+            Prix: 0,
+            Traite: false,
           };
           try {
-             console.log(impression);
-            const newImpression = await insertImpression(impression);
+            toast.success("Order is being treated, please wait a moment...");
+             console.log(Order);
+            const newImpression = await insertOrder({order:Order ,cartItems:CartItems});
             if (!newImpression) throw new Error("Failed to submit impression");
-            toast.success("impression submitted successfully!");
+            toast.success("Ordeer submitted successfully!");
             
             form.reset(); // Reset the form
  
           } catch (error) {
             // Error feedback
-            toast.error("An error occurred while submitting the Cours.");
+            toast.error("An error occurred while submitting the Order.");
             console.error("Submission error:", error); // Log the error for debugging
           } finally {
             // Reset loading state

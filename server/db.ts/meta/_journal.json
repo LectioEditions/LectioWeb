@@ -64,6 +64,20 @@
       "when": 1727525063256,
       "tag": "0008_fast_gabe_jones",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1727532707346,
+      "tag": "0009_far_prowler",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1727532917074,
+      "tag": "0010_natural_jimmy_woo",
+      "breakpoints": true
     }
   ]
 }
