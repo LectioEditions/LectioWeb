@@ -54,13 +54,13 @@ export const sidebarLinks = [
     },
     {
       imgURL: "/icons/home.svg",
-      route: "/impression/3",
-      label: "Impression",
+      route: "/ordering",
+      label: "Ordering",
     },
     {
       imgURL: "/icons/microphone.svg",
       route: "/create-podcast",
-      label: "Create Cours",
+      label: "Create Item",
     },
   ];
   
