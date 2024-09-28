@@ -62,7 +62,10 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
 
  
 
-  if (!Item || ! owner ) return <Loader />;
+  if (!Item || ! owner ) return(
+  <div className="w-full flex justify-center items-center h-64">
+    <Loader />
+  </div>)
 
   return (
     <div className="mt-6 flex w-full justify-between max-md:justify-center">
@@ -97,12 +100,16 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
           </article>
 
         { !showBtn &&  <Button
-            onClick={() => {
+            onClick={async() => {
+              try{
               toast.success("item is beig treated please wait a moment...");
 
-             addCartItem(Item);
+             await addCartItem(Item);
              toast.success("Item  is added successfully!");
-
+              }catch(error){
+                toast.error("you have already added this item");
+                console.error("Submission error:", error); // Log the error for debugging
+              }
             }}
             className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-white-1"
           >

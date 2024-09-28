@@ -5,7 +5,7 @@ import { sql , desc ,like} from 'drizzle-orm'
 import * as schema from './schema';
 import { eq } from "drizzle-orm";
 import { sql as pg, QueryResult } from '@vercel/postgres';
-import { Item, Items, Upload ,CartItem,CartItems, Order } from '@/src/types';
+import { Item, Items, Upload ,CartItem,CartItems, Order, OrderProps } from '@/src/types';
 import { User as NewUser } from '@/src/types';
 import { auth, clerkClient } from '@clerk/nextjs/server';
 export const db =  drizzle(pg, { schema });
@@ -181,6 +181,14 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
   if (!CartItem) throw new Error('Item is required');
   
   CartItem.userId = user.userId;
+  const userRecord = await getCartItemsByUserId(user.userId);
+  console.log(userRecord);
+  // Check if the new item already exists in the user's cart
+  const itemExists = userRecord.some(cartItem => cartItem.idItem === CartItem.idItem);
+  
+  if (itemExists) {
+    throw new Error('This item is already in your cart');
+  }
   
   // Execute independent async calls concurrently
   const [newUser, newCartItem, newItem] = await Promise.all([
@@ -206,7 +214,7 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
 }
 
 
-export async function deleteCartItem(cartItemId: number): Promise<CartItems> {
+export async function deleteCartItem(cartItemId: number | null | undefined): Promise<CartItems> {
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
   if (!cartItemId) throw new Error('CartItem ID is required');
@@ -242,7 +250,7 @@ export async function getCartItems() {
   return await db.query.CartItem.findMany();
 }
 
-export async function getCartItemsByUserId(userId: string | null) {
+export async function getCartItemsByUserId(userId: string | null) : Promise<CartItems[]> {
   if (!userId) throw new Error('userId is required');
   return await db.query.CartItem.findMany({ where: (model, { eq }) => eq(model.userId, userId) });
 }
@@ -251,15 +259,33 @@ export async function getCartItemsByOrderId(orderId: number) {
   return await db.query.CartItem.findMany({ where: (model, { eq }) => eq(model.OrderId, orderId) });
 }
 
-export async function insertOrder( order : Order){
+export async function insertOrder(order: OrderProps) {
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
-  if(!order) throw new Error('order is required');
-  const newOrder =  await db.insert(schema.Order).values(order);
-   if(!newOrder) return ;
-    return order;
+  const agent = await clerkClient.users.getUser(user.userId);
+  if (!agent) throw new Error("Unauthorized");
+  if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
+  if (!order) throw new Error('Order is required');
+  
+  const timestamp = Date.now(); // Get current timestamp in milliseconds
+  const randomNum = Math.floor(Math.random() * 10000); // Generate a random number (0-9999)
+  const identifier = timestamp*randomNum; // Combine timestamp and random number as a string
 
+  // Assign the identifier to the order
+  order.order.identifier = identifier;
+  const updatePromises = order.cartItems.map(async (cartItem) => {
+    cartItem.OrderId = identifier; // Assign the identifier to OrderId
+    return await db.update(schema.CartItem).set(cartItem).where(eq(schema.CartItem.id, cartItem.id));
+  });
+  
+  
+  // Insert the order into the database
+  const newOrder = await db.insert(schema.Order).values(order.order);
+  if (!newOrder) return;
+  await Promise.all(updatePromises);
+  return identifier; 
 }
+
 
 export async function deleteOrder(orderId: number) {
   const user = auth();

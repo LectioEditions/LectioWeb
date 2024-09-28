@@ -79,6 +79,7 @@ export const Order = createTable(
   'Order',
   {
     id: serial('id').primaryKey(),
+    identifier: integer('identifier').notNull(),
     Prix: integer('Prix'),
     NumTel: text('NumTel').notNull(),
     Adress: text('Adress').notNull(),

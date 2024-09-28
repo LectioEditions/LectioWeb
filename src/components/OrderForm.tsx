@@ -35,7 +35,7 @@ const formSchema = z.object({
   
 });
 
-export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], insertOrder: (cart: OrderProps) => Promise<Order | undefined> }) {
+export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], insertOrder: (cart: OrderProps) => Promise<number | undefined> }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -61,6 +61,7 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
             imageURL: "",
             NumTel: data.NumTel,
             Prix: 0,
+            identifier: 0,
             Traite: false,
           };
           try {

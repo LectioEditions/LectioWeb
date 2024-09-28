@@ -19,7 +19,7 @@ const CoursDetails = async({params}:{
   const isAgent  = agent.publicMetadata.agent === true;
   const Item = await getItemById(params.id);
   const similarItem = await getItemes();
-  if(!Item) return(<div className='w-full h-screen flex justify-center items-center'>
+  if(!Item) return(<div className='min-w-full min-h-screen flex justify-center items-center'>
     <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
@@ -65,7 +65,7 @@ const CoursDetails = async({params}:{
       <CoursdetailPlayer Item={Item} deleteItem={handleDeleteItem} getUserByClerkId={handleGetUserByClerkId} agent={isAgent} addCartItem={handleAddTCart}/>
       <p className='text-black-1 dark:text-white-1 text-lg pb-8 pt-11 font-medium max-md:text-center'>{Item?.description}</p>
      <section className='flex flex-col gap-8'>
-      <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> Similar Courss:</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> Similar Items:</h1>
      {similarItem && similarItem.length>0 ?(
       <div className='Cours_grid'>{similarItem.map((Cours,index)=>(
         <CoursCard key={index} title={Cours.Titre} imgURL={Cours.imageURL} description={Cours.description} id={Cours.id} />

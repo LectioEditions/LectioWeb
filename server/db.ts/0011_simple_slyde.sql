@@ -1,0 +1,1 @@
+ALTER TABLE "lection_Order" ADD COLUMN "identifier" integer NOT NULL;

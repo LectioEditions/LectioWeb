@@ -1,0 +1,440 @@
+{
+  "id": "d14fb7ee-4857-4f5e-87e7-a72f1d44399a",
+  "prevId": "408e2485-b90f-4b60-8f6a-46b4574cb349",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.lection_CartItem": {
+      "name": "lection_CartItem",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "Quantite": {
+          "name": "Quantite",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "PdfUrl": {
+          "name": "PdfUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "idItem": {
+          "name": "idItem",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "OrderId": {
+          "name": "OrderId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "Type": {
+          "name": "Type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Prix": {
+          "name": "Prix",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "lection_CartItem_idItem_lection_Item_id_fk": {
+          "name": "lection_CartItem_idItem_lection_Item_id_fk",
+          "tableFrom": "lection_CartItem",
+          "tableTo": "lection_Item",
+          "columnsFrom": [
+            "idItem"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "lection_CartItem_OrderId_lection_Order_id_fk": {
+          "name": "lection_CartItem_OrderId_lection_Order_id_fk",
+          "tableFrom": "lection_CartItem",
+          "tableTo": "lection_Order",
+          "columnsFrom": [
+            "OrderId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "lection_CartItem_userId_lection_users_clerkId_fk": {
+          "name": "lection_CartItem_userId_lection_users_clerkId_fk",
+          "tableFrom": "lection_CartItem",
+          "tableTo": "lection_users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "clerkId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.lection_Item": {
+      "name": "lection_Item",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Category": {
+          "name": "Category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Annee": {
+          "name": "Annee",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Module": {
+          "name": "Module",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Type": {
+          "name": "Type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "PdfUrl": {
+          "name": "PdfUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "imageURL": {
+          "name": "imageURL",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Prix": {
+          "name": "Prix",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "etat": {
+          "name": "etat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "Achat": {
+          "name": "Achat",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "titreId": {
+          "name": "titreId",
+          "columns": [
+            {
+              "expression": "title",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "lection_Item_userId_lection_users_clerkId_fk": {
+          "name": "lection_Item_userId_lection_users_clerkId_fk",
+          "tableFrom": "lection_Item",
+          "tableTo": "lection_users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "clerkId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.lection_Order": {
+      "name": "lection_Order",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "identifier": {
+          "name": "identifier",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Prix": {
+          "name": "Prix",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NumTel": {
+          "name": "NumTel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Adress": {
+          "name": "Adress",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Commune": {
+          "name": "Commune",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Traite": {
+          "name": "Traite",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "imageURL": {
+          "name": "imageURL",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "lection_Order_userId_lection_users_clerkId_fk": {
+          "name": "lection_Order_userId_lection_users_clerkId_fk",
+          "tableFrom": "lection_Order",
+          "tableTo": "lection_users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "clerkId"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.lection_Uploads": {
+      "name": "lection_Uploads",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "imageURL": {
+          "name": "imageURL",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "titlesId": {
+          "name": "titlesId",
+          "columns": [
+            {
+              "expression": "imageURL",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.lection_users": {
+      "name": "lection_users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "clerkId": {
+          "name": "clerkId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "ItemCount": {
+          "name": "ItemCount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "Achat": {
+          "name": "Achat",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "uniq_idx": {
+          "name": "uniq_idx",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
