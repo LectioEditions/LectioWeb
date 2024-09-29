@@ -10,11 +10,12 @@ import { Button } from "./ui/button";
 //import { useToast } from "./ui/use-toast";
 import { QueryResult } from "@vercel/postgres";
 import { toast } from "sonner";
+import QuantityForm from "./QuantityForm";
 
 interface ItemDetailPlayerProps {
   Item: Items;
   deleteItem: (id?: number) => Promise<QueryResult<never>>;
-  addCartItem: (item: Items)=> Promise<CartItem | undefined>;
+  addCartItem: (item :Items , Quantite : number )=> Promise<CartItem | undefined>;
   getUserByClerkId: (clerkId: string | null | undefined) => Promise<User | undefined>;
   agent: boolean;
 }
@@ -27,7 +28,6 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
   getUserByClerkId,
 }) => {
   const router = useRouter();
-  //const { toast } = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
   const [owner, setOwner] = useState<User |null>(null);
   const Pathname = usePathname();
@@ -99,23 +99,7 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
             </figure>
           </article>
 
-        { !showBtn &&  <Button
-            onClick={async() => {
-              try{
-              toast.success("item is beig treated please wait a moment...");
-
-             await addCartItem(Item);
-             toast.success("Item  is added successfully!");
-              }catch(error){
-                toast.error("you have already added this item");
-                console.error("Submission error:", error); // Log the error for debugging
-              }
-            }}
-            className="text-16 w-full max-w-[250px] bg-green-1 font-extrabold text-white-1"
-          >
-            
-            Ajouter au panier
-          </Button>}
+        { !showBtn &&  <QuantityForm addToCart={addCartItem} Item={Item} />}
         </div>
       </div>
       {agent && (
@@ -148,3 +132,5 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
 };
 
 export default ItemDetailPlayer;
+
+

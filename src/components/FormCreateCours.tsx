@@ -84,6 +84,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             etat: "Disponible",
 
           };
+          const toastId = toast.loading("Entrain d'ajouter l'Item...");
           try {
             const newCours = await insertItem(item);
             console.log(newCours);
@@ -91,7 +92,6 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             
             // Success feedback
             toast.success("Item submitted successfully!");
-            
             form.reset(); // Reset the form
           } catch (error) {
             // Error feedback
@@ -99,6 +99,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             console.error("Submission error:", error); // Log the error for debugging
           } finally {
             // Reset loading state
+            toast.dismiss(toastId); // Dismiss the loading toast
             setIsLoading(false);
 
           }

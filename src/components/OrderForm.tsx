@@ -64,21 +64,22 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
             identifier: 0,
             Traite: false,
           };
+          const toastId = toast.loading("Order is being treated, please wait a moment...");
           try {
-            toast.success("Order is being treated, please wait a moment...");
-             console.log(Order);
+            console.log(Order);
             const newImpression = await insertOrder({order:Order ,cartItems:CartItems});
             if (!newImpression) throw new Error("Failed to submit impression");
             toast.success("Ordeer submitted successfully!");
             
             form.reset(); // Reset the form
- 
+            
           } catch (error) {
             // Error feedback
             toast.error("An error occurred while submitting the Order.");
             console.error("Submission error:", error); // Log the error for debugging
           } finally {
             // Reset loading state
+            toast.dismiss(toastId);
             setIsLoading(false);
 
           }

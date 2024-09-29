@@ -136,9 +136,6 @@ export async function insertItem  (Item: Item): Promise<Item|undefined> {
 export async function UpdateItem (Item:Items){
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
-  const agent = await clerkClient.users.getUser(user.userId);
-  if (!agent) throw new Error("Unauthorized");
-  if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
   return await db.update(schema.Item).set(Item).where(eq(schema.Item.PdfUrl, Item.PdfUrl));
 }
  

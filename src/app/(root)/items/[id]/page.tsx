@@ -23,7 +23,7 @@ const CoursDetails = async({params}:{
     <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
-  async function handleAddTCart(item :Items) :Promise<CartItem | undefined>
+  async function handleAddTCart(item :Items , Quantite : number ) :Promise<CartItem | undefined>
   {
     "use server";
     console.log(item);
@@ -33,7 +33,7 @@ const CoursDetails = async({params}:{
       Prix: item.Prix,
       Type: item.Type,
       PdfUrl: item.PdfUrl,
-      Quantite : 0,
+      Quantite : Quantite,
     }
     return await insertCartItem(cartItem);
   }
