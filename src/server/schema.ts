@@ -63,7 +63,7 @@ export const CartItem = createTable(
   {id : serial('id').primaryKey(),
     Quantite: integer('Quantite').notNull(),
     PdfUrl : text('PdfUrl').notNull(),
-    idItem: integer('idItem'),
+    idItem: integer('idItem').notNull(),
     OrderId: integer('OrderId'),
     userId: text('userId'),
     Type: text('Type').notNull(),

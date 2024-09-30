@@ -4,9 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from './ui/button'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 const Cart_Item = ({imgURL,title,description,id ,ItemId,handleRemoveCartItem}:{imgURL:string|undefined,title:string|undefined,description:string|undefined,id:number|undefined,ItemId:number | undefined ,handleRemoveCartItem :(id: number | undefined, itemId: number | undefined)=> Promise<void>}) => {
-
+    const router= useRouter(); 
   return (
     <div >
     <Link className='cursor-pointer' href={`/items/${id}`} key={id}>
@@ -24,6 +25,7 @@ const Cart_Item = ({imgURL,title,description,id ,ItemId,handleRemoveCartItem}:{i
         try{
         await handleRemoveCartItem(id,ItemId)
         toast.success("Item submitted successfully!");
+        router.refresh();
     } catch (error) {
         // Error feedback
         toast.error("An error occurred while submitting the Cours.");

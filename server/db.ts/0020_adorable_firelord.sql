@@ -1,0 +1,1 @@
+ALTER TABLE "lection_CartItem" ALTER COLUMN "idItem" SET NOT NULL;
