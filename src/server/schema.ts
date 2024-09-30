@@ -36,7 +36,7 @@ export const Users = createTable(
   );
 
 export const Item = createTable(
-  'Item',
+  'Items',
   {id : serial('id').primaryKey(),
     Titre: text('title').notNull(),
     Category: text('Category').notNull(),
@@ -63,14 +63,11 @@ export const CartItem = createTable(
   {id : serial('id').primaryKey(),
     Quantite: integer('Quantite').notNull(),
     PdfUrl : text('PdfUrl').notNull(),
-    idItem: integer('idItem').references(()=>Item.id),
-    OrderId: integer('OrderId').references(()=>Order.id),
-    userId: text('userId').references(()=>Users.clerkId),
+    idItem: integer('idItem'),
+    OrderId: integer('OrderId'),
+    userId: text('userId'),
     Type: text('Type').notNull(),
     Prix: integer('Prix'),
-
-
-    
   },
 
 );

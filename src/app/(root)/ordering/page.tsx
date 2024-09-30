@@ -3,14 +3,23 @@ import { Loader } from "lucide-react";
 
 import { deleteCartItem, getCartItemsByUserId, getItemes, insertOrder } from '@/src/server/db'
 import { getUserByClerkId } from '@/src/server/db';
-import {  CartItems, Item, OrderProps, User } from '@/src/types';
+import {  CartItem, Item, OrderProps, User } from '@/src/types';
 import { auth } from '@clerk/nextjs/server';
 import { OrderForm } from '@/src/components/OrderForm';
-import CoursCard from '@/src/components/CoursCard';
+import Cart_Item from '@/src/components/CartItem';
 
 async function handleOrdering(Order:OrderProps) :Promise<number | undefined>{ 
     "use server";
     return await insertOrder(Order);
+  }
+
+async function handleRemoveCartItem(id:number | undefined , itemId : number | undefined) :Promise<void>
+  { "use server";
+    console.log("id",id)
+    console.log("itemId",itemId)
+    const deleted = await deleteCartItem(id,itemId);
+    if(deleted) console.log("deleted");
+
   }
 
 const Page = async({}) => {
@@ -41,10 +50,10 @@ const Page = async({}) => {
     <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
-  async function handleDeleteCartItem(id:number | undefined) :Promise<CartItems | undefined>{ 
-    "use server";
-    return await deleteCartItem(id);
-  }
+  //async function handleDeleteCartItem(id:number | undefined) :Promise<CartItem | undefined>{ 
+    //"use server";
+    //return await deleteCartItem(id);
+  //}
 
   async function handleGetUserByClerkId(id:string | null | undefined) :Promise<User| undefined>{ 
     "use server";
@@ -53,7 +62,7 @@ const Page = async({}) => {
   return (
      <section className=' flex w-full flex-col '>
       <div className='Cours_grid'>{combinedItems.map((Cours,index)=>(
-        <CoursCard key={index} title={Cours.item?.Titre} imgURL={Cours.item?.imageURL} description={Cours.item?.description} id={Cours.item?.id} />
+        <Cart_Item handleRemoveCartItem={handleRemoveCartItem} key={index} title={Cours.item?.Titre} imgURL={Cours.item?.imageURL} description={Cours.item?.description} id={Cours.cartItem?.id} ItemId={Cours.item?.id}/>
       ))}
       </div>     
      <section className='flex flex-col gap-8'>

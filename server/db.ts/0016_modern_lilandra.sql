@@ -1,0 +1,1 @@
+ALTER TABLE "lection_CartItems" RENAME TO "lection_CartItem";

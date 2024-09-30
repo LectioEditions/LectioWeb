@@ -210,19 +210,24 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
   return CartItem;
 }
 
+export async function getCartItemById(cartItemId: number | null | undefined): Promise<CartItem | undefined> {
+  if (!cartItemId) throw new Error('CartItem ID is required');
+  return await db.query.CartItem.findFirst({ where: (model, { eq }) => eq(model.id, cartItemId) });
+}
 
-export async function deleteCartItem(cartItemId: number | null | undefined): Promise<CartItems> {
+export async function deleteCartItem(cartItemId: number | null | undefined , itemId : number | undefined): Promise<CartItem> {
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
   if (!cartItemId) throw new Error('CartItem ID is required');
-
+  if (!itemId) throw new Error('Item ID is required');
   // Fetch the CartItem, associated User, and Item concurrently
   const [cartItem, userRecord, item] = await Promise.all([
-    db.query.CartItem.findFirst({ where: (model, { eq }) => eq(model.id, cartItemId) }),
+    getCartItemById(cartItemId),
     getUserByClerkId(user.userId),
-    db.query.Item.findFirst({ where: (model, { eq }) => eq(model.id, cartItemId) })
+    db.query.Item.findFirst({ where: (model, { eq }) => eq(model.id, itemId) })
   ]);
-
+  console.log("cart item",cartItem);
+  console.log(item);
   if (!cartItem) throw new Error('CartItem not found');
   if (!userRecord || !item) throw new Error('User or Item not found');
 
@@ -233,14 +238,14 @@ export async function deleteCartItem(cartItemId: number | null | undefined): Pro
   // Update the User's and Item's Achat counts after deletion
   userRecord.Achat -= 1;
   item.Achat -= 1;
-
+   console.log( "deleted")
   // Execute the update operations concurrently
   await Promise.all([
     UpdateUser(userRecord),
     UpdateItem(item)
   ]);
 
-  return cartItem 
+  return cartItem; 
 }
 
 export async function getCartItems() {

@@ -101,7 +101,7 @@ export default function MyDropzone({  setImageURL }: DropProps) {
           Select Files
         </button>
       )}
-      {uploadedFiles.length === 2 && (
+      {uploadedFiles.length === 1 && (
         <div className='flex justify-center items-center flex-col w-full'>
         <button
          type="button"
