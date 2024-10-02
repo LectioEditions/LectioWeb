@@ -10,8 +10,9 @@ import { Button } from './ui/button';
 import ThemeSwitch from './ThemeSwitch';
 
 
-const LeftSideBar = () => {
+const LeftSideBar = ({isAgetn}:{isAgetn:boolean}) => {
     const Pathname = usePathname();
+    
 
   return (
     <section className='left_sidebar'>

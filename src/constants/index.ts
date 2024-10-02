@@ -40,6 +40,11 @@ export const agentLinks = [
     route: "/create-podcast",
     label: "Create Cours",
   },
+  {
+    imgURL: "/icons/microphone.svg",
+    route: "/orders",
+    label: "Commandes",
+  },
 ]
 export const sidebarLinks = [
     {
@@ -57,11 +62,7 @@ export const sidebarLinks = [
       route: "/ordering",
       label: "Ordering",
     },
-    {
-      imgURL: "/icons/microphone.svg",
-      route: "/create-podcast",
-      label: "Create Item",
-    },
+  
   ];
   
   export const voiceDetails = [

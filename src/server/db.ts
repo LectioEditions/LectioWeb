@@ -314,3 +314,17 @@ export async function getOrders() {
 export async function insertUpload({uploadURL }:Upload){
   return await db.insert(schema.Uploads).values({uploadURL});
 }
+
+
+
+
+
+
+export async function isAgent(){
+  const user = auth();
+  if(!user.userId) return;
+  const fullUserData = clerkClient.users.getUser(user.userId);
+  if((await fullUserData).publicMetadata.agent==="true") return true;
+  return;
+
+}

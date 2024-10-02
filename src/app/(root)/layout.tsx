@@ -1,18 +1,20 @@
 import LeftSideBar from "@/src/components/LeftSideBar";
 import MobileNav from "@/src/components/MobileNav";
 import RightSideBar from "@/src/components/RightSideBar";
+import { isAgent } from "@/src/server/db";
 import Image from "next/image";
 import React from "react";
 import { Toaster } from "sonner";
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAgetn = await isAgent();
   return (
     <div className="relative flex flex-col">
         <main className="relative flex bg-white-1  dark:bg-black-1">
-          <LeftSideBar/>
+          <LeftSideBar isAgetn={isAgetn}/>
           <section className="flex min-h-screen flex-1 flex-col px-4 sm:px-14">
             <div className="mx-auto flex w-full max-w-5xl flex-col max-sm:px-4">
             <div className="flex h-16 items-center justify-between md:hidden">
