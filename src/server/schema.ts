@@ -10,7 +10,7 @@ import {
   timestamp,
   uniqueIndex,PgArray
 } from 'drizzle-orm/pg-core';
-import { boolean } from "drizzle-orm/pg-core";
+import { boolean,bigint } from "drizzle-orm/pg-core";
 
 import { foreignKey } from 'drizzle-orm/pg-core';
 
@@ -64,7 +64,7 @@ export const CartItem = createTable(
     Quantite: integer('Quantite').notNull(),
     PdfUrl : text('PdfUrl').notNull(),
     idItem: integer('idItem').notNull(),
-    OrderId: integer('OrderId'),
+    OrderId: text('OrderId').default(""),
     userId: text('userId'),
     Type: text('Type').notNull(),
     Prix: integer('Prix'),
@@ -76,8 +76,8 @@ export const Order = createTable(
   'Order',
   {
     id: serial('id').primaryKey(),
-    identifier: integer('identifier').notNull(),
-    Prix: integer('Prix'),
+    identifier: text('identifier'),
+    Prix: integer('Prix').default(0),
     NumTel: text('NumTel').notNull(),
     Adress: text('Adress').notNull(),
     Commune: text('Commune').notNull(),

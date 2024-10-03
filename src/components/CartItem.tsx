@@ -6,16 +6,21 @@ import { Button } from './ui/button'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 
-const Cart_Item = ({imgURL,title,description,id ,ItemId,handleRemoveCartItem}:{imgURL:string|undefined,title:string|undefined,description:string|undefined,id:number|undefined,ItemId:number | undefined ,handleRemoveCartItem :(id: number | undefined, itemId: number | undefined)=> Promise<void>}) => {
+const Cart_Item = ({imgURL,title,description,id,cartItemPrix ,itemPrix,ItemId,handleRemoveCartItem}:{imgURL:string|undefined,title:string|undefined,cartItemPrix:number | null | undefined,itemPrix:number | null | undefined,description:string|undefined,id:number|undefined,ItemId:number | undefined ,handleRemoveCartItem :(id: number | undefined, itemId: number | undefined)=> Promise<void>}) => {
     const router= useRouter(); 
   return (
-    <div >
-    <Link className='cursor-pointer' href={`/items/${id}`} key={id}>
-      <figure className=' flex flex-col gap-2 items-center bg-black-2 dark:bg-inherit py-5 rounded-xl text-white-1'>
+    <div className='w-[174px]' >
+    <Link className='cursor-pointer w-full' href={`/items/${id}`} key={id}>
+      <figure className=' flex flex-col gap-2 items-center bg-black-2 dark:bg-inherit py-5 rounded-xl text-white-1 w-full'>
       <Image src={!imgURL ? "" : imgURL} alt={!title ? "placeholder": title} width={174} height={174}  className='aspect-square rounded-xl'/>
-      <div className=' flex flex-col '>
+      <div className=' flex flex-col w-full'>
       <h1 className='text-16 truncate font-bold capitalize  text-white-1'>{title}</h1>
         <h2 className='text-12 truncate font-normal capitalize  text-white-1'>{description}</h2>
+      </div>
+      <div className='w-full'>
+        <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix Unitaire: {itemPrix}</h2>
+        <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Quantité: {cartItemPrix&&itemPrix ?cartItemPrix/itemPrix : ""}</h2>
+        <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix : {cartItemPrix}</h1>
       </div>
       </figure>
     </Link>

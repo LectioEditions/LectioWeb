@@ -1,7 +1,7 @@
 "use strict";
 import './envConfig';
 import { drizzle } from 'drizzle-orm/vercel-postgres';
-import { sql , desc ,like} from 'drizzle-orm'
+import { sql , desc ,like, isNull, or, and} from 'drizzle-orm'
 import * as schema from './schema';
 import { eq } from "drizzle-orm";
 import { sql as pg, QueryResult } from '@vercel/postgres';
@@ -251,41 +251,51 @@ export async function deleteCartItem(cartItemId: number | null | undefined , ite
 export async function getCartItems() {
   return await db.query.CartItem.findMany();
 }
-
-export async function getCartItemsByUserId(userId: string | null) : Promise<CartItems[]> {
-  if (!userId) throw new Error('userId is required');
-  return await db.query.CartItem.findMany({ where: (model, { eq }) => eq(model.userId, userId) });
+export async function getCartItemsByUserId(userId: string) {
+  const cartItems = await db.select()
+    .from(schema.CartItem)
+    .where(and(eq(schema.CartItem.userId, userId),isNull(schema.CartItem.OrderId)));
+    
+  return cartItems;
 }
 
-export async function getCartItemsByOrderId(orderId: number) {
+export async function getCartItemsByOrderId(orderId: string) {
   return await db.query.CartItem.findMany({ where: (model, { eq }) => eq(model.OrderId, orderId) });
 }
 
-export async function insertOrder(order: OrderProps) {
+export async function insertOrder(orderProp: OrderProps) {
   const user = auth();
-  if (!user.userId) throw new Error("Unauthorized");
-  const agent = await clerkClient.users.getUser(user.userId);
-  if (!agent) throw new Error("Unauthorized");
-  if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
-  if (!order) throw new Error('Order is required');
+  if (!user || !user.userId) throw new Error("Unauthorized"); // Ensure user is valid
+  if (!orderProp) throw new Error('Order is required');
   
-  const timestamp = Date.now(); // Get current timestamp in milliseconds
-  const randomNum = Math.floor(Math.random() * 10000); // Generate a random number (0-9999)
-  const identifier = timestamp*randomNum; // Combine timestamp and random number as a string
+  try {
+    const timestamp = Date.now(); // Get current timestamp in milliseconds
+    const identifier = timestamp.toString(); // Combine timestamp and random number as a string
+    console.log("identifier",identifier);
+    // Assign the identifier to the order
+    orderProp.order.identifier = identifier; // Adjusted to direct assignment
+    orderProp.cartItems.forEach(cartItem => {
+      if(!orderProp.order.Prix)orderProp.order.Prix= cartItem.Prix; 
+      else if(cartItem.Prix) orderProp.order.Prix += cartItem.Prix;
+      
+    });
+    const updatePromises = orderProp.cartItems.map(async (cartItem) => {
+      cartItem.OrderId = identifier; // Assign the identifier to OrderId
+      return db.update(schema.CartItem).set(cartItem).where(eq(schema.CartItem.id, cartItem.id));
+    });
 
-  // Assign the identifier to the order
-  order.order.identifier = identifier;
-  const updatePromises = order.cartItems.map(async (cartItem) => {
-    cartItem.OrderId = identifier; // Assign the identifier to OrderId
-    return await db.update(schema.CartItem).set(cartItem).where(eq(schema.CartItem.id, cartItem.id));
-  });
-  
-  
-  // Insert the order into the database
-  const newOrder = await db.insert(schema.Order).values(order.order);
-  if (!newOrder) return;
-  await Promise.all(updatePromises);
-  return identifier; 
+    const newOrder = await db.insert(schema.Order).values(orderProp.order);
+    if (!newOrder) throw new Error('Failed to insert order');
+     console.log("order inserted");
+    // Wait for all cart items to be updated
+    await Promise.all(updatePromises);
+    console.log("cart items updated");
+    console.log("id",identifier); 
+    return identifier; 
+  } catch (err) {
+    console.error("Error inserting order:", err); // Log full error details
+    throw err; // Optionally rethrow to allow error propagation
+  }
 }
 
 

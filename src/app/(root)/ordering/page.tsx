@@ -8,7 +8,7 @@ import { auth } from '@clerk/nextjs/server';
 import { OrderForm } from '@/src/components/OrderForm';
 import Cart_Item from '@/src/components/CartItem';
 
-async function handleOrdering(Order:OrderProps) :Promise<number | undefined>{ 
+async function handleOrdering(Order:OrderProps) :Promise<string | undefined>{ 
     "use server";
     return await insertOrder(Order);
   }
@@ -62,7 +62,7 @@ const Page = async({}) => {
   return (
      <section className=' flex w-full flex-col '>
       <div className='Cours_grid'>{combinedItems.map((Cours,index)=>(
-        <Cart_Item handleRemoveCartItem={handleRemoveCartItem} key={index} title={Cours.item?.Titre} imgURL={Cours.item?.imageURL} description={Cours.item?.description} id={Cours.cartItem?.id} ItemId={Cours.item?.id}/>
+        <Cart_Item handleRemoveCartItem={handleRemoveCartItem} key={index} title={Cours.item?.Titre} imgURL={Cours.item?.imageURL} description={Cours.item?.description} id={Cours.cartItem?.id} ItemId={Cours.item?.id} itemPrix={Cours.item?.Prix} cartItemPrix={Cours.cartItem.Prix}/>
       ))}
       </div>     
      <section className='flex flex-col gap-8'>

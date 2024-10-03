@@ -30,7 +30,7 @@ const CoursDetails = async({params}:{
     const cartItem :CartItem ={
       idItem: item.id,
       userId: item.userId,
-      Prix: item.Prix,
+      Prix: item.Prix ? item.Prix * Quantite : 0,
       Type: item.Type,
       PdfUrl: item.PdfUrl,
       Quantite : Quantite,

@@ -1,0 +1,1 @@
+ALTER TABLE "lection_Order" ALTER COLUMN "identifier" SET DATA TYPE bigint;

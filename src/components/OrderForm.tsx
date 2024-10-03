@@ -29,20 +29,18 @@ const formSchema = z.object({
   Commune: z.string().min(2, {
     message: "Description must be at least 2 characters.",
   }),
-  Quantite:  z.number().gt(0, { message: "The number must be greater than 0" }), // Ensures number is greater than 0
   
   NumTel: z.string().regex(/^0[5-7][0-9]{8}$/, { message: "Invalid phone number format" }),
   
 });
 
-export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], insertOrder: (cart: OrderProps) => Promise<number | undefined> }) {
+export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], insertOrder: (cart: OrderProps) => Promise<string | undefined> }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       adress: "",
       Commune: "",
-      Quantite: 0,
       NumTel: "0",
     },
   });
@@ -61,13 +59,13 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
             imageURL: "",
             NumTel: data.NumTel,
             Prix: 0,
-            identifier: 0,
             Traite: false,
           };
           const toastId = toast.loading("Order is being treated, please wait a moment...");
           try {
-            console.log(Order);
+            console.log("order");
             const newImpression = await insertOrder({order:Order ,cartItems:CartItems});
+            console.log("newImpression",newImpression);
             if (!newImpression) throw new Error("Failed to submit impression");
             toast.success("Ordeer submitted successfully!");
             
@@ -120,30 +118,6 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
                       className="input-class focus-visible:ring-offset-green-1"
                       placeholder="Rue xxxxxxxx"
                     />
-                  </FormControl>
-                  <FormMessage className="text-black-1 dark:text-white-1" />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="Quantite"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Quantité</FormLabel>
-                  <FormControl>
-                  <Input
-                     inputMode="numeric"
-                     type="number"
-                     {...field}
-                      onBlur={(e) => {    form.setValue("Quantite", parseInt(e.target.value)); // or parseInt(field.value) for whole numbers
-                        form.trigger("Quantite");}} // Validate on blur
-                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
-                     placeholder="1234"
-                     pattern="[0-9]*"
-                    />
-
-
                   </FormControl>
                   <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>

@@ -49,32 +49,39 @@ const QuantityForm = ({ Item, addToCart }: QuantityFormProps) => {
             console.log("Toast dismissed:", t);
         }
       })}>
-        <FormField
-          control={formMethods.control}
-          name="Quantite"
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-2.5">
-              <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Quantité</FormLabel>
-              <FormControl>
-                <Input
-                  inputMode="numeric"
-                  type="number"
-                  {...field}
-                  onBlur={() => {
-                    formMethods.trigger('Quantite'); // Validate on blur
-                  }}
-                  className="input-class focus-visible:ring-offset-green-1 no-arrows"
-                  placeholder="1" // Set placeholder to a valid number
-                />
-              </FormControl>
-              <FormMessage className="text-black-1 dark:text-white-1">
-                {formMethods.formState.errors.Quantite?.message}
-              </FormMessage>
-            </FormItem>
-          )}
+<FormField
+  control={formMethods.control}
+  name="Quantite"
+  render={({ field }) => (
+    <FormItem className="flex flex-col gap-2.5">
+      <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Quantité</FormLabel>
+      <FormControl>
+        <Input
+          inputMode="numeric"
+          type="number"
+          {...field}
+          onBlur={(e) => {
+            // Ensure the value is treated as a number
+            const valueAsNumber = Number(e.target.value);
+            if (!isNaN(valueAsNumber)) {
+              field.onChange(valueAsNumber);
+            }
+            // Trigger validation
+            formMethods.trigger('Quantite');
+          }}
+          className="input-class focus-visible:ring-offset-green-1 no-arrows"
+          placeholder="1" // Set placeholder to a valid number
         />
+      </FormControl>
+      <FormMessage className="text-black-1 dark:text-white-1">
+        {formMethods.formState.errors.Quantite?.message}
+      </FormMessage>
+    </FormItem>
+  )}
+/>
+
         
-        <Button type="submit" className="btn-submit w-full bg-green-1 font-semibold mt-5">
+        <Button type="submit" className="btn-submit w-full bg-green-1 font-semibold mt-5 text-white-1">
           Ajouter au Panier
         </Button>
       </form>

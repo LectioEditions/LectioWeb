@@ -97,6 +97,7 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
               />
               <h2 className="text-16 font-normal text-black-1 dark:text-white-3 ">{owner.name}</h2>
             </figure>
+            <h1 className="text-16 font-normal text-black-1 dark:text-white-1">Prix unitair: {Item.Prix}</h1>
           </article>
 
         { !showBtn &&  <QuantityForm addToCart={addCartItem} Item={Item} />}
