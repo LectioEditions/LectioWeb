@@ -21,6 +21,21 @@ export interface OrderProps {
 }
 
 export type Upload = typeof schema.Uploads.$inferInsert;
+
+export type MergedItemCart = {
+  id: number;
+  Titre: string;
+  Category: string;
+  Annee: string;
+  Module: string;
+  Type: string;
+  PdfUrl: string;
+  imageURL: string;
+  Prix: number | null;
+  Quantite: number;
+  CartPrix: number;
+};
+
 export interface SoundModel {
   name: string; // The name of the sound model
   url: string;  // The URL to the model for generating sound

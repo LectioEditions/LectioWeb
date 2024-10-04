@@ -26,7 +26,7 @@ const Page = async({}) => {
     const user = auth();
     if(!user.userId) return;
     const cartItems = await getCartItemsByUserId(user.userId);
-
+    
     // Fetch items concurrently
     const items = await getItemes(); // Make sure to await this
     
@@ -59,6 +59,7 @@ const Page = async({}) => {
     "use server";
     return await getUserByClerkId(id);
   }
+
   return (
      <section className=' flex w-full flex-col '>
       <div className='Cours_grid'>{combinedItems.map((Cours,index)=>(

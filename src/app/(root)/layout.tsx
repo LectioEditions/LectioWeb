@@ -10,11 +10,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isAgetn = await isAgent();
+  const handleAgent = async()=>{ 
+    "use server";
+    const agent = await isAgent();
+     if(agent){
+      return true;}
+      return false;
+  }
   return (
     <div className="relative flex flex-col">
         <main className="relative flex bg-white-1  dark:bg-black-1">
-          <LeftSideBar isAgetn={isAgetn}/>
+          <LeftSideBar isAgent={handleAgent}/>
           <section className="flex min-h-screen flex-1 flex-col px-4 sm:px-14">
             <div className="mx-auto flex w-full max-w-5xl flex-col max-sm:px-4">
             <div className="flex h-16 items-center justify-between md:hidden">

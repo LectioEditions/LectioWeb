@@ -7,7 +7,9 @@ const nextConfig = {
         {protocol: 'https',
             hostname: 'utfs.io',},
             {protocol: 'https',
-                hostname: 'img.clerk.com',}
+                hostname: 'img.clerk.com',},
+                {protocol: 'https',
+                    hostname: 'loremflickr.com',}
         ],
           
     },

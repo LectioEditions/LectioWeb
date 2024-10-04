@@ -1,7 +1,7 @@
 "use strict";
 import './envConfig';
 import { drizzle } from 'drizzle-orm/vercel-postgres';
-import { sql , desc ,like, isNull, or, and} from 'drizzle-orm'
+import { sql , desc ,like, isNull, or, and, ne} from 'drizzle-orm'
 import * as schema from './schema';
 import { eq } from "drizzle-orm";
 import { sql as pg, QueryResult } from '@vercel/postgres';
@@ -254,8 +254,7 @@ export async function getCartItems() {
 export async function getCartItemsByUserId(userId: string) {
   const cartItems = await db.select()
     .from(schema.CartItem)
-    .where(and(eq(schema.CartItem.userId, userId),isNull(schema.CartItem.OrderId)));
-    
+    .where(and(and(eq(schema.CartItem.userId, userId),eq(schema.CartItem.OrderId,""))));
   return cartItems;
 }
 
@@ -326,7 +325,17 @@ export async function insertUpload({uploadURL }:Upload){
 }
 
 
+export async function getOrderByIdentifier(identifier:string) {
+  const user = auth();
+  if(!user) throw new Error('unauthorized');
+  const order = await db.query.Order.findFirst({ where: (model, { eq }) => eq(model.identifier, identifier) })
+  if( order?.userId !== user.userId){
+    const agent = await isAgent();
+    if(!agent) throw new Error('unauthorized')
+  }
+return order;
 
+}
 
 
 
@@ -334,7 +343,7 @@ export async function isAgent(){
   const user = auth();
   if(!user.userId) return;
   const fullUserData = clerkClient.users.getUser(user.userId);
-  if((await fullUserData).publicMetadata.agent==="true") return true;
+  if((await fullUserData).publicMetadata.agent===true) return true;
   return;
 
 }
