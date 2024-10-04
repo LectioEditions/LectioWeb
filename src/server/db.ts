@@ -5,9 +5,10 @@ import { sql , desc ,like, isNull, or, and, ne} from 'drizzle-orm'
 import * as schema from './schema';
 import { eq } from "drizzle-orm";
 import { sql as pg, QueryResult } from '@vercel/postgres';
-import { Item, Items, Upload ,CartItem,CartItems, Order, OrderProps } from '@/src/types';
+import { Item, Items, Upload ,CartItem,CartItems, Order, OrderProps, Orders } from '@/src/types';
 import { User as NewUser } from '@/src/types';
 import { auth, clerkClient } from '@clerk/nextjs/server';
+import { use } from 'react';
 export const db =  drizzle(pg, { schema });
  
 
@@ -319,6 +320,21 @@ export async function getOrders() {
   return await db.query.Order.findMany();
 }
 
+
+
+export async function updateOrder(order:Orders) {
+  const user = auth()
+  if(!user)throw new Error("unauthorized");
+  order.userId=user.userId;
+  const agent = await isAgent();
+  if(!agent) throw new Error("unauthorized");
+
+  const neworder= await db.update(schema.Order).set(order).where(eq(schema.Order.id, order.id));
+  if(!neworder)return;
+  return order;
+
+  
+}
 
 export async function insertUpload({uploadURL }:Upload){
   return await db.insert(schema.Uploads).values({uploadURL});

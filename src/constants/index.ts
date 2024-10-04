@@ -45,6 +45,11 @@ export const agentLinks = [
     route: "/orders",
     label: "Commandes",
   },
+  {
+    imgURL: "/icons/microphone.svg",
+    route: "/treated-orders",
+    label: "Archive",
+  },
 ]
 export const sidebarLinks = [
     {

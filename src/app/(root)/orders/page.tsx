@@ -11,8 +11,8 @@ const Page = async ({searchParams: {search}}:{searchParams:{search : string}}) =
       <div className='flex flex-col gap-9'>
       <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Commandes</h1>
        {orders ? <div className='Cours_grid'>
-        {orders.map(cours => (
-          <OrderCard id={cours.identifier} imgURL={cours.imageURL} Prix={cours.Prix}  CreatedAt={cours.createdAt}/>))}
+        {orders.map((cours,index) => (
+          <OrderCard key={index} id={cours.identifier} imgURL={cours.imageURL} Prix={cours.Prix}  CreatedAt={cours.createdAt}/>))}
         </div>:<EmptyState title={'No Results found'}/>}
        
       </div>

@@ -2,12 +2,21 @@ import React from 'react'
 import Image from 'next/image'
 import { Loader } from "lucide-react";
 
-import { getCartItemsByOrderId, getItemById, getOrderByIdentifier, insertCartItem } from '@/src/server/db'
-import { CartItem, CartItems, Item, Items, MergedItemCart, User } from '@/src/types';
+import { getCartItemsByOrderId, getItemById, getOrderByIdentifier, insertCartItem, updateOrder } from '@/src/server/db'
+import { CartItem, CartItems, Item, Items, MergedItemCart, Orders, User } from '@/src/types';
 import { deleteItem, getUserByClerkId,isAgent } from '@/src/server/db';
 import { QueryResult } from '@vercel/postgres';
 import { auth, clerkClient } from '@clerk/nextjs/server';
 import OrderDetails from '@/src/components/OrderDetailes';
+
+const editOrder= async (order :Orders)=>{
+  "use server";
+
+  const newOrder = await updateOrder(order);
+   if(!newOrder) return;
+   return order;
+}
+
 
 const Page = async({ params }: { params: { id: string } }) => {
   const user = auth();
@@ -67,6 +76,7 @@ const Page = async({ params }: { params: { id: string } }) => {
         MergedItemCart={mergedItemsCart} 
         order={order} 
         agent={agent} 
+        editOrder={editOrder}
       />
     </section>
   );
