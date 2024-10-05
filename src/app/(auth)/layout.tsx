@@ -6,10 +6,8 @@ export default function RootLayout({
   }>) {
     return (
 
-          <main className="relative h-screen w-full">
-            <div className='absolute size-full'>
-              <Image src="/images/bg-img.png" alt="background" fill className="size-full" />
-            </div>
+          <main className="relative h-screen w-full bg-white-6 dark:bg-black-3">
+            
               {children}
           </main>
     );

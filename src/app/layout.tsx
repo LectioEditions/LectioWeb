@@ -27,7 +27,7 @@ export default function RootLayout({
     appearance={{
       layout:{
         socialButtonsVariant:"iconButton",
-        logoImageUrl:"/icons/auth-logo.svg",
+        logoImageUrl:"/icons/lectio_logo-04.png",
       },
       signIn: {
       variables:{

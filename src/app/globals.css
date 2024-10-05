@@ -132,13 +132,13 @@ input[type='number'] {
   filter: invert(1);
 }
 .cl-internal-b3fm6y {
-  background: #f97535;
+  background: #319075;
 }
 .cl-formButtonPrimary {
-  background: #f97535;
+  background: #319075;
 }
 .cl-footerActionLink {
-  color: #f97535;
+  color: #319075;
 }
 .cl-headerSubtitle {
   color: #c5d0e6;
@@ -155,7 +155,15 @@ input[type='number'] {
   color: white;
 }
 .cl-internal-wkkub3 {
-  color: #f97535;
+  color: #319075;
+}
+
+.cl-internal-piyvrh{
+  background: repeating-linear-gradient(-45deg, rgba(49, 144, 117, 0.07), rgba(49, 144, 117, 0.07) 6px, rgba(49, 144, 117, 0.11) 6px, rgba(49, 144, 117, 0.11) 12px);
+
+}
+.cl-internal-16vtwdp{
+  color: #319075;
 }
 @layer base {
   :root {
