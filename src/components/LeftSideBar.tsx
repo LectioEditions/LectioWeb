@@ -17,7 +17,6 @@ const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
         const checkAgent = async () => {
             const agentStatus = await isAgent();
             setAgent(agentStatus);
-            console.log("is agent", agentStatus);
         };
 
         checkAgent();

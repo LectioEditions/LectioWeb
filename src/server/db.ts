@@ -180,7 +180,6 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
   
   CartItem.userId = user.userId;
   const userRecord = await getCartItemsByUserId(user.userId);
-  console.log(userRecord);
   // Check if the new item already exists in the user's cart
   const itemExists = userRecord.some(cartItem => cartItem.idItem === CartItem.idItem);
   
@@ -227,8 +226,6 @@ export async function deleteCartItem(cartItemId: number | null | undefined , ite
     getUserByClerkId(user.userId),
     db.query.Item.findFirst({ where: (model, { eq }) => eq(model.id, itemId) })
   ]);
-  console.log("cart item",cartItem);
-  console.log(item);
   if (!cartItem) throw new Error('CartItem not found');
   if (!userRecord || !item) throw new Error('User or Item not found');
 
@@ -239,7 +236,6 @@ export async function deleteCartItem(cartItemId: number | null | undefined , ite
   // Update the User's and Item's Achat counts after deletion
   userRecord.Achat -= 1;
   item.Achat -= 1;
-   console.log( "deleted")
   // Execute the update operations concurrently
   await Promise.all([
     UpdateUser(userRecord),
@@ -271,7 +267,6 @@ export async function insertOrder(orderProp: OrderProps) {
   try {
     const timestamp = Date.now(); // Get current timestamp in milliseconds
     const identifier = timestamp.toString(); // Combine timestamp and random number as a string
-    console.log("identifier",identifier);
     // Assign the identifier to the order
     orderProp.order.identifier = identifier; // Adjusted to direct assignment
     orderProp.cartItems.forEach(cartItem => {
@@ -286,11 +281,8 @@ export async function insertOrder(orderProp: OrderProps) {
 
     const newOrder = await db.insert(schema.Order).values(orderProp.order);
     if (!newOrder) throw new Error('Failed to insert order');
-     console.log("order inserted");
     // Wait for all cart items to be updated
     await Promise.all(updatePromises);
-    console.log("cart items updated");
-    console.log("id",identifier); 
     return identifier; 
   } catch (err) {
     console.error("Error inserting order:", err); // Log full error details
@@ -317,7 +309,17 @@ export async function getOrders() {
   const agent = await clerkClient.users.getUser(user.userId);
   if (!agent) throw new Error("Unauthorized");
   if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
-  return await db.query.Order.findMany();
+  return await db.select().from(schema.Order).where(eq(schema.Order.Traite, false));
+}
+
+export async function getAllOrders() {
+  const agent = await isAgent();
+  const user = auth();
+
+  if (!agent && !user) throw new Error("Unauthorized");
+  if(!agent && user.userId)   return await db.select().from(schema.Order).where(eq(schema.Order.userId, user.userId));
+
+  return await db.select().from(schema.Order).where(eq(schema.Order.Traite, true));
 }
 
 

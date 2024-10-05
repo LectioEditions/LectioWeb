@@ -46,7 +46,6 @@ const QuantityForm = ({ Item, addToCart }: QuantityFormProps) => {
           console.error("Submission error:", error);
         }finally{
             const t = toast.dismiss(toastId);
-            console.log("Toast dismissed:", t);
         }
       })}>
 <FormField

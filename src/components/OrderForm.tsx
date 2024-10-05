@@ -63,9 +63,7 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
           };
           const toastId = toast.loading("Order is being treated, please wait a moment...");
           try {
-            console.log("order");
             const newImpression = await insertOrder({order:Order ,cartItems:CartItems});
-            console.log("newImpression",newImpression);
             if (!newImpression) throw new Error("Failed to submit impression");
             toast.success("Ordeer submitted successfully!");
             

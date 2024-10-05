@@ -19,10 +19,10 @@ const orderSchema = z.object({
 
 type OrderFormValues = z.infer<typeof orderSchema>
 
-const OrderDetails = ({ MergedItemCart, order, agent, editOrder }: {
+const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
   MergedItemCart: MergedItemCart[],
   order: Orders,
-  agent: true | undefined,
+  archive:boolean,
   editOrder: (order: Orders) => Promise<Orders | undefined>
 }) => {
   const router = useRouter();
@@ -74,7 +74,12 @@ const OrderDetails = ({ MergedItemCart, order, agent, editOrder }: {
         </figure>
       ))}
 
-      <FormProvider {...formMethods}>
+          <div className='flex flex-col'>
+            <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Temps estimé: {order.Temps}</h2>
+            <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>ID: {order.id}</h2>
+            <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix: {order.Prix}</h1>
+          </div>
+      {!archive && <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)} className='flex flex-col gap-5 items-center justify-center cursor-pointer rounded-xl'>
           <FormField
             control={formMethods.control}
@@ -105,7 +110,7 @@ const OrderDetails = ({ MergedItemCart, order, agent, editOrder }: {
             <h2 className="text-16 font-normal text-black-1 dark:text-white-1">Valider</h2>
           </Button>
         </form>
-      </FormProvider>
+      </FormProvider>}
     </div>
   );
 }

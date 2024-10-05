@@ -26,7 +26,6 @@ const CoursDetails = async({params}:{
   async function handleAddTCart(item :Items , Quantite : number ) :Promise<CartItem | undefined>
   {
     "use server";
-    console.log(item);
     const cartItem :CartItem ={
       idItem: item.id,
       userId: item.userId,

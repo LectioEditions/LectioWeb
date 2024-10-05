@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-const OrderCard = ({imgURL,Prix,CreatedAt,id}:{imgURL:string|undefined,Prix:number|null,CreatedAt:Date|null,id:string|null}) => {
+const OrderCard = ({imgURL,Prix,CreatedAt,id ,route}:{route:string ,imgURL:string|undefined,Prix:number|null,CreatedAt:Date|null,id:string|null}) => {
 
   return (
-    <Link className='cursor-pointer h-fit' href={`/orders/${id}`} key={id}>
+    <Link className='cursor-pointer h-fit' href={`/${route}/${id}`} key={id}>
       <figure className=' flex flex-col gap-2 items-center bg-black-2 dark:bg-inherit py-5 rounded-xl text-white-1'>
       <Image src={!imgURL ? "" : imgURL} alt={ "placeholder"} width={174} height={174}  className='aspect-square rounded-xl'/>
       <div className=' flex flex-col h-fit w-full pl-5'>

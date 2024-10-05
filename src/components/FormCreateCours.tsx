@@ -87,7 +87,6 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
           const toastId = toast.loading("Entrain d'ajouter l'Item...");
           try {
             const newCours = await insertItem(item);
-            console.log(newCours);
             if (!newCours) throw new Error("No Cours returned");
             
             // Success feedback

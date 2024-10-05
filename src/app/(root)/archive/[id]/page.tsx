@@ -74,7 +74,7 @@ const Page = async({ params }: { params: { id: string } }) => {
       <OrderDetails 
         MergedItemCart={mergedItemsCart} 
         order={order} 
-        archive={false} 
+        archive={true} 
         editOrder={editOrder}
       />
     </section>

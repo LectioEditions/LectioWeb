@@ -15,10 +15,7 @@ async function handleOrdering(Order:OrderProps) :Promise<string | undefined>{
 
 async function handleRemoveCartItem(id:number | undefined , itemId : number | undefined) :Promise<void>
   { "use server";
-    console.log("id",id)
-    console.log("itemId",itemId)
-    const deleted = await deleteCartItem(id,itemId);
-    if(deleted) console.log("deleted");
+ await deleteCartItem(id,itemId);
 
   }
 
