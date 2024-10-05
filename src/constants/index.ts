@@ -37,7 +37,7 @@ export const Categories = [
 export const agentLinks = [
   {
     imgURL: "/icons/microphone.svg",
-    route: "/create-podcast",
+    route: "/create-item",
     label: "Create Cours",
   },
   {
