@@ -8,8 +8,8 @@ const CoursCard = ({imgURL,title,description,id}:{imgURL:string|undefined,title:
       <figure className=' flex flex-col gap-2 items-center bg-white-6 dark:bg-black-4 py-5 rounded-xl text-white-1'>
       <Image src={!imgURL ? "" : imgURL} alt={!title ? "placeholder": title} width={174} height={174}  className='aspect-square rounded-xl'/>
       <div className=' flex flex-col '>
-      <h1 className='text-16 truncate font-bold capitalize  text-white-1'>{title}</h1>
-        <h2 className='text-12 truncate font-normal capitalize  text-white-1'>{description}</h2>
+      <h1 className='text-16 truncate font-bold capitalize text-black-1 dark:text-white-1'>{title}</h1>
+        <h2 className='text-12 truncate font-normal capitalize text-black-1 dark:text-white-1'>{description}</h2>
       </div>
       </figure>
     </Link>
