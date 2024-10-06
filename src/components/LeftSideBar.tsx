@@ -3,13 +3,14 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { agentLinks, sidebarLinks } from '@/src/constants';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/src/lib/utils';
 import { SignedIn, SignedOut, SignOutButton } from '@clerk/nextjs';
 import { Button } from './ui/button';
 import ThemeSwitch from './ThemeSwitch';
 
 const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
+    const router = useRouter();
     const pathname = usePathname();
     const [agent, setAgent] = useState(false);
 

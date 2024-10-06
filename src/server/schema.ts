@@ -84,7 +84,8 @@ export const Order = createTable(
     Traite: boolean('Traite').default(false).notNull(),
     Temps : text('temps').default("0"),
     userId: text('userId').references(() => Users.clerkId),
-    imageURL: text('imageURL').notNull(),
+    agenId: text('agenId').references(() => Users.clerkId),
+
     createdAt: timestamp('createdAt', { withTimezone: true }).defaultNow().notNull(),
     
 

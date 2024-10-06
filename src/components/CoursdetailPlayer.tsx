@@ -14,7 +14,7 @@ import QuantityForm from "./QuantityForm";
 
 interface ItemDetailPlayerProps {
   Item: Items;
-  deleteItem: (id?: number) => Promise<QueryResult<never>>;
+  deleteItem: (id?: number) => Promise<number>;
   addCartItem: (item :Items , Quantite : number )=> Promise<CartItem | undefined>;
   getUserByClerkId: (clerkId: string | null | undefined) => Promise<User | undefined>;
   agent: boolean;
@@ -46,17 +46,18 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
 
   
   const handleDelete = async () => {
+    const toastId=toast.loading("Deleting Item");
     try {
      if(!Item.id) throw new Error("Item id is missing")
-      await deleteItem(Item.id);
-     // toast({   title: "Item deleted", });
+      const deleted = await deleteItem(Item.id);
+     if(!deleted) throw new Error("Item not deleted")
+      toast.success("Item deleted");
       router.push("/");
     } catch (error) {
       console.error("Error deleting Item", error);
-    //  toast({
-      //  title: "Error deleting Item",
-      //  variant: "destructive",
-     // });
+ 
+    }finally{
+      toast.dismiss(toastId);
     }
   };
 
@@ -115,15 +116,16 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
           />
           {isDeleting && (
             <form action = {async ()=>{await handleDelete()}} 
-              className="absolute -left-32 -top-2 z-10 flex w-32 cursor-pointer justify-center gap-2 rounded-md bg-white-6 derk:bg-black-6 py-1.5 hover:bg-black-2"
+              className="absolute -left-32 -top-2 z-10 flex w-32 cursor-pointer justify-center gap-2 rounded-md "
             >
+              <Button className="text-16 font-normal bg-red-700 w-full text-white-1">
               <Image
                 src="/icons/delete.svg"
                 width={16}
                 height={16}
                 alt="Delete icon"
               />
-              <h2 className="text-16 font-normal text-black-1 dark:text-white-1">Delete</h2>
+                Delete</Button>
             </form>
           )}
         </div>

@@ -21,6 +21,7 @@ import { cn } from "../lib/utils";
 import { Label } from "./ui/label";
 import { Categories, Communes } from "../constants";
 import "@/src/app/globals.css";
+import { useRouter } from "next/navigation";
 // Updated form schema
 const formSchema = z.object({
   adress: z.string().min(2, {
@@ -36,6 +37,7 @@ const formSchema = z.object({
 
 export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], insertOrder: (cart: OrderProps) => Promise<string | undefined> }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,7 +58,6 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
           const Order: Order = {
             Adress: data.adress,
             Commune: data.Commune,
-            imageURL: "",
             NumTel: data.NumTel,
             Prix: 0,
             Traite: false,
@@ -77,6 +78,7 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
             // Reset loading state
             toast.dismiss(toastId);
             setIsLoading(false);
+            router.push("/")
 
           }
           

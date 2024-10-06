@@ -22,7 +22,7 @@ import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Categories, Types } from "../constants";
 import { cn } from "../lib/utils";
-
+import { useRouter } from "next/navigation";
 // Updated form schema
 const formSchema = z.object({
   Title: z.string().min(1, 'Title is required'),
@@ -40,7 +40,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [Type, setType] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
-
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -78,7 +78,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             description: data.Description,
             Type: data.Type,
             PdfUrl: data.CoursURL,
-            imageURL: data.imageURL === "" ? "/icons/player1.png" : data.imageURL,
+            imageURL: data.imageURL === "" ? "https://utfs.io/f/UbLnnOeeK6tTefMZw0I5HyLIpj0E9Rl6SDaWfcQvVsdiGMoC" : data.imageURL,
             Prix: data.Prix,
             Achat: 0,
             etat: "Disponible",
@@ -92,6 +92,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             // Success feedback
             toast.success("Item submitted successfully!");
             form.reset(); // Reset the form
+
           } catch (error) {
             // Error feedback
             toast.error("An error occurred while submitting the Cours.");
@@ -100,6 +101,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             // Reset loading state
             toast.dismiss(toastId); // Dismiss the loading toast
             setIsLoading(false);
+            router.push("/");
 
           }
           
@@ -219,7 +221,38 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                   ))}
                 </SelectContent>
               </Select>
+
             </div>
+            <FormField
+              control={form.control}
+              name="Prix"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Prix</FormLabel>
+                  <FormControl>
+                  <Input
+                     inputMode="numeric"
+                     type="number"
+                     {...field}
+                     onBlur={(e) => { 
+                      const price = parseFloat(e.target.value); 
+                      if (!isNaN(price)) {
+                        form.setValue("Prix", price); 
+                      }
+                      form.trigger("Prix"); 
+                    }}
+                    
+                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
+                     placeholder="1234"
+                     pattern="[0-9]*"
+                    />
+
+
+                  </FormControl>
+                  <FormMessage className="text-black-1 dark:text-white-1" />
+                </FormItem>
+              )}
+            />
             {Type ==="Cours" && <FormField
               control={form.control}
               name="CoursURL"
@@ -243,30 +276,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
               setImageURL={setImageURL} 
               
             />
-            <FormField
-              control={form.control}
-              name="Prix"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Prix</FormLabel>
-                  <FormControl>
-                  <Input
-                     inputMode="numeric"
-                     type="number"
-                     {...field}
-                      onBlur={(e) => {    form.setValue("Prix", parseInt(e.target.value)); 
-                        form.trigger("Prix");}} // Validate on blur
-                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
-                     placeholder="1234"
-                     pattern="[0-9]*"
-                    />
-
-
-                  </FormControl>
-                  <FormMessage className="text-black-1 dark:text-white-1" />
-                </FormItem>
-              )}
-            /></div>}
+            </div>}
           <div className="flex flex-col">
             <div className="">
               <Button

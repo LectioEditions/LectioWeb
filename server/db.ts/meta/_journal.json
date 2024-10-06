@@ -190,6 +190,34 @@
       "when": 1728037993708,
       "tag": "0026_rich_doctor_spectrum",
       "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1728213360250,
+      "tag": "0027_majestic_the_phantom",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1728214360335,
+      "tag": "0028_curvy_ultimates",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1728214389187,
+      "tag": "0029_greedy_spectrum",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1728216708444,
+      "tag": "0030_busy_mulholland_black",
+      "breakpoints": true
     }
   ]
 }

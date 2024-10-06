@@ -47,7 +47,7 @@ export const agentLinks = [
   },
   {
     imgURL: "/icons/microphone.svg",
-    route: "/treated-orders",
+    route: "/archive",
     label: "Archive",
   },
 ]
@@ -67,7 +67,11 @@ export const sidebarLinks = [
       route: "/ordering",
       label: "Ordering",
     },
-  
+    {
+      imgURL: "/icons/microphone.svg",
+      route: "/archive",
+      label: "Mes Commandes",
+    },
   ];
   
   export const voiceDetails = [

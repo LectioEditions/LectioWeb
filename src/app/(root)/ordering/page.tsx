@@ -2,8 +2,7 @@ import React from 'react'
 import { Loader } from "lucide-react";
 
 import { deleteCartItem, getCartItemsByUserId, getItemes, insertOrder } from '@/src/server/db'
-import { getUserByClerkId } from '@/src/server/db';
-import {  CartItem, Item, OrderProps, User } from '@/src/types';
+import {   Item, OrderProps } from '@/src/types';
 import { auth } from '@clerk/nextjs/server';
 import { OrderForm } from '@/src/components/OrderForm';
 import Cart_Item from '@/src/components/CartItem';
@@ -47,15 +46,7 @@ const Page = async({}) => {
     <Loader size={30} className="animate-spin  text-green-1"/>
     </div>
   )
-  //async function handleDeleteCartItem(id:number | undefined) :Promise<CartItem | undefined>{ 
-    //"use server";
-    //return await deleteCartItem(id);
-  //}
-
-  async function handleGetUserByClerkId(id:string | null | undefined) :Promise<User| undefined>{ 
-    "use server";
-    return await getUserByClerkId(id);
-  }
+ 
 
   return (
      <section className=' flex w-full flex-col '>

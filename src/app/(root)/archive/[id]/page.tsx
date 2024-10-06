@@ -23,8 +23,7 @@ const Page = async({ params }: { params: { id: string } }) => {
   if (!user.userId) return;
 
   // Fetch agent and order details in parallel
-  const [agent, order, cartItems ] = await Promise.all([
-    isAgent(),
+  const [ order, cartItems ] = await Promise.all([
     getOrderByIdentifier(params.id),
     getCartItemsByOrderId(params.id)
   ]);
@@ -70,7 +69,7 @@ const Page = async({ params }: { params: { id: string } }) => {
 
 
   return (
-    <section className='flex w-full flex-col'>
+    <section className='flex w-full flex-col '>
       <OrderDetails 
         MergedItemCart={mergedItemsCart} 
         order={order} 

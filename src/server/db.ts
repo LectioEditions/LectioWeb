@@ -134,11 +134,15 @@ export async function insertItem  (Item: Item): Promise<Item|undefined> {
   return Item;
  }
 
-export async function UpdateItem (Item:Items){
+ export async function updateItem(updatedItem: Items) {
   const user = auth();
   if (!user.userId) throw new Error("Unauthorized");
-  return await db.update(schema.Item).set(Item).where(eq(schema.Item.PdfUrl, Item.PdfUrl));
+
+  return await db.update(schema.Item)
+    .set(updatedItem)
+    .where(and(eq(schema.Item.id, updatedItem.id), eq(schema.Item.userId, user.userId))); // Ensure the user is only updating their own item
 }
+
  
 export async function getItemByUserId (userId: string | null)  {
   if(!userId) throw new Error('author is required');
@@ -166,9 +170,10 @@ if (!agent) throw new Error("Unauthorized");
 if(!agent.publicMetadata.agent) throw new Error("Unauthorized");
   if(!id) throw new Error('id is required');
 
-  return await db.delete(schema.Item).where(eq(schema.Item.id, id));
+  const deleted= await db.delete(schema.Item).where(eq(schema.Item.id, id));
+   if(!deleted) throw new Error('Item not deleted');
+   return id;
 }
-
 
 
 
@@ -178,37 +183,40 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
   if (!user.userId) throw new Error("Unauthorized");
   if (!CartItem) throw new Error('Item is required');
   
-  CartItem.userId = user.userId;
+  CartItem.userId = user.userId; // Associate the CartItem with the authenticated user
+  
+  // Fetch user's current cart items
   const userRecord = await getCartItemsByUserId(user.userId);
+  
   // Check if the new item already exists in the user's cart
   const itemExists = userRecord.some(cartItem => cartItem.idItem === CartItem.idItem);
   
   if (itemExists) {
-    throw new Error('This item is already in your cart');
+    throw new Error('This item is already in your cart ');
   }
   
   // Execute independent async calls concurrently
-  const [newUser, newCartItem, newItem] = await Promise.all([
+  const [newUser, newItem] = await Promise.all([
     getUserByClerkId(user.userId),
-    db.insert(schema.CartItem).values(CartItem),
     getItemById(CartItem.idItem)
   ]);
 
-  if (!newCartItem) return;
   if (!newUser || !newItem) throw new Error('User or Item not found');
-
-  // Update user and Item counts
+  const newCartItem = await db.insert(schema.CartItem).values(CartItem);  
+  if (!newCartItem) return;
+  // Update the user's purchase count (Achat) and the item's purchase count
   newUser.Achat += 1;
   newItem.Achat += 1;
-
+  console.log("added");
   // Execute update operations concurrently
   await Promise.all([
     UpdateUser(newUser),
-    UpdateItem(newItem)
+    updateItem(newItem)
   ]);
 
-  return CartItem;
+  return CartItem; // Return the inserted CartItem (without 'id' conflict)
 }
+
 
 export async function getCartItemById(cartItemId: number | null | undefined): Promise<CartItem | undefined> {
   if (!cartItemId) throw new Error('CartItem ID is required');
@@ -239,7 +247,7 @@ export async function deleteCartItem(cartItemId: number | null | undefined , ite
   // Execute the update operations concurrently
   await Promise.all([
     UpdateUser(userRecord),
-    UpdateItem(item)
+    updateItem(item)
   ]);
 
   return cartItem; 
@@ -275,10 +283,10 @@ export async function insertOrder(orderProp: OrderProps) {
       
     });
     const updatePromises = orderProp.cartItems.map(async (cartItem) => {
-      cartItem.OrderId = identifier; // Assign the identifier to OrderId
+      cartItem.OrderId = identifier; 
       return db.update(schema.CartItem).set(cartItem).where(eq(schema.CartItem.id, cartItem.id));
     });
-
+    orderProp.order.userId = user.userId; // Associate the order with the authenticated user
     const newOrder = await db.insert(schema.Order).values(orderProp.order);
     if (!newOrder) throw new Error('Failed to insert order');
     // Wait for all cart items to be updated
@@ -315,11 +323,17 @@ export async function getOrders() {
 export async function getAllOrders() {
   const agent = await isAgent();
   const user = auth();
-
+  
   if (!agent && !user) throw new Error("Unauthorized");
-  if(!agent && user.userId)   return await db.select().from(schema.Order).where(eq(schema.Order.userId, user.userId));
+  if(!agent && user.userId)  { console.log(user.userId);
+    const orders = await db.select().from(schema.Order).where(eq(schema.Order.userId, user.userId));
+    console.log(orders);
+    return orders;
+  }
 
-  return await db.select().from(schema.Order).where(eq(schema.Order.Traite, true));
+  const orders = await db.select().from(schema.Order).where(eq(schema.Order.Traite, true));
+   
+  return orders;
 }
 
 
@@ -327,10 +341,10 @@ export async function getAllOrders() {
 export async function updateOrder(order:Orders) {
   const user = auth()
   if(!user)throw new Error("unauthorized");
-  order.userId=user.userId;
   const agent = await isAgent();
-  if(!agent) throw new Error("unauthorized");
-
+  if(!agent) throw new Error("unauthorized not agent to update");
+   order.Traite = true;
+   order.agenId=user.userId;
   const neworder= await db.update(schema.Order).set(order).where(eq(schema.Order.id, order.id));
   if(!neworder)return;
   return order;

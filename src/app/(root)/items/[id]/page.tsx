@@ -36,7 +36,7 @@ const CoursDetails = async({params}:{
     }
     return await insertCartItem(cartItem);
   }
-  async function handleDeleteItem(id:number | undefined) :Promise<QueryResult<never>>{ 
+  async function handleDeleteItem(id:number | undefined) :Promise<number>{ 
     "use server";
     return await deleteItem(id);
   }
