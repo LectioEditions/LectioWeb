@@ -23,11 +23,11 @@ import OrderCard from '@/src/components/OrderCard';
   return (
      <section className=' flex w-full flex-col '>
       <header className=' mt-9 flex items-center justify-between'>
-      <ProfileDisplay user={user} agent={agent} courses={usercourss}/>
+      <ProfileDisplay user={user} />
       
       </header>
      <section className='flex flex-col gap-8'>
-      <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> All courss</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> Mes Commandes</h1>
      {usercourss && usercourss.length>0 ?(
       <div className='Cours_grid'>{usercourss.map((cours,index)=>(
         <OrderCard route={"archive"}  key={index} id={cours.identifier} Prix={cours.Prix}  CreatedAt={cours.createdAt}/>
