@@ -1,19 +1,17 @@
-import { deletecours, getCoursById, getCoursByUserId, getCourses, getUserByClerkId } from '@/src/server/db';
+import {  getAllOrders,    getUserByClerkId } from '@/src/server/db';
 import { Loader } from 'lucide-react';
 import React from 'react'
-import CoursdetailPlayer from '@/src/components/CoursdetailPlayer';
-import CoursCard from '@/src/components/CoursCard';
 import EmptyState from '@/src/components/EmptyState';
-import { QueryResult } from '@vercel/postgres';
 import ProfileDisplay from '@/src/components/ProfileDisplay';
 import { clerkClient } from '@clerk/nextjs/server';
+import OrderCard from '@/src/components/OrderCard';
 
  const Profile= async({params}:{
   params:{profileId : string}
 }) => {
   
   const user = await getUserByClerkId(params.profileId);
-  const usercourss = await getCoursByUserId(params.profileId);
+  const usercourss = await getAllOrders();
   
 
   if(!user) return(<div className='w-full h-screen flex justify-center items-center'>
@@ -32,7 +30,7 @@ import { clerkClient } from '@clerk/nextjs/server';
       <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> All courss</h1>
      {usercourss && usercourss.length>0 ?(
       <div className='Cours_grid'>{usercourss.map((cours,index)=>(
-        <CoursCard key={index} title={cours.Titre} imgURL={cours.imageURL} description={cours.description} id={cours.id} />
+        <OrderCard route={"archive"}  key={index} id={cours.identifier} Prix={cours.Prix}  CreatedAt={cours.createdAt}/>
       ))}
       </div>
      ):(

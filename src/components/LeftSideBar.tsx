@@ -12,16 +12,23 @@ import ThemeSwitch from './ThemeSwitch';
 const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
     const router = useRouter();
     const pathname = usePathname();
-    const [agent, setAgent] = useState(false);
+    const [agent, setAgent] = useState<boolean | undefined>(undefined);
 
     useEffect(() => {
         const checkAgent = async () => {
-            const agentStatus = await isAgent();
-            setAgent(agentStatus);
+            try {
+                const agentStatus = await isAgent();
+                setAgent(agentStatus);
+            } catch (error) {
+                console.error('Error fetching agent status:', error);
+                setAgent(false);
+            }
         };
 
         checkAgent();
     }, [isAgent]);
+
+    const linksToRender = agent ? agentLinks : sidebarLinks;
 
     return (
         <section className='left_sidebar'>
@@ -29,7 +36,8 @@ const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
                 <Link href={"/"} className='flex cursor-pointer items-start gap-1 justify-start'>
                     <Image src='/icons/lectio_logo-04.png' alt='logo' width={130} height={27} />
                 </Link>
-                {sidebarLinks.map((route, index) => {
+                
+                {linksToRender.map((route, index) => {
                     const isActive = pathname === route.route || pathname.startsWith(`${route.route}/`);
                     return (
                         <Link
@@ -45,27 +53,7 @@ const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
                         </Link>
                     );
                 })}
-                {agent && (
-                    <>
-                        
-                        {agentLinks.map((route, index) => {
-                            const isActive = pathname === route.route || pathname.startsWith(`${route.route}/`);
-                            return (
-                                <Link
-                                    key={index}
-                                    href={route.route}
-                                    className={cn(
-                                        'flex cursor-pointer items-center gap-3 py-4 max-lg:px-4 justify-center lg:justify-start',
-                                        isActive ? 'bg-nav-focus border-r-4 border-green-1' : ''
-                                    )}
-                                >
-                                    <Image src={route.imgURL} alt={route.label} width={24} height={24} />
-                                    <p>{route.label}</p>
-                                </Link>
-                            );
-                        })}
-                    </>
-                )}
+
                 <ThemeSwitch />
             </nav>
 

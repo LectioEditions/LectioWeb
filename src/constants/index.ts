@@ -36,9 +36,19 @@ export const Categories = [
 ];
 export const agentLinks = [
   {
+    imgURL: "/icons/home.svg",
+    route: "/",
+    label: "Home",
+  },
+  {
+    imgURL: "/icons/discover.svg",
+    route: "/discover",
+    label: "Discover",
+  },
+  {
     imgURL: "/icons/microphone.svg",
     route: "/create-item",
-    label: "Create Cours",
+    label: "Create Item",
   },
   {
     imgURL: "/icons/microphone.svg",

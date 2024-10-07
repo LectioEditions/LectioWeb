@@ -43,29 +43,7 @@ const RightSideBar = async () => {
         <Carousel TopUsers={topUsers} Cours={Cours}/>
 
       </section>
-      <section className='flex flex-col gap-8 pt-12'>
-      <Header headerTitle='Top Courss' titleClassName=''/>
-      <div className=' flex flex-col gap-6'>
-       {topUsers?.slice(0,4).map((user)=>(
-        <Link href={`/profile/${user.clerkId}`} key={user.id}>
-        <div  className='flex cursor-pointer justify-between'>
-        <div className='flex gap-3 justify-start items-centers'>
-        <Image
-          src={user.image}
-          alt={user.name}
-          width={44}
-          height={44}
-          className='rounded-lg aspect-square'/>
-          <h2 className='text-sm text-white-1 dark:text-white-1 font-semibold'>{user.name}</h2>
-          </div>
-          <div className='flex items-center'>
-          <p className='text-xs font-normal'>{user.Achat} Vente</p>
-          </div>
-        </div>
-        </Link>
-       ))}
-      </div>
-      </section>
+      
     </section>
   )
 }
