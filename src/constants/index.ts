@@ -26,7 +26,12 @@ export const Types = [
   "Livre",
 
 ];
-
+export const Modules =[
+  "Anatomie",
+  "Physiologie",
+  "Biochimie",
+  
+]
 export const NivUniv = [
   "1ere Année",
   "2eme Année",
