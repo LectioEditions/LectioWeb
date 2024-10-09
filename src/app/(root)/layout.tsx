@@ -27,7 +27,7 @@ export default async function RootLayout({
             <Image className="hidden dark:block" src='/icons/lectio_logo-04.png' alt='logo' width={100} height={27} />
             <Image className="dark:hidden" src='/icons/lectio_logo-02.png' alt='logo' width={100} height={27} />
 
-            <MobileNav/>
+            <MobileNav isAgent={handleAgent}/>
             </div>
             <div className="flex flex-col md:pb-14">
             <Toaster />

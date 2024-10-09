@@ -20,13 +20,13 @@ const RightSideBar = async () => {
     <Loader size={30} className="animate-spin  text-green-1"/>
     </div>)
   return (
-    <section className='right_sidebar text-white-1 dark:text-white-1'>
+    <section className='right_sidebar text-black-1 dark:text-white-1'>
 
       <SignedIn>
         <Link href={ `/profile/${userData?.clerkId}`} className='flex gap-3 pb-12'>
         <UserButton/>
         <div className='flex w-full items-center justify-between '>
-          <h1 className='text-lg truncate font-semibold text-white-1 dark:text-white-1'>
+          <h1 className='text-lg truncate font-semibold text-black-1 dark:text-white-1'>
             {userData?.name}
           </h1>
           <Image

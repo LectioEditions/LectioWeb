@@ -34,7 +34,8 @@ const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
         <section className='left_sidebar'>
             <nav className='flex flex-col gap-6'>
                 <Link href={"/"} className='flex cursor-pointer items-start gap-1 justify-start'>
-                    <Image src='/icons/lectio_logo-04.png' alt='logo' width={130} height={27} />
+                    <Image src='/icons/lectio_logo-02.png' alt='logo' width={130} height={27} className='dark:hidden'/>
+                    <Image src='/icons/lectio_logo-04.png' alt='logo' width={130} height={27} className='hidden dark:block' />
                 </Link>
                 
                 {linksToRender.map((route, index) => {
@@ -44,7 +45,7 @@ const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
                             key={index}
                             href={route.route}
                             className={cn(
-                                'flex cursor-pointer items-center gap-3 py-4 max-lg:px-4 justify-center lg:justify-start',
+                                'flex cursor-pointer font-semibold items-center gap-3 py-4 max-lg:px-4 justify-center lg:justify-start',
                                 isActive ? 'bg-nav-focus border-r-4 border-green-1' : ''
                             )}
                         >

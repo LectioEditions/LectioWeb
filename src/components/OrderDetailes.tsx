@@ -56,7 +56,7 @@ const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center '>
         <div className='bg-white-6 dark:bg-black-4 w-3/4 p-5 rounded-xl gap-5'>
-         <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Les detailles de la Commande</h1>
+         <h1 className='text-xl font-bold text-white-1'>Les detailles de la Commande</h1>
       {MergedItemCart.map((item, index) => (
         <figure key={index} className='flex justify-around items-center  bg-inherit py-5 rounded-xl text-white-1 w-full'>
           <Image
@@ -67,19 +67,19 @@ const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
             className='aspect-square rounded-xl'
           />
           <div className='flex flex-col'>
-            <h1 className='text-16 truncate font-bold capitalize text-black-1 dark:text-white-1'>{item.Titre}</h1>
-            <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix Unitaire: {item.Prix === 0 ? "n'est pas mentionné" : item.Prix}</h2>
-            <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Quantité: {item.Quantite}</h2>
-            <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix: {item.CartPrix}</h1>
+            <h1 className='text-16 truncate font-bold capitalize text-white-1'>{item.Titre}</h1>
+            <h2 className='text-16 font-normal text-white-1'>Prix Unitaire: {item.Prix === 0 ? "n'est pas mentionné" : item.Prix}</h2>
+            <h2 className='text-16 font-normal text-white-1'>Quantité: {item.Quantite}</h2>
+            <h1 className='text-16 font-normal text-white-1'>Prix: {item.CartPrix}</h1>
             {item.PdfUrl && (<Link href={item.PdfUrl}>Voire le Document</Link>)}
           </div>
         </figure>
       ))}
 
           <div className='flex flex-col'>
-            <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Temps estimé: {order.Temps === "0" ? " la commande n'est pas encore traité" : order.Temps}</h2>
-            <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>ID: {order.id}</h2>
-            <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix Total: {order.Prix}</h1>
+            <h2 className='text-16 font-normal text-white-1'>Temps estimé: {order.Temps === "0" ? " la commande n'est pas encore traité" : order.Temps}</h2>
+            <h2 className='text-16 font-normal text-white-1'>ID: {order.id}</h2>
+            <h1 className='text-16 font-normal text-white-1'>Prix Total: {order.Prix}</h1>
           </div>
       {!archive && <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)} className='flex flex-col gap-2 items-center justify-center cursor-pointer rounded-xl mt-8'>
@@ -88,7 +88,7 @@ const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
             name="Temps"
             render={({ field }) => (
               <FormItem className="flex flex-col gap-1 w-full justify-start items-start">
-                <FormLabel className="text-base font-bold whitespace-nowrap text-black-1 dark:text-white-1">Temps estimé</FormLabel>
+                <FormLabel className="text-base font-bold whitespace-nowrap text-white-1">Temps estimé</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -109,7 +109,7 @@ const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
               height={16}
               alt="Valider icon"
               />
-            <h2 className="text-16 font-normal text-black-1 dark:text-white-1">Valider</h2>
+            <h2 className="text-16 font-normal text-white-1">Valider</h2>
           </Button>
         </form>
       </FormProvider>}

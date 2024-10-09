@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Sheet,
   SheetClose,
@@ -11,14 +11,31 @@ import {
 } from "@/src/components/ui/sheet"
 import Image from 'next/image'
 import Link from 'next/link'
-import { sidebarLinks } from '@/src/constants'
+import { agentLinks, sidebarLinks } from '@/src/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/src/lib/utils'
 import ThemeSwitch from './ThemeSwitch';
 
 
-const MobileNav = () => {
-  const Pathname = usePathname();
+const MobileNav = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
+  const pathname = usePathname();
+  const [agent, setAgent] = useState<boolean | undefined>(undefined);
+
+  useEffect(() => {
+      const checkAgent = async () => {
+          try {
+              const agentStatus = await isAgent();
+              setAgent(agentStatus);
+          } catch (error) {
+              console.error('Error fetching agent status:', error);
+              setAgent(false);
+          }
+      };
+
+      checkAgent();
+  }, [isAgent]);
+
+  const linksToRender = agent ? agentLinks : sidebarLinks;
 
   return (
     
@@ -40,7 +57,7 @@ const MobileNav = () => {
        <SheetClose asChild>
         <nav className='flex flex-col gap-6 h-full text-white-1'>
         {sidebarLinks.map((route,index)=>{
-                const isActive = Pathname === route.route || Pathname.startsWith('${route.route}/')   ;
+                const isActive = pathname === route.route || pathname.startsWith('${route.route}/')   ;
                 return(
                   <SheetClose asChild key={route.route}> 
                   <Link key={index} href={route.route} className={cn('flex cursor-pointer items-center gap-3 py-4 max-lg:px-4 justify-start',

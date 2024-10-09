@@ -18,9 +18,9 @@ const Cart_Item = ({imgURL,title,description,id,cartItemPrix ,itemPrix,ItemId,ha
         <h2 className='text-12 truncate font-normal capitalize  text-white-1'>{description}</h2>
       </div>
       <div className='w-full'>
-        <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix Unitaire: {itemPrix}</h2>
-        <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Quantité: {cartItemPrix&&itemPrix ?cartItemPrix/itemPrix : ""}</h2>
-        <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix : {cartItemPrix}</h1>
+        <h2 className='text-16 font-normal text-white-1'>Prix Unitaire: {itemPrix}</h2>
+        <h2 className='text-16 font-normal text-white-1'>Quantité: {cartItemPrix&&itemPrix ?cartItemPrix/itemPrix : ""}</h2>
+        <h1 className='text-16 font-normal text-white-1'>Prix : {cartItemPrix}</h1>
       </div>
       </figure>
     </Link>
@@ -49,7 +49,7 @@ const Cart_Item = ({imgURL,title,description,id,cartItemPrix ,itemPrix,ItemId,ha
                 height={16}
                 alt="Delete icon"
               />
-              <h2 className="text-16 font-normal text-black-1 dark:text-white-1">Delete</h2>
+              <h2 className="text-16 font-normal text-white-1">Delete</h2>
            </Button>
             </form>
     </div>
