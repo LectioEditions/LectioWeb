@@ -4,13 +4,12 @@ import {  EmblaCarouselType } from 'embla-carousel'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
-import {  Cours } from '@/src/types';
 import { useRouter } from 'next/navigation';
-import { User } from '@/src/types/index';
+import { Items, User } from '@/src/types/index';
 import Image from 'next/image';
 import { Loader } from 'lucide-react';
 
-const EmblaCarousel= ({TopUsers ,Cours}:{TopUsers:User[],Cours:Cours[]}) => {
+const EmblaCarousel= ({TopUsers ,Cours}:{TopUsers:User[],Cours:Items[]}) => {
   const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({loop: true},[Autoplay()])
 
@@ -30,7 +29,7 @@ const EmblaCarousel= ({TopUsers ,Cours}:{TopUsers:User[],Cours:Cours[]}) => {
     emblaApi,
     onNavButtonClick
   )
-  const slides = TopUsers && TopUsers?.filter((item : User)=>{if(item.CoursCount) item.CoursCount > 0})
+  const slides = TopUsers && TopUsers?.filter((item : User)=>{if(item.Achat) item.Achat > 0})
 
  if(!Cours) return(<div className='w-full h-screen flex justify-center items-center'>
   <Loader size={30} className="animate-spin  text-green-1"/>

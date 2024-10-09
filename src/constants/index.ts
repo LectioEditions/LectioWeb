@@ -27,6 +27,17 @@ export const Types = [
 
 ];
 
+export const NivUniv = [
+  "1ere Année",
+  "2eme Année",
+  "3eme Année",
+  "4eme Année",
+  "5eme Année",
+  "6eme Année",
+  "7eme Année",
+
+];
+
 export const Categories = [
   "science",
   "technology",

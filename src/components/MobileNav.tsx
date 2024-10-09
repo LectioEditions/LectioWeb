@@ -56,7 +56,7 @@ const MobileNav = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
       <div className='h-[calc(100vh - 72px)] flex-col justify-between overflow-auto'>
        <SheetClose asChild>
         <nav className='flex flex-col gap-6 h-full text-white-1'>
-        {sidebarLinks.map((route,index)=>{
+        {linksToRender.map((route,index)=>{
                 const isActive = pathname === route.route || pathname.startsWith('${route.route}/')   ;
                 return(
                   <SheetClose asChild key={route.route}> 

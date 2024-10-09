@@ -217,6 +217,9 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
   return CartItem; // Return the inserted CartItem (without 'id' conflict)
 }
 
+export async function getItemByCategory(category: string) {
+  return await db.query.Item.findMany({ where: (model, { eq }) => eq(model.Category, category) });
+}
 
 export async function getCartItemById(cartItemId: number | null | undefined): Promise<CartItem | undefined> {
   if (!cartItemId) throw new Error('CartItem ID is required');

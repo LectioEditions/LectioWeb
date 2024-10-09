@@ -42,6 +42,7 @@ export const Item = createTable(
     Category: text('Category').notNull(),
     description: text('description').notNull(),
     Annee: text('Annee').notNull(),
+    NivUniv: text('NivUniv').notNull(),
     Module: text('Module').notNull(),
     Type: text('Type').notNull(),
     PdfUrl : text('PdfUrl').notNull(),

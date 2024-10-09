@@ -20,7 +20,7 @@ import MyDropzone from "./DropZone";
 import { Item } from "@/src/types";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Categories, Types } from "../constants";
+import { Categories, NivUniv, Types } from "../constants";
 import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
 // Updated form schema
@@ -31,6 +31,7 @@ const formSchema = z.object({
   CoursURL: z.string(),
   imageURL: z.string(),
   Annee: z.string().min(1, 'Year is required'),
+  NivUniv: z.string().min(1, 'Niveau Universitaire is required'),
   Module: z.string().min(1, 'Module is required'),
   Type: z.string().min(1, 'Type is required'),
   Prix: z.number(), // Adjust regex for the format you expect
@@ -52,6 +53,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
       imageURL: "",
       Annee: "",
       Module: "",
+      NivUniv:"",
       Type: "",
       Prix: 0,
     },
@@ -74,6 +76,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             Titre: data.Title,
             Module: data.Module,
             Annee: data.Annee,
+            NivUniv:data.NivUniv,
             Category: data.Category,
             description: data.Description,
             Type: data.Type,
@@ -184,6 +187,25 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+            <div className="flex flex-col gap-2.5">
+              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
+                Niveau Universitaire
+              </Label>
+
+              <Select onValueChange={(value) => {form.setValue("NivUniv",value);setType(value) }}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {NivUniv.map((Type) => (
+                    <SelectItem key={Type} value={Type} className="capitalize focus:bg-green-1">
+                      {Type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
             </div>
             <FormField
               control={form.control}

@@ -61,7 +61,7 @@ import { cn } from '@/src/lib/utils';
   export const DotButton: React.FC<DotButtonProps> = ({selected,onClick}:DotButtonProps) => {
   
     return (
-      <button type="button" onClick={onClick} className={cn('size-2.5 bg-white-3 cursor-pointer transition-all duration-500 rounded-full',{'bg-white-1':selected})} />
+      <button type="button" onClick={onClick} className={cn('size-2.5 bg-gray-1 dark:bg-white-3 cursor-pointer transition-all duration-500 rounded-full',{'bg-black-1 dark:bg-white-1':selected})} />
     )
   }
   

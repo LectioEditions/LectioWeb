@@ -49,8 +49,10 @@ const Page = async({}) => {
  
 
   return (
-     <section className=' flex w-full flex-col '>
-      <div className='Cours_grid'>{combinedItems.map((Cours,index)=>(
+     <section className=' flex w-full flex-col  py-10'>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1 mb-3'>Le contenu de votre panier</h1>
+      <div className='Cours_grid'>
+        {combinedItems.map((Cours,index)=>(
         <Cart_Item handleRemoveCartItem={handleRemoveCartItem} key={index} title={Cours.item?.Titre} imgURL={Cours.item?.imageURL} description={Cours.item?.description} id={Cours.cartItem?.id} ItemId={Cours.item?.id} itemPrix={Cours.item?.Prix} cartItemPrix={Cours.cartItem.Prix}/>
       ))}
       </div>     

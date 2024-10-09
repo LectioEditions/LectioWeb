@@ -8,7 +8,7 @@ const Page = async () => {
   const orders= await getAllOrders();
   if(!orders) return <Loader size={50} className='mx-auto'/>;
   return (
-    <div className=" flex flex-col gap-9">
+    <section className=" w-full min-h-screen  py-10">
       <div className='flex flex-col gap-9'>
       <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Commandes</h1>
        {orders.length > 0 ? <div className='Cours_grid'>
@@ -17,7 +17,7 @@ const Page = async () => {
         </div>:<EmptyState title={'No Results found'}/>}
        
       </div>
-    </div>
+    </section>
   )
 }
 

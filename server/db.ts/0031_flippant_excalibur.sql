@@ -1,0 +1,1 @@
+ALTER TABLE "lection_Items" ADD COLUMN "NivUniv" text NOT NULL;
