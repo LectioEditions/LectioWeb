@@ -33,7 +33,7 @@ const Filter = ({ setModule, setNivUniv, onFilter }: {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full h-fit flex justify-around items-center">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full h-fit flex flex-col md:flex-row justify-around items-center">
       {/* Niveau Universitaire Field */}
       <div className="flex justify-around items-center gap-2.5 min-w-[200px]">
         <Label className="text-16 font-bold whitespace-nowrap text-black-1 dark:text-white-1">
