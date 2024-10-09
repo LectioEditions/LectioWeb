@@ -218,6 +218,8 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
 }
 
 export async function getItemByCategory(category: string) {
+  if (!category || category === "") return;
+
   return await db.query.Item.findMany({ where: (model, { eq }) => eq(model.Category, category) });
 }
 

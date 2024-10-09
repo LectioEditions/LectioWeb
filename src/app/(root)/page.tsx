@@ -33,7 +33,7 @@ const Home = async () => {
             />
           ))}
           {/* Add a link as the fourth item */}
-          <Link href="/department/education">
+          <Link href={`/department/${department1Courses[0].Category}`}>
           <div className='w-full h-full rounded-xl bg-white-6 dark:bg-black-2 flex justify-center items-center'>
 
             <h1 className="text-green-1 font-semibold ">View All Health Courses</h1>
@@ -56,7 +56,7 @@ const Home = async () => {
             />
           ))}
           {/* Add a link as the fourth item */}
-          <Link href="/department/health">
+          <Link href={`/department/${department2Courses[0].Category}`}>
           <div className='w-full h-full rounded-xl bg-white-6 dark:bg-black-2 flex justify-center items-center'>
 
             <h1 className="text-green-1 font-semibold ">View All Health Courses</h1>
@@ -79,7 +79,7 @@ const Home = async () => {
             />
           ))}
           {/* Add a link as the fourth item */}
-          <Link href="/department/technology">
+          <Link href={`/department/${department3Courses[0].Category}`}>
           <div className='w-full h-full rounded-xl bg-white-6 dark:bg-black-2 flex justify-center items-center'>
 
             <h1 className="text-green-1 font-semibold ">View All Health Courses</h1>
