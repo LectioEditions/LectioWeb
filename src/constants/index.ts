@@ -32,6 +32,14 @@ export const Modules =[
   "Biochimie",
   
 ]
+
+export const Unites =[
+  "Unite1",
+  "Unite2",
+  "Unite3",
+  
+]
+
 export const NivUniv = [
   "1ere Année",
   "2eme Année",
@@ -44,9 +52,9 @@ export const NivUniv = [
 ];
 
 export const Categories = [
-  "science",
-  "technology",
-  "business",
+  "Medecine",
+  "Dentair",
+  "Pharma",
   "education",
   "health",
 ];

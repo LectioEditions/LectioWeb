@@ -7,6 +7,7 @@ const Page = async ({params}:{ params:{depNom : string}}) => {
   console.log(search);
   console.log('searchParams', params);
   const Items = await getItemByCategory(search);
+  console.log('Items', Items);
   return (
     <section>
     <DepItems items={Items} />

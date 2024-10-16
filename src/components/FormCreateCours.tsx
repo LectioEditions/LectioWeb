@@ -20,14 +20,15 @@ import MyDropzone from "./DropZone";
 import { Item } from "@/src/types";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Categories, NivUniv, Types } from "../constants";
+import { Categories, NivUniv, Types, Unites } from "../constants";
 import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
 // Updated form schema
 const formSchema = z.object({
   Title: z.string().min(1, 'Title is required'),
   Description: z.string().min(1, 'Description is required'),
-  Category: z.string().min(1, 'Category is required'),
+  Departement: z.string().min(1, 'Département is required'),
+  Unite: z.string(),
   CoursURL: z.string(),
   imageURL: z.string(),
   Annee: z.string().min(1, 'Year is required'),
@@ -41,6 +42,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [Type, setType] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
+  const [Dep, setDep] = useState<string>("");
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,7 +50,8 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
     defaultValues: {
       Title: "",
       Description: "",
-      Category: "",
+      Departement: "",
+      Unite:"",
       CoursURL: "",
       imageURL: "",
       Annee: "",
@@ -77,8 +80,9 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             Module: data.Module,
             Annee: data.Annee,
             NivUniv:data.NivUniv,
-            Category: data.Category,
+            Departement: data.Departement,
             description: data.Description,
+            Unite: data.Unite,
             Type: data.Type,
             PdfUrl: data.CoursURL,
             imageURL: data.imageURL === "" ? "https://utfs.io/f/UbLnnOeeK6tTefMZw0I5HyLIpj0E9Rl6SDaWfcQvVsdiGMoC" : data.imageURL,
@@ -172,10 +176,10 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
             />
             <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-black-1 dark:text-white-1">
-                Category
+                Département
               </Label>
 
-              <Select onValueChange={(value) => form.setValue("Category",value)}>
+              <Select onValueChange={(value) => {form.setValue("Departement",value);setDep(value)}}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
@@ -188,6 +192,24 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                 </SelectContent>
               </Select>
             </div>
+            {Dep==="Medecine" && <div className="flex flex-col gap-2.5">
+              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
+                Unité
+              </Label>
+
+              <Select onValueChange={(value) => form.setValue("Unite",value)}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {Unites.map((category) => (
+                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
+                      {category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>}
             <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Niveau Universitaire
