@@ -51,7 +51,7 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
               {livres.length > 0 && (
                 <>
                   <h1 className="text-2xl font-bold text-black-1 dark:text-white-1">Livres</h1>
-                  <div className='Cours_grid'>
+                  <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4'>
                     {livres.map(item => (
                       <CoursCard 
                         key={item.id} 
@@ -68,7 +68,7 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
               {cours.length > 0 && (
                 <>
                   <h1 className="text-2xl font-bold text-black-1 dark:text-white-1">Cours</h1>
-                  <div className='Cours_grid'>
+                  <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4'>
                     {cours.map(item => (
                       <CoursCard 
                         key={item.id} 
