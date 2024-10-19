@@ -20,15 +20,16 @@ export default function ThemeSwitch() {
       alt="Loading Light/Dark Toggle"
       priority={false}
       title="Loading Light/Dark Toggle"
+        className="ml-7"
     />
   )
 
   if (resolvedTheme === 'dark') {
-    return <FiSun onClick={() => setTheme('light')} />
+    return <FiSun onClick={() => setTheme('light')}   className="ml-7"/>
   }
 
   if (resolvedTheme === 'light') {
-    return <FiMoon onClick={() => setTheme('dark')} />
+    return <FiMoon onClick={() => setTheme('dark')}  className="ml-7"/>
   }
 
 }

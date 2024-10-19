@@ -37,13 +37,13 @@ const Filter = ({ setModule, setNivUniv, onFilter ,Dep }: {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full h-fit Cours_grid">
       {/* Niveau Universitaire Field */}
-      <div className="flex justify-around items-center gap-2.5 min-w-[200px]">
+      <div className="flex justify-between items-center gap-2.5 min-w-[200px]">
         <Label className="text-16 font-bold whitespace-nowrap text-black-1 dark:text-white-1">
           Niveau 
         </Label>
 
         <Select onValueChange={(value) => setValue("NivUniv", value)}>
-          <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+          <SelectTrigger className={cn('text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
             <SelectValue placeholder="Select university level" className="placeholder:text-gray-1" />
           </SelectTrigger>
           <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
@@ -55,13 +55,13 @@ const Filter = ({ setModule, setNivUniv, onFilter ,Dep }: {
           </SelectContent>
         </Select>
       </div>
-      {Dep==="Medecine" && <div className="flex justify-around items-center gap-2.5 min-w-[200px]">
+      {Dep==="Medecine" && <div className="flex justify-between items-center gap-2.5 min-w-[200px]">
               <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Unité
               </Label>
 
-              <Select onValueChange={(value) => setValue("Unite",value)}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+              <Select onValueChange={(value) => setValue("Unite",value)} >
+                <SelectTrigger className={cn('text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
@@ -74,13 +74,13 @@ const Filter = ({ setModule, setNivUniv, onFilter ,Dep }: {
               </Select>
             </div>}
       {/* Module Field */}
-      <div className="flex justify-around items-center gap-2.5 min-w-[200px]">
+      <div className="flex justify-between items-center gap-2.5 min-w-[200px]">
         <Label className="text-16 font-bold text-black-1 dark:text-white-1">
           Module
         </Label>
 
         <Select onValueChange={(value) => setValue("Module", value)}>
-          <SelectTrigger className={cn('text-16 w-full border-none bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+          <SelectTrigger className={cn('text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
             <SelectValue placeholder="Select a module" className="placeholder:text-gray-1" />
           </SelectTrigger>
           <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
