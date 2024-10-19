@@ -297,7 +297,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                 </FormItem>
               )}
             />
-            {Type ==="Cours" && <FormField
+            {Type !=="Livre" && <FormField
               control={form.control}
               name="CoursURL"
               render={({ field }) => (

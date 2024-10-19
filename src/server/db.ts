@@ -207,7 +207,6 @@ export async function insertCartItem(CartItem: CartItem): Promise<CartItem | und
   // Update the user's purchase count (Achat) and the item's purchase count
   newUser.Achat += 1;
   newItem.Achat += 1;
-  console.log("added");
   // Execute update operations concurrently
   await Promise.all([
     UpdateUser(newUser),
@@ -332,7 +331,6 @@ export async function getAllOrders() {
   if (!agent && !user) throw new Error("Unauthorized");
   if(!agent && user.userId)  { console.log(user.userId);
     const orders = await db.select().from(schema.Order).where(eq(schema.Order.userId, user.userId));
-    console.log(orders);
     return orders;
   }
 

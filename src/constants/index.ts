@@ -24,6 +24,7 @@ export const Communes = [
 export const Types = [
   "Cours",
   "Livre",
+  "TD",
 
 ];
 export const Modules =[
