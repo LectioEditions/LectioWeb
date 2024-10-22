@@ -37,7 +37,7 @@ const Home = async () => {
           <Link href={`/department/${Categories[0]}`}>
           <div className='w-full h-full rounded-xl bg-white-6 dark:bg-black-2 flex justify-center items-center'>
 
-            <h1 className="text-green-1 font-semibold ">View All Health Courses</h1>
+            <h1 className="text-green-1 font-semibold ">Voire tous</h1>
           </div>
                     </Link>
         </div>
@@ -60,7 +60,7 @@ const Home = async () => {
           <Link href={`/department/${Categories[1]}`}>
           <div className='w-full h-full rounded-xl bg-white-6 dark:bg-black-2 flex justify-center items-center'>
 
-            <h1 className="text-green-1 font-semibold ">View All Health Courses</h1>
+            <h1 className="text-green-1 font-semibold ">Voire tous</h1>
           </div>
           </Link>
         </div>
@@ -83,7 +83,7 @@ const Home = async () => {
           <Link href={`/department/${Categories[2]}`}>
           <div className='w-full h-full rounded-xl bg-white-6 dark:bg-black-2 flex justify-center items-center'>
 
-            <h1 className="text-green-1 font-semibold ">View All Health Courses</h1>
+            <h1 className="text-green-1 font-semibold ">Voire tous</h1>
           </div>
                     </Link>
         </div>

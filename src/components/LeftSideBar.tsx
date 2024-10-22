@@ -49,7 +49,8 @@ const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
                                 isActive ? 'bg-nav-focus border-r-4 border-green-1' : ''
                             )}
                         >
-                            <Image src={route.imgURL} alt={route.label} width={24} height={24} />
+                            <Image src={route.imgURL} alt={route.label} width={24} height={24} className='color-black-1 dark:color-white-6 hidden dark:block'/>
+                            <Image src={route.imgURLwhite} alt={route.label} width={24} height={24} className='color-black-1 dark:color-white-6 dark:hidden'/>
                             <p>{route.label}</p>
                         </Link>
                     );

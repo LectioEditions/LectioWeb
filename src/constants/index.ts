@@ -62,48 +62,58 @@ export const Categories = [
 export const agentLinks = [
   {
     imgURL: "/icons/home.svg",
+    imgURLwhite: "/icons/home-white.svg",
     route: "/",
-    label: "Home",
+    label: "Départements",
   },
   {
     imgURL: "/icons/discover.svg",
+    imgURLwhite: "/icons/discover-white.svg",
     route: "/discover",
-    label: "Discover",
+
+    label: "Découvrire",
   },
   {
-    imgURL: "/icons/microphone.svg",
+    imgURL: "/icons/createItem.svg",
+    imgURLwhite: "/icons/createItem-white.svg",
     route: "/create-item",
-    label: "Create Item",
+    label: "Ajouter un item",
   },
   {
-    imgURL: "/icons/microphone.svg",
+    imgURL: "/icons/ordersIcon.svg",
+    imgURLwhite: "/icons/microphone-white.svg",
     route: "/orders",
     label: "Commandes",
   },
   {
-    imgURL: "/icons/microphone.svg",
+    imgURL: "/icons/history.svg",
+    imgURLwhite: "/icons/microphone-white.svg",
     route: "/archive",
-    label: "Archive",
+    label: "Historiques",
   },
 ]
 export const sidebarLinks = [
     {
       imgURL: "/icons/home.svg",
+      imgURLwhite: "/icons/home-white.svg",
       route: "/",
-      label: "Home",
+      label: "Départements",
     },
     {
       imgURL: "/icons/discover.svg",
+      imgURLwhite: "/icons/discover-white.svg",
       route: "/discover",
-      label: "Discover",
+      label: "Découvrire",
     },
     {
-      imgURL: "/icons/home.svg",
+      imgURL: "/icons/panier.svg",
+      imgURLwhite: "/icons/home-white.svg",
       route: "/ordering",
-      label: "Ordering",
+      label: "Mon Panier",
     },
     {
-      imgURL: "/icons/microphone.svg",
+      imgURL: "/icons/history.svg",
+      imgURLwhite: "/icons/microphone-white.svg",
       route: "/archive",
       label: "Mes Commandes",
     },
