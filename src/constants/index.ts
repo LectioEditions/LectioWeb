@@ -89,7 +89,7 @@ export const agentLinks = [
     imgURL: "/icons/history.svg",
     imgURLwhite: "/icons/microphone-white.svg",
     route: "/archive",
-    label: "Historiques",
+    label: "Historique",
   },
 ]
 export const sidebarLinks = [
