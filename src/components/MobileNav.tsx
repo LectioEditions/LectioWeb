@@ -49,7 +49,7 @@ const MobileNav = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
         alt="menu"
         />
       </SheetTrigger>
-      <SheetContent side="left" className='border-none bg-white-6  dark:bg-black-2'>
+      <SheetContent side="left" className='border-none bg-white-6  dark:bg-black-2 text-black-1 dark:text-white-1'>
       <Link  href={"/"} className='flex cursor-pointer items-center gap-1 pb-10 pl-4'>
       <Image src='/icons/lectio_logo-04.png' alt='logo' width={100} height={27} />
       </Link>
