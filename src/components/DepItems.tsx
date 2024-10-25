@@ -12,7 +12,9 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
   const [filteredItems, setFilteredItems] = useState<Items[]>(items || []);
   const [Dep, setDep] = useState<string>(" ");
 
-  // Use useEffect to set Dep only once when items are available
+  if(!filteredItems && items){
+    setFilteredItems(items)
+  }
   useEffect(() => {
     if (items !== undefined && items[0]?.Departement) {
       setDep(items[0].Departement);
@@ -21,15 +23,20 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
 
   const handleFilter = () => {
     let filtered = items || []; // Initialize with items or empty array
-
-    // Apply filters
+    
+    
     if (nivUniv !== undefined) {
+      console.log("AA")
       filtered = filtered.filter(item => item.NivUniv === nivUniv);
     }
     if (module !== undefined) {
+      console.log("AA")
+
       filtered = filtered.filter(item => item.Module === module);
     }
     if (Dep === "Medecine") {
+      console.log("AA")
+
       filtered = filtered.filter(item => item.Departement === Dep);
     }
 
@@ -48,7 +55,7 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
       <Filter setModule={setModule} setNivUniv={setNivUniv} onFilter={handleFilter} Dep={Dep} />
       <div className='flex flex-col gap-9'>
         {items !== undefined ? (
-          livres.length > 0 || cours.length > 0 ? (
+          TD.length > 0 || livres.length > 0 || cours.length > 0 ? (
             <>
               {livres.length > 0 && (
                 <>
@@ -86,9 +93,9 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
 
               {TD.length > 0 && (
                 <>
-                  <h1 className="text-2xl font-bold text-black-1 dark:text-white-1">Cours</h1>
+                  <h1 className="text-2xl font-bold text-black-1 dark:text-white-1">TD</h1>
                   <div className='Cours_grid'>
-                    {cours.map(item => (
+                    {TD.map(item => (
                       <CoursCard 
                         key={item.id} 
                         id={item.id} 
