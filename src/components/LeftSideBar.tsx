@@ -45,7 +45,7 @@ const LeftSideBar = ({ isAgent }: { isAgent: () => Promise<boolean> }) => {
                             key={index}
                             href={route.route}
                             className={cn(
-                                'flex cursor-pointer font-semibold items-center gap-3 py-4 max-lg:px-4 justify-center lg:justify-start',
+                                'flex cursor-pointer font-semibold items-center gap-3 py-4 max-lg:px-4 justify-start',
                                 isActive ? 'bg-nav-focus border-r-4 border-green-1' : ''
                             )}
                         >
