@@ -39,7 +39,7 @@ const RightSideBar = async () => {
         </Link>
       </SignedIn>
       <section>
-        <Header headerTitle='For fans like you' titleClassName=''/>
+        <Header headerTitle='Nos derniers ouvrages' titleClassName=''/>
         <Carousel TopUsers={topUsers} Cours={Cours}/>
 
       </section>
