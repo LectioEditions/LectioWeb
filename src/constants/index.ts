@@ -71,7 +71,7 @@ export const agentLinks = [
     imgURLwhite: "/icons/discover-white.svg",
     route: "/discover",
 
-    label: "Découvrire",
+    label: "Découvrir",
   },
   {
     imgURL: "/icons/createItem.svg",
@@ -103,7 +103,7 @@ export const sidebarLinks = [
       imgURL: "/icons/discover.svg",
       imgURLwhite: "/icons/discover-white.svg",
       route: "/discover",
-      label: "Découvrire",
+      label: "Découvrir",
     },
     {
       imgURL: "/icons/panier.svg",
