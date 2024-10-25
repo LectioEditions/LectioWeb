@@ -22,7 +22,7 @@ const Home = async () => {
     <div className='mt-9 flex flex-col gap-9'>
       {/* Section for Department 1 */}
       <section className='flex flex-col gap-5'>
-        <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Département :{Categories[0]}</h1>
+        <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Département {Categories[0]}</h1>
         <div className='Cours_grid'>
           {department1Courses.slice(0, 3).map((Cours, index) => (
             <CoursCard 
@@ -45,7 +45,7 @@ const Home = async () => {
 
       {/* Section for Department 2 */}
       <section className='flex flex-col gap-5'>
-        <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Département :{Categories[1]}</h1>
+        <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Département {Categories[1]}</h1>
         <div className='Cours_grid'>
           {department2Courses.slice(0, 3).map((Cours, index) => (
             <CoursCard 
