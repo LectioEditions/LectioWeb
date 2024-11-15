@@ -56,8 +56,8 @@ export const Categories = [
   "Medecine",
   "Médecine dentaire",
   "Pharma",
-  "education",
-  "health",
+  "Pharma industrielle",
+  
 ];
 export const agentLinks = [
   {
