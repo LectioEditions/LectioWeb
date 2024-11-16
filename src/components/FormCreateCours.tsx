@@ -228,7 +228,7 @@ if (Annee && Annee !== " ") {
               </Select>
 
             </div>
-            {filteredModules.length > 0 ? <FormField
+            {FilterModules !== undefined ? <FormField
               control={form.control}
               name="Module"
               render={({ field }) => (
@@ -239,7 +239,7 @@ if (Annee && Annee !== " ") {
                   <SelectValue placeholder="Selectionner le Module" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-                  {filteredModules.map((category,index) => (
+                  {FilterModules.map((category,index) => (
                     <SelectItem key={index} value={category.module} className="capitalize focus:bg-green-1">
                       {category.module}
                     </SelectItem>
