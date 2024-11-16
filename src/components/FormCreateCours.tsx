@@ -17,10 +17,10 @@ import {
 import { Textarea } from "@/src/components/ui/textarea";
 import { Input } from "@/src/components/ui/input";
 import MyDropzone from "./DropZone";
-import { Item } from "@/src/types";
+import { Item, Module } from "@/src/types";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Categories, NivUniv, Types, Unites } from "../constants";
+import { Categories, Modules, NivUniv, Types, Unites } from "../constants";
 import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
 // Updated form schema
@@ -43,8 +43,10 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   const [Type, setType] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
   const [Dep, setDep] = useState<string>("");
-  const router = useRouter();
+  const [Annee, setAnnee] = useState<string>("");
 
+  const router = useRouter();
+  const [FilterModules, setFilterModules] = useState<Module[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -61,10 +63,18 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
       Prix: 0,
     },
   });
-
+   
   // Update form values when CoursURL or imageURL changes
   useEffect(() => {
     form.setValue("imageURL", imageURL);
+    setFilterModules(Modules);
+    if(Dep !==" "){
+      setFilterModules(FilterModules.filter(item => item.departement === Dep ));
+    }
+    if(Annee !==" "){
+      setFilterModules(FilterModules.filter(item => item.annee === Annee ));
+    }
+
   }, [ imageURL, form]);
 
   return (
@@ -134,46 +144,30 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                 </FormItem>
               )}
             />
-              <FormField
-              control={form.control}
-              name="Module"
-              render={({ field }) => (
-                <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Module </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      onBlur={() => form.trigger("Module")} // Validate on blur
-                      className="input-class focus-visible:ring-offset-green-1"
-                      placeholder="Enter Module"
-                    />
-                  </FormControl>
-                  <FormMessage className="text-black-1 dark:text-white-1" />
-                </FormItem>
-              )}
-            />
+              
             <FormField
               control={form.control}
               name="Annee"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
                   <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Année </FormLabel>
-                  <FormControl>
-                  <Input
-                     inputMode="numeric"
-                     type="number"
-                     {...field}
-                      onBlur={(e) => {    
-                        form.trigger("Annee");}} // Validate on blur
-                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
-                     placeholder="1234"
-                     pattern="[0-9]*"
-                    />
-                  </FormControl>
+                  <Select onValueChange={(value) => {form.setValue("Annee",value);setAnnee(value);}}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {NivUniv.map((category,index) => (
+                    <SelectItem key={index} value={category} className="capitalize focus:bg-green-1">
+                      {category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
                   <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
             />
+
             <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Département
@@ -229,6 +223,28 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
               </Select>
 
             </div>
+            <FormField
+              control={form.control}
+              name="Module"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Module </FormLabel>
+                  <Select onValueChange={(value) => {form.setValue("Module",value);}}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {Modules.map((category,index) => (
+                    <SelectItem key={index} value={category.module} className="capitalize focus:bg-green-1">
+                      {category.module}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+                  <FormMessage className="text-black-1 dark:text-white-1" />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="Description"
