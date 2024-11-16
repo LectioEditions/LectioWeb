@@ -66,16 +66,19 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
    
   // Update form values when CoursURL or imageURL changes
   useEffect(() => {
-    form.setValue("imageURL", imageURL);
-    setFilterModules(Modules);
-    if(Dep !==" "){
-      setFilterModules(FilterModules.filter(item => item.departement === Dep ));
-    }
-    if(Annee !==" "){
-      setFilterModules(FilterModules.filter(item => item.annee === Annee ));
-    }
+  form.setValue("imageURL", imageURL);
 
-  }, [ imageURL, form,Annee,Dep]);
+  let filteredModules = Modules;
+
+  if (Dep !== " ") {
+    filteredModules = filteredModules.filter(item => item.departement === Dep);
+  }
+  if (Annee !== " ") {
+    filteredModules = filteredModules.filter(item => item.annee === Annee);
+  }
+
+  setFilterModules(filteredModules);
+}, [imageURL, form, Annee, Dep]);
 
   return (
     <section className="mt-10 flex flex-col">
