@@ -140,8 +140,8 @@ export const NivUniv = [
 
 export const Categories = [
   "Medecine",
-  "Médecine dentaire",
-  "Pharma",
+  "Chirurgie Dentaire",
+  "Pharmacie",
   "Pharma industrielle",
   
 ];
