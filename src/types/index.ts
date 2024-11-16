@@ -19,7 +19,9 @@ export interface OrderProps {
   order: Order;
   cartItems: CartItems[];
 }
-
+export type Module ={
+   module: string; annee: string;departement: string;
+}
 export type Upload = typeof schema.Uploads.$inferInsert;
 
 export type MergedItemCart = {
