@@ -27,17 +27,103 @@ export const Types = [
   "TD",
 
 ];
-export const Modules =[
-  "Anatomie",
-  "Physiologie",
-  "Biochimie",
-  
-]
+export const Modules = [
+  { module: "Organique", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Physique", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Anatomie", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Biologie végétale", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Embryologie et histologie", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Cytologie et physiologie cellulaire", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Biomathématique, informatique et biostatistique", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Histoire de la pharmacie", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Chimie générale", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Chimie organique", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Physiologie", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Langue française", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Chimie analytique", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Chimie Minérale", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Biochimie", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Botanique", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Biophysique", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Génétique", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Physiopathologie", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Langue anglaise", annee: "2eme Année", departement: "Pharmacie" },
+  { module: "Pharmacologie", annee: "3eme Année", departement: "Pharmacie" },
+  { module: "Chimie thérapeutique", annee: "3eme Année", departement: "Pharmacie" },
+  { module: "Chimie analytique", annee: "3eme Année", departement: "Pharmacie" },
+  { module: "Pharmacie galénique", annee: "3eme Année", departement: "Pharmacie" },
+  { module: "Pharmacognosie", annee: "3eme Année", departement: "Pharmacie" },
+  { module: "Sémiologie", annee: "3eme Année", departement: "Pharmacie" },
+  { module: "Microbiologie", annee: "4eme Année", departement: "Pharmacie" },
+  { module: "Biochimie", annee: "4eme Année", departement: "Pharmacie" },
+  { module: "Immunologie", annee: "4eme Année", departement: "Pharmacie" },
+  { module: "Parasitologie", annee: "4eme Année", departement: "Pharmacie" },
+  { module: "Hemobiologie", annee: "4eme Année", departement: "Pharmacie" },
+  { module: "Toxicologie", annee: "5eme Année", departement: "Pharmacie" },
+  { module: "Hydrologie bromatologie", annee: "5eme Année", departement: "Pharmacie" },
+  { module: "Pharmacie clinique", annee: "5eme Année", departement: "Pharmacie" },
+  { module: "Épidémiologie", annee: "5eme Année", departement: "Pharmacie" },
+  { module: "Gestion pharmaceutique", annee: "5eme Année", departement: "Pharmacie" },
+  { module: "Droit pharmaceutique", annee: "5eme Année", departement: "Pharmacie" },
+  { module: "Pharmacie hospitaliere", annee: "5eme Année", departement: "Pharmacie" },
+  { module: "Pharmacie industrielle", annee: "5eme Année", departement: "Pharmacie" },
+
+  { module: "Anatomie humaine", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Biochimie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Chimie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Biophysique", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Physique", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Génétique", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Cytologie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Déontologie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Physiologie générale", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Biomathématiques", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Histologie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Embryologie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Français", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Anglais", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Anatomie humaine", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Anatomie dentaire", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Occlusion", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Parodontologie", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Pathologie bucco-dentaire", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Orthopédie dento-faciale", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Prothese dentaire", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Microbiologie", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Immunologie", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Hygiene", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Informatique", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Biomatériaux", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Physiologie spéciale", annee: "2eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Pharmacologie", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Anesthésiologie", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Occlusion", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Orthopédie dento-faciale", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Parodontologie", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Prothese dentaire", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Pathologie bucco-dentaire", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Occlusodontie", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Anatomie pathologique", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Oxyologie", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Radiologie", annee: "3eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Implantologie", annee: "4eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Odontologie pédiatrique", annee: "4eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Odontologie gériatrique", annee: "4eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Déontologie", annee: "4eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Pathologie médicale", annee: "4eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Ergonomie", annee: "5eme Année", departement: "Chirurgie Dentaire" },
+  { module: "Orthopédie et Prothese dentaires", annee: "5eme Année", departement: "Chirurgie Dentaire" }
+];
+
+
 
 export const Unites =[
-  "Unite1",
-  "Unite2",
-  "Unite3",
+  "Unite 1",
+  "Unite 2",
+  "Unite 3",
+  "Unite 4",
+  "Unite 5",
+  
   
 ]
 
@@ -119,88 +205,3 @@ export const sidebarLinks = [
     },
   ];
   
-  export const voiceDetails = [
-    {
-      id: 1,
-      name: "alloy",
-    },
-    {
-      id: 2,
-      name: "echo",
-    },
-    {
-      id: 3,
-      name: "fable",
-    },
-    {
-      id: 4,
-      name: "onyx",
-    },
-    {
-      id: 5,
-      name: "nova",
-    },
-    {
-      id: 6,
-      name: "shimmer",
-    },
-  ];
-  
-  export const podcastData = [
-    {
-      id: 1,
-      title: "The Joe Rogan Experience",
-      description: "A long form, in-depth conversation",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/3106b884-548d-4ba0-a179-785901f69806",
-    },
-    {
-      id: 2,
-      title: "The Futur",
-      description: "This is how the news should sound",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/16fbf9bd-d800-42bc-ac95-d5a586447bf6",
-    },
-    {
-      id: 3,
-      title: "Waveform",
-      description: "Join Michelle Obama in conversation",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/60f0c1d9-f2ac-4a96-9178-f01d78fa3733",
-    },
-    {
-      id: 4,
-      title: "The Tech Talks Daily Podcast",
-      description: "This is how the news should sound",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/5ba7ed1b-88b4-4c32-8d71-270f1c502445",
-    },
-    {
-      id: 5,
-      title: "GaryVee Audio Experience",
-      description: "A long form, in-depth conversation",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/ca7cb1a6-4919-4b2c-a73e-279a79ac6d23",
-    },
-    {
-      id: 6,
-      title: "Syntax ",
-      description: "Join Michelle Obama in conversation",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/b8ea40c7-aafb-401a-9129-73c515a73ab5",
-    },
-    {
-      id: 7,
-      title: "IMPAULSIVE",
-      description: "A long form, in-depth conversation",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/8a55d662-fe3f-4bcf-b78b-3b2f3d3def5c",
-    },
-    {
-      id: 8,
-      title: "Ted Tech",
-      description: "This is how the news should sound",
-      imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/221ee4bd-435f-42c3-8e98-4a001e0d806e",
-    },
-  ];
