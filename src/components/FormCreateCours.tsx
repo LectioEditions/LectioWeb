@@ -75,7 +75,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
       setFilterModules(FilterModules.filter(item => item.annee === Annee ));
     }
 
-  }, [ imageURL, form]);
+  }, [ imageURL, form,Annee,Dep]);
 
   return (
     <section className="mt-10 flex flex-col">
