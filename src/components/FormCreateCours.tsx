@@ -237,7 +237,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                   <SelectValue placeholder="Selectionner le Module" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-                  {Modules.map((category,index) => (
+                  {filteredModules.map((category,index) => (
                     <SelectItem key={index} value={category.module} className="capitalize focus:bg-green-1">
                       {category.module}
                     </SelectItem>
