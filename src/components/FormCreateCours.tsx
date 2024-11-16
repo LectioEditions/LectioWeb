@@ -151,18 +151,18 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
                   <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Année </FormLabel>
-                  <Select onValueChange={(value) => {form.setValue("Annee",value);setAnnee(value);}}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
-                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
-                </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-                  {NivUniv.map((category,index) => (
-                    <SelectItem key={index} value={category} className="capitalize focus:bg-green-1">
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                  <FormControl>
+                  <Input
+                     inputMode="numeric"
+                     type="number"
+                     {...field}
+                      onBlur={(e) => {    
+                        form.trigger("Annee");}} // Validate on blur
+                     className="input-class focus-visible:ring-offset-green-1 no-arrows" // Add a custom class to hide arrows
+                     placeholder="2024"
+                     pattern="[0-9]*"
+                    />
+                  </FormControl>
                   <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
@@ -175,7 +175,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
 
               <Select onValueChange={(value) => {form.setValue("Departement",value);setDep(value)}}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
-                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                  <SelectValue placeholder="Selectionner le departement " className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Categories.map((category) => (
@@ -209,9 +209,9 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                 Niveau Universitaire
               </Label>
 
-              <Select onValueChange={(value) => {form.setValue("NivUniv",value);setType(value) }}>
+              <Select onValueChange={(value) => {form.setValue("NivUniv",value) ;setAnnee(value);}}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
-                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                  <SelectValue placeholder="Select le Niveau Universitaire" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {NivUniv.map((Type) => (
@@ -231,7 +231,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                   <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Module </FormLabel>
                   <Select onValueChange={(value) => {form.setValue("Module",value);}}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
-                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                  <SelectValue placeholder="Selectionner le Module" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Modules.map((category,index) => (
