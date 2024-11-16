@@ -67,7 +67,6 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   // Update form values when CoursURL or imageURL changes
   useEffect(() => {
   form.setValue("imageURL", imageURL);
-  console.log(Modules.length); 
   let filteredModules = Modules;
 
   if (Dep && Dep !== " ") {
@@ -79,7 +78,6 @@ if (Annee && Annee !== " ") {
 
 
   setFilterModules(filteredModules);
-    console.log(filteredModules.length); 
 }, [imageURL, form, Annee, Dep]);
 
   return (
