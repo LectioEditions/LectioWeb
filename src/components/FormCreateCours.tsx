@@ -226,7 +226,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
               </Select>
 
             </div>
-            <FormField
+            {filteredModules.length >0 ? <FormField
               control={form.control}
               name="Module"
               render={({ field }) => (
@@ -247,7 +247,29 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
                   <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
-            />
+            /> :
+            <FormField
+              control={form.control}
+              name="Module"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-base font-bold text-black-1 dark:text-white-1">Module </FormLabel>
+                  <Select onValueChange={(value) => {form.setValue("Module",value);}}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Selectionner le Module" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {Modules.map((category,index) => (
+                    <SelectItem key={index} value={category.module} className="capitalize focus:bg-green-1">
+                      {category.module}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+                  <FormMessage className="text-black-1 dark:text-white-1" />
+                </FormItem>
+              )}
+            />}
             <FormField
               control={form.control}
               name="Description"
