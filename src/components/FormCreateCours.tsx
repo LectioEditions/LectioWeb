@@ -67,17 +67,19 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   // Update form values when CoursURL or imageURL changes
   useEffect(() => {
   form.setValue("imageURL", imageURL);
-
+  console.log(Modules.length); 
   let filteredModules = Modules;
 
-  if (Dep !== " ") {
-    filteredModules = filteredModules.filter(item => item.departement === Dep);
-  }
-  if (Annee !== " ") {
-    filteredModules = filteredModules.filter(item => item.annee === Annee);
-  }
+  if (Dep && Dep !== " ") {
+  filteredModules = filteredModules.filter(item => item.departement === Dep);
+}
+if (Annee && Annee !== " ") {
+  filteredModules = filteredModules.filter(item => item.annee === Annee);
+}
+
 
   setFilterModules(filteredModules);
+    console.log(filteredModules.length); 
 }, [imageURL, form, Annee, Dep]);
 
   return (
@@ -226,7 +228,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
               </Select>
 
             </div>
-            {filteredModules.length >0 ? <FormField
+            {filteredModules.length > 0 ? <FormField
               control={form.control}
               name="Module"
               render={({ field }) => (
