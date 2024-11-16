@@ -46,7 +46,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   const [Annee, setAnnee] = useState<string>("");
 
   const router = useRouter();
-  const [FilterModules, setFilterModules] = useState<Module[]>([]);
+  const [FilterModules, setFilterModules] = useState<Module[]>(Modules);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
