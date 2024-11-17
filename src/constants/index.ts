@@ -127,7 +127,7 @@ export const Unites =[
   
 ]
 
-export const NivUniv = [
+export const NivUniv_Med = [
   "1ere Année",
   "2eme Année",
   "3eme Année",
@@ -137,7 +137,24 @@ export const NivUniv = [
   "7eme Année",
 
 ];
+export const NivUniv_Dentaire = [
+  "1ere Année",
+  "2eme Année",
+  "3eme Année",
+  "4eme Année",
+  "5eme Année",
+  "6eme Année",
 
+];
+export const NivUniv_pharma = [
+  "1ere Année",
+  "2eme Année",
+  "3eme Année",
+  "4eme Année",
+  "5eme Année",
+  "6eme Année",
+
+];
 export const Categories = [
   "Medecine",
   "Chirurgie Dentaire",
