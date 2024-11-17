@@ -78,8 +78,8 @@ if (Annee && Annee !== " ") {
 
 if(Dep=== "Medecine"){setNivUniv(NivUniv_Med);}
 if(Dep=== "Pharmacie"){setNivUniv(NivUniv_pharma);}
-if(Dep=== "Churigie Dentaire"){setNivUniv(NivUniv_Dentaire);}
-if(Dep=== "Pharmacie Industrielle"){setNivUniv(NivUniv_pharma);}
+if(Dep=== "Chirurgie Dentaire"){setNivUniv(NivUniv_Dentaire);}
+if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
   setFilterModules(filteredModules);
 }, [imageURL, form, Annee, Dep]);
 
