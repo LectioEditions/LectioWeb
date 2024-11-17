@@ -15,11 +15,12 @@ import {
   FormMessage,
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
-import { CartItems, Order, OrderProps } from "@/src/types";
+import { CartItems, Commune, Order, OrderProps,Wilaya } from "@/src/types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { cn } from "../lib/utils";
 import { Label } from "./ui/label";
-import { Categories, Communes } from "../constants";
+import {  Communes } from "../constants/Communes";
+import {wilayas} from '@/src/constants/wilayas'
 import "@/src/app/globals.css";
 import { useRouter } from "next/navigation";
 // Updated form schema
@@ -27,6 +28,10 @@ const formSchema = z.object({
   adress: z.string().min(2, {
     message: "Title must be at least 2 characters.",
   }),
+  Wilaya: z.string().min(2, {
+    message: "Description must be at least 2 characters.",
+  }),
+  
   Commune: z.string().min(2, {
     message: "Description must be at least 2 characters.",
   }),
@@ -37,16 +42,32 @@ const formSchema = z.object({
 
 export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], insertOrder: (cart: OrderProps) => Promise<string | undefined> }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [FilteredCommunes,setFilteredCommunes]=useState<Commune[]>(Communes)
+  const [wilaya,setwilaya]=useState<string>("");
+
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       adress: "",
       Commune: "",
+      Wilaya:"",
       NumTel: "0",
     },
   });
+  useEffect(() => {
+    let filterCommunes = Communes;
+  
+    if (wilaya && wilaya !== " ") {
+      let id :Wilaya | undefined = wilayas.find(wilaya_ => wilaya_.name === wilaya);
+      
+      if(id)filterCommunes = filterCommunes.filter(item => item.wilaya_id === id.id);
+  }
 
+  
+  setFilteredCommunes(filterCommunes);
+  }, [wilaya, form, ]);
+  
 
   return (
     <section className="mt-10 flex flex-col pb-10">
@@ -58,6 +79,7 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
           const Order: Order = {
             Adress: data.adress,
             Commune: data.Commune,
+            Wilaya: data.Wilaya,
             NumTel: data.NumTel,
             Prix: 0,
             Traite: false,
@@ -85,6 +107,25 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
         })}
           className="space-y-8 mt-12 flex flex-col w-full"
         >
+           <div className="flex flex-col gap-2.5">
+              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
+                Wilaya
+              </Label>
+
+              <Select onValueChange={(value) => {form.setValue("Wilaya", value);
+                form.trigger("Wilaya");setwilaya(value);}}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Selectionner votre Wilaya" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {wilayas.map((category) => (
+                    <SelectItem key={category.id} value={category.name} className="capitalize focus:bg-green-1">
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
             <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Commune
@@ -96,9 +137,9 @@ export function OrderForm({ insertOrder , CartItems}: {CartItems:CartItems[], in
                   <SelectValue placeholder="Selectionner votre Commune" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-                  {Communes.map((category) => (
-                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
-                      {category}
+                  {FilteredCommunes.map((category) => (
+                    <SelectItem key={category.id} value={category.name} className="capitalize focus:bg-green-1">
+                      {category.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
