@@ -192,7 +192,7 @@ if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
                 </SelectContent>
               </Select>
             </div>
-            {Dep==="Medecine" && <div className="flex flex-col gap-2.5">
+            {Dep==="Médecine" && <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Unité
               </Label>
