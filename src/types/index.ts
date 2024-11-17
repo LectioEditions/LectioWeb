@@ -24,6 +24,26 @@ export type Module ={
 }
 export type Upload = typeof schema.Uploads.$inferInsert;
 
+export type Wilaya = {
+  id: string;
+  code: string;
+  name: string;
+  ar_name: string;
+  longitude: string;
+  latitude: string;
+};
+
+export type Commune = {
+  id: string;
+  post_code: string;
+  name: string;
+  wilaya_id: string;
+  ar_name: string;
+  longitude: string;
+  latitude: string;
+};
+
+
 export type MergedItemCart = {
   id: number;
   Titre: string;
