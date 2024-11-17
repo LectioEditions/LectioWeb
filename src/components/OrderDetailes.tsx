@@ -80,7 +80,7 @@ const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
             <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>Temps estimé: {order.Temps === "0" ? " la commande n'est pas encore traité" : order.Temps}</h2>
             <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>ID du Commande : {order.id}</h2>
             <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix Total: {order.Prix}</h1>
-
+            <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Wilaya: {order.Wilaya}</h1>
             <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Commune: {order.Commune}</h1>
 
             <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Adress: {order.Adress}</h1>
