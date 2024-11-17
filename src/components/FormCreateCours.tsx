@@ -20,7 +20,7 @@ import MyDropzone from "./DropZone";
 import { Item, Module } from "@/src/types";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Categories, Modules, NivUniv, Types, Unites } from "../constants";
+import { Categories, Modules, NivUniv_Dentaire,NivUniv_pharma,NivUniv_Med, Types, Unites } from "../constants";
 import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
 // Updated form schema
@@ -44,7 +44,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   const [imageURL, setImageURL] = useState<string>("");
   const [Dep, setDep] = useState<string>("");
   const [Annee, setAnnee] = useState<string>("");
-
+  const [NivUniv, setNivUniv] = useState<string[]>(NivUniv_Med);
   const router = useRouter();
   const [FilterModules, setFilterModules] = useState<Module[]>(Modules);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -76,7 +76,10 @@ if (Annee && Annee !== " ") {
   filteredModules = filteredModules.filter(item => item.annee === Annee);
 }
 
-
+if(Dep=== "Medecine"){setNivUniv(NivUniv_Med);}
+if(Dep=== "Pharmacie"){setNivUniv(NivUniv_pharma);}
+if(Dep=== "Churigie Dentaire"){setNivUniv(NivUniv_Dentaire);}
+if(Dep=== "Pharmacie Industrielle"){setNivUniv(NivUniv_pharma);}
   setFilterModules(filteredModules);
 }, [imageURL, form, Annee, Dep]);
 
