@@ -82,6 +82,7 @@ export const Order = createTable(
     Prix: integer('Prix').default(0),
     NumTel: text('NumTel').notNull(),
     Adress: text('Adress').notNull(),
+    Wilaya: text('Wilaya').notNull(),
     Commune: text('Commune').notNull(),
     Traite: boolean('Traite').default(false).notNull(),
     Temps : text('temps').default("0"),
