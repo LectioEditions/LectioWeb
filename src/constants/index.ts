@@ -307,6 +307,13 @@ export const NivUniv_pharma = [
   "6ème Année",
 
 ];
+
+export const NivUniv_pharma_industrielle = [
+  "1ere Année",
+  "2ème Année",
+  "3ème Année",
+];
+
 export const Categories = [
   "Médecine",
   "Chirurgie Dentaire",
