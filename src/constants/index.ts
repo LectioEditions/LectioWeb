@@ -213,7 +213,52 @@ export const Modules = [
   { module: "Oto-rhino-laryngologie", unite: "Unité 04", annee: "6ème Année", departement: "Médecine" },
   { module: "Médecine du travail", unite: "Unité 05", annee: "6ème Année", departement: "Médecine" },
   { module: "Médecine Légale", unite: "Unité 06", annee: "6ème Année", departement: "Médecine" },
-  { module: "Dermatologie", unite: "Unité 07", annee: "6ème Année", departement: "Médecine" }
+  { module: "Dermatologie", unite: "Unité 07", annee: "6ème Année", departement: "Médecine" },
+
+  // Première année
+  { module: "Chimie générale", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Chimie organique", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Biologie végétale", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Biologie animale", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Biostatistique", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Logiciels et outils informatiques", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Terminologie médico pharmaceutique", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Anglais", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Chimie inorganique", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Anatomie - physiologie - physiopathologie", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Taxonomie et systématique végétale", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Méthodes chimiques", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Méthodes physiques", annee: "1ère Année", departement: "Pharma Industrielle" },
+  { module: "Histoire des sciences médicales et pharmaceutiques", annee: "1ère Année", departement: "Pharma Industrielle" },
+
+  // Deuxième année
+  { module: "Sciences bioactives naturelles", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Pharmacologie générale", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Sciences biologiques", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Méthodes séparatives", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Méthodes spectrales", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Opérations pharmaceutiques", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Bonnes pratiques", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Anglais", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Phytothérapie aromatique", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Pharmacologie spéciale", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Analyses biologiques", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Formes pharmaceutiques", annee: "2ème Année", departement: "Pharma Industrielle" },
+  { module: "Normes et guidelines", annee: "2ème Année", departement: "Pharma Industrielle" },
+
+  // Troisième année
+  { module: "Biotechnologie", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Production pharmaceutique", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Contrôle de qualité", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Économie de la santé", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Métrologie, qualification et validation", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Management qualité", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "HSE", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Législation et code du travail", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Gestes sanitaires", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Langues étrangères", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Insertion professionnelle", annee: "3ème Année", departement: "Pharma Industrielle" },
+  { module: "Techniques de rédaction", annee: "3ème Année", departement: "Pharma Industrielle" }
 
   
 
