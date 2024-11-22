@@ -270,11 +270,13 @@ export const Modules = [
 
 
 export const Unites =[
-  "Unite 1",
-  "Unite 2",
-  "Unite 3",
-  "Unite 4",
-  "Unite 5",
+  "Unité 01",
+  "Unité 02",
+  "Unité 03",
+  "Unité 04",
+  "Unité 05",
+  "Unité 06",
+  "Unité 07"
   
   
 ]
