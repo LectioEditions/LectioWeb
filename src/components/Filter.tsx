@@ -18,9 +18,10 @@ const filterSchema = z.object({
   Unite: z.string(),
 });
 
-const Filter = ({ setModule, setNivUniv, onFilter ,Dep }: {
+const Filter = ({ setModule, setNivUniv,setunite, onFilter ,Dep }: {
   setModule: React.Dispatch<React.SetStateAction<string | undefined>>,
   setNivUniv: React.Dispatch<React.SetStateAction<string | undefined>>,
+  setunite: React.Dispatch<React.SetStateAction<string | undefined>>,
   onFilter: () => void,
   Dep:string
 }) => {
@@ -31,6 +32,7 @@ const Filter = ({ setModule, setNivUniv, onFilter ,Dep }: {
   const handleFormSubmit = (data: any) => {
     setModule(data.Module);
     setNivUniv(data.NivUniv);
+    setunite(data.Unite);
     onFilter(); // Call the onFilter function to trigger filtering
   };
 
