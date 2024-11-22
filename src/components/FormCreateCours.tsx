@@ -77,7 +77,7 @@ if (Annee && Annee !== " ") {
   filteredModules = filteredModules.filter(item => item.annee === Annee);
 }
 if (unite && unite !== " ") {
-  filteredModules = filteredModules.filter(item => item.Unite === unite);
+  filteredModules = filteredModules.filter(item => item.unite === unite);
 }
 
 if(Dep=== "Medecine"){setNivUniv(NivUniv_Med);}
