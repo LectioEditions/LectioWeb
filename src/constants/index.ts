@@ -282,7 +282,7 @@ export const Unites =[
 ]
 
 export const NivUniv_Med = [
-  "1ere Année",
+  "1ère Année",
   "2ème Année",
   "3ème Année",
   "4ème Année",
