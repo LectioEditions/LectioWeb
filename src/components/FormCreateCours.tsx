@@ -85,7 +85,7 @@ if(Dep=== "Pharmacie"){setNivUniv(NivUniv_pharma);}
 if(Dep=== "Chirurgie Dentaire"){setNivUniv(NivUniv_Dentaire);}
 if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
   setFilterModules(filteredModules);
-}, [imageURL, form, Annee, Dep]);
+}, [imageURL, form, Annee, Dep, unite]);
 
   return (
     <section className="mt-10 flex flex-col">
@@ -94,7 +94,7 @@ if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
         <form
          onSubmit={form.handleSubmit(async (data) => {
           setIsLoading(true);
-          toast.success("Item is beeing submitted wait a moment");
+          toast.success("Item is being submitted wait a moment");
           const item: Item = {
             Titre: data.Title,
             Module: data.Module,
@@ -196,24 +196,7 @@ if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
                 </SelectContent>
               </Select>
             </div>
-            {Dep==="Médecine" && <div className="flex flex-col gap-2.5">
-              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
-                Unité
-              </Label>
-
-              <Select onValueChange={(value) =>{ form.setValue("Unite",value);setunite(value);}}>
-                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
-                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
-                </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-                  {Unites.map((category) => (
-                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>}
+            
             <div className="flex flex-col gap-2.5">
               <Label className="text-16 font-bold text-black-1 dark:text-white-1">
                 Niveau Universitaire
@@ -233,6 +216,24 @@ if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
               </Select>
 
             </div>
+            {Dep==="Médecine" && <div className="flex flex-col gap-2.5">
+              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
+                Unité
+              </Label>
+
+              <Select onValueChange={(value) =>{ form.setValue("Unite",value);setunite(value);}}>
+                <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+                </SelectTrigger>
+                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+                  {Unites.map((category) => (
+                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
+                      {category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>}
             {FilterModules !== undefined ? <FormField
               control={form.control}
               name="Module"
