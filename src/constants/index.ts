@@ -320,7 +320,7 @@ export const Categories = [
   "Médecine",
   "Chirurgie Dentaire",
   "Pharmacie",
-  "Pharma industrielle",
+  "Pharma Industrielle",
   
 ];
 export const agentLinks = [
