@@ -201,7 +201,7 @@ if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
                 Unité
               </Label>
 
-              <Select onValueChange={(value) =>{ form.setValue("Unite",value);setunite(value);}>
+              <Select onValueChange={(value) =>{ form.setValue("Unite",value);setunite(value);}}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
