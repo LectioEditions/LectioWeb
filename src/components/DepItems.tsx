@@ -9,6 +9,7 @@ import { Items } from '../types';
 const DepItems = ({ items }: { items: Items[] | undefined }) => {
   const [module, setModule] = useState<string | undefined>(undefined);
   const [nivUniv, setNivUniv] = useState<string | undefined>(undefined);
+  const [unite, setunite] = useState<string | undefined>(undefined);
   const [filteredItems, setFilteredItems] = useState<Items[]>(items || []);
   const [Dep, setDep] = useState<string>(" ");
 
@@ -26,20 +27,20 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
     
     
     if (nivUniv !== undefined) {
-      console.log("AA")
       filtered = filtered.filter(item => item.NivUniv === nivUniv);
     }
     if (module !== undefined) {
-      console.log("AA")
 
       filtered = filtered.filter(item => item.Module === module);
     }
-    if (Dep === "Medecine") {
-      console.log("AA")
+    if (Dep && Dep !== "") {
 
       filtered = filtered.filter(item => item.Departement === Dep);
     }
+    if (unite && unite !== "") {
 
+      filtered = filtered.filter(item => item.Unite === unite);
+    }
     // Update filteredItems state after filtering
     setFilteredItems(filtered);
   };
@@ -52,7 +53,7 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
 
   return (
     <div className="flex flex-col gap-9 py-10">
-      <Filter setModule={setModule} setNivUniv={setNivUniv} onFilter={handleFilter} Dep={Dep} />
+      <Filter setModule={setModule} setNivUniv={setNivUniv} setunite={setunite} onFilter={handleFilter} Dep={Dep} />
       <div className='flex flex-col gap-9'>
         {items !== undefined ? (
           TD.length > 0 || livres.length > 0 || cours.length > 0 ? (
