@@ -76,14 +76,14 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
 if (Annee && Annee !== " ") {
   filteredModules = filteredModules.filter(item => item.annee === Annee);
 }
-if (unite && unite !== " ") {
+if (unite && unite !== " " && Dep=== "Médecine") {
   filteredModules = filteredModules.filter(item => item.unite === unite);
 }
 
-if(Dep=== "Medecine"){setNivUniv(NivUniv_Med);}
+if(Dep=== "Médecine"){setNivUniv(NivUniv_Med);}
 if(Dep=== "Pharmacie"){setNivUniv(NivUniv_pharma);}
 if(Dep=== "Chirurgie Dentaire"){setNivUniv(NivUniv_Dentaire);}
-if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
+if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma_industrielle);}
   setFilterModules(filteredModules);
 }, [imageURL, form, Annee, Dep, unite]);
 
