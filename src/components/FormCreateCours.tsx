@@ -20,7 +20,7 @@ import MyDropzone from "./DropZone";
 import { Item, Module } from "@/src/types";
 import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Categories, Modules, NivUniv_Dentaire,NivUniv_pharma,NivUniv_Med, Types, Unites } from "../constants";
+import { Categories, Modules, NivUniv_Dentaire,NivUniv_pharma,NivUniv_Med,NivUniv_pharma_industrielle, Types, Unites } from "../constants";
 import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
 // Updated form schema
