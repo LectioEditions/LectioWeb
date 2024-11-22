@@ -44,6 +44,7 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
   const [imageURL, setImageURL] = useState<string>("");
   const [Dep, setDep] = useState<string>("");
   const [Annee, setAnnee] = useState<string>("");
+  const [unite, setunite] = useState<string>("");
   const [NivUniv, setNivUniv] = useState<string[]>(NivUniv_Med);
   const router = useRouter();
   const [FilterModules, setFilterModules] = useState<Module[]>(Modules);
@@ -74,6 +75,9 @@ export function FormCreateCours({ insertItem }: { insertItem: (Item: Item) => Pr
 }
 if (Annee && Annee !== " ") {
   filteredModules = filteredModules.filter(item => item.annee === Annee);
+}
+if (unite && unite !== " ") {
+  filteredModules = filteredModules.filter(item => item.Unite === unite);
 }
 
 if(Dep=== "Medecine"){setNivUniv(NivUniv_Med);}
@@ -197,7 +201,7 @@ if(Dep=== "Pharma industrielle"){setNivUniv(NivUniv_pharma);}
                 Unité
               </Label>
 
-              <Select onValueChange={(value) => form.setValue("Unite",value)}>
+              <Select onValueChange={(value) =>{ form.setValue("Unite",value);setunite(value);}>
                 <SelectTrigger className={cn('text-16 w-full border-none bg-white-6  dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
                   <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
                 </SelectTrigger>
