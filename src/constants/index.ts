@@ -311,7 +311,7 @@ export const NivUniv_pharma = [
 ];
 
 export const NivUniv_pharma_industrielle = [
-  "1ere Année",
+  "1ère Année",
   "2ème Année",
   "3ème Année",
 ];
