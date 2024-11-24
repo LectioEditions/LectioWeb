@@ -8,18 +8,18 @@ export const Types = [
 ];
 export const Modules = [
   // Première année
-  { module: "Organique", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Physique", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Anatomie", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Biologie végétale", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Embryologie et histologie", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Cytologie et physiologie cellulaire", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Biomathématique, informatique et biostatistique", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Histoire de la pharmacie", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Chimie générale", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Chimie organique", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Physiologie", annee: "1ere Année", departement: "Pharmacie" },
-  { module: "Langue française", annee: "1ere Année", departement: "Pharmacie" },
+  { module: "Organique", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Physique", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Anatomie", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Biologie végétale", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Embryologie et histologie", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Cytologie et physiologie cellulaire", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Biomathématique, informatique et biostatistique", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Histoire de la pharmacie", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Chimie générale", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Chimie organique", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Physiologie", annee: "1ère Année", departement: "Pharmacie" },
+  { module: "Langue française", annee: "1ère Année", departement: "Pharmacie" },
 
   // Deuxième année
   { module: "Chimie analytique", annee: "2ème Année", departement: "Pharmacie" },
@@ -58,20 +58,20 @@ export const Modules = [
   
     // Première année
 
-  { module: "Anatomie humaine", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Biochimie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Chimie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Biophysique", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Physique", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Génétique", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Cytologie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Déontologie (SSH)", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Physiologie générale", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Biomathématiques", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Histologie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Embryologie", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Français", annee: "1ere Année", departement: "Chirurgie Dentaire" },
-  { module: "Anglais", annee: "1ere Année", departement: "Chirurgie Dentaire" },
+  { module: "Anatomie humaine", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Biochimie", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Chimie", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Biophysique", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Physique", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Génétique", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Cytologie", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Déontologie (SSH)", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Physiologie générale", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Biomathématiques", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Histologie", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Embryologie", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Français", annee: "1ère Année", departement: "Chirurgie Dentaire" },
+  { module: "Anglais", annee: "1ère Année", departement: "Chirurgie Dentaire" },
 
   // Deuxième année
   { module: "Anatomie humaine", annee: "2ème Année", departement: "Chirurgie Dentaire" },
@@ -292,7 +292,7 @@ export const NivUniv_Med = [
 
 ];
 export const NivUniv_Dentaire = [
-  "1ere Année",
+  "1ère Année",
   "2ème Année",
   "3ème Année",
   "4ème Année",
@@ -301,7 +301,7 @@ export const NivUniv_Dentaire = [
 
 ];
 export const NivUniv_pharma = [
-  "1ere Année",
+  "1ère Année",
   "2ème Année",
   "3ème Année",
   "4ème Année",
