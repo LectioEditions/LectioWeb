@@ -13,7 +13,7 @@ import { Providers } from "./providers";
 const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lction",
+  title: "LctioEditions",
   description: "Vous donner les moyens d'atteindre l'excellence",
   icons: [{ rel: "icon", url: "/icons/lectio_logo-04.png" }],}
 
