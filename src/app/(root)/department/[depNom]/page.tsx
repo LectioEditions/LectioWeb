@@ -3,7 +3,7 @@ import { getItemByCategory } from '@/src/server/db';
 import React from 'react'
 
 const Page = async ({params}:{ params:{depNom : string}}) => {
-  const search = params?.depNom || '';
+  const search = await params.depNom;
 
   const Items = await getItemByCategory(search);
   return (
