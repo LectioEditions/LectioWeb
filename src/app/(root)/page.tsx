@@ -49,7 +49,7 @@ const Home = async () => {
           key={index}
           title={`Département ${category}`}
           courses={departmentCourses[index]}
-          link={`/department/${category}`}
+          link={`/department/${category.toLowerCase()}`}
         />
       ))}
     </div>
