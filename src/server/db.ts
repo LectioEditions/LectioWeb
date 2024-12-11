@@ -1,7 +1,7 @@
 "use strict";
 import './envConfig';
 import { drizzle } from 'drizzle-orm/vercel-postgres';
-import { sql , desc ,like, isNull, or, and, ne} from 'drizzle-orm'
+import { sql , desc ,like, isNull, or, and, ne, ilike} from 'drizzle-orm'
 import * as schema from './schema';
 import { eq } from "drizzle-orm";
 import { sql as pg, QueryResult } from '@vercel/postgres';
@@ -53,6 +53,7 @@ export async function getTopUserByItemCount() {
 
   export async function getItemById (id: number | null | undefined)  {
     if(!id) throw new Error('id is required');
+    console.log(id);
     return await db.query.Item.findFirst(
       {where:(model,{eq})=>eq(model.id,id),}
      );
@@ -71,12 +72,15 @@ export async function getItemBySearch(search?: string) {
   if (search === '') return;
   if (!search) throw new Error('search is required');
 
+  const searchPattern = `%${search}%`;
+
   const [ByTitle, ByModule, ByDescription, ByAnnee] = await Promise.all([
-    db.select().from(schema.Item).where(like(schema.Item.Titre, `%${search}%`)).execute(),
-    db.select().from(schema.Item).where(like(schema.Item.Module, `%${search}%`)).execute(),
-    db.select().from(schema.Item).where(like(schema.Item.description, `%${search}%`)).execute(),
-    db.select().from(schema.Item).where(like(schema.Item.Annee, `%${search}%`)).execute()
+    db.select().from(schema.Item).where(ilike(schema.Item.Titre, searchPattern)).execute(),
+    db.select().from(schema.Item).where(ilike(schema.Item.Module, searchPattern)).execute(),
+    db.select().from(schema.Item).where(ilike(schema.Item.description, searchPattern)).execute(),
+    db.select().from(schema.Item).where(ilike(schema.Item.Annee, searchPattern)).execute()
   ]);
+  
 
   // Use a Set to track unique items by ID to avoid duplicates
   const seenIds = new Set<number>();
@@ -113,6 +117,7 @@ export async function getItemBySearch(search?: string) {
 
   return orderedResults;
 }
+
 
 export async function insertItem  (Item: Item): Promise<Item|undefined> {
   const user = auth();
