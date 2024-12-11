@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Loader } from "lucide-react";
 
-import { getItemById, getItemes, insertCartItem } from '@/src/server/db'
+import { getItemById, getItemes, insertCartItem, isAgent } from '@/src/server/db'
 import CoursdetailPlayer from '@/src/components/CoursdetailPlayer';
 import CoursCard from '@/src/components/CoursCard';
 import EmptyState from '@/src/components/EmptyState';
@@ -15,8 +15,7 @@ const CoursDetails = async({params}:{
   const user = auth();
   if(!user.userId) return;
   const {id} = await params;
-  const agent = await clerkClient.users.getUser(user.userId);
-  const isAgent  = agent.publicMetadata.agent === true;
+  const Agent  = await isAgent();
   const Item = await getItemById(id);
   const similarItem = await getItemes();
   if(!Item) return(<div className='min-w-full min-h-screen flex justify-center items-center'>
@@ -50,18 +49,9 @@ const CoursDetails = async({params}:{
      <section className=' flex w-full flex-col '>
       <header className=' mt-9 flex items-center justify-between'>
       
-      <figure className='flex gap-3 '>
-        <Image 
-        src="/icons/headphone.svg" 
-        width={24}
-        height={24}
-        alt="headphone"/>
-      <h2 className='text-lg font-bold text-black-1 dark:text-white-1'>
-        {Item?.Achat} Achat
-      </h2>
-      </figure>
+    
       </header>
-      <CoursdetailPlayer Item={Item} deleteItem={handleDeleteItem} getUserByClerkId={handleGetUserByClerkId} agent={isAgent} addCartItem={handleAddTCart}/>
+      <CoursdetailPlayer Item={Item} deleteItem={handleDeleteItem} getUserByClerkId={handleGetUserByClerkId} agent={Agent} addCartItem={handleAddTCart}/>
       <p className='text-black-1 dark:text-white-1 text-lg pb-8 pt-11 font-medium max-md:text-center'>{Item?.description}</p>
      <section className='flex flex-col gap-8'>
       <h1 className='text-xl font-bold text-black-1 dark:text-white-1 '> Similar Items:</h1>
