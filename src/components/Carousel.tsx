@@ -41,7 +41,7 @@ const EmblaCarousel= ({TopUsers ,Cours}:{TopUsers:User[],Cours:Items[]}) => {
           {Cours.slice(0,5).map((index) => (
             <figure  key={index.id}
             className='carousel_box'
-            onClick={()=>router.push(`/podcast/${index.id}`)}
+            onClick={()=>router.push(`/items/${index.id}`)}
             >
               <Image
               src={index.imageURL}
