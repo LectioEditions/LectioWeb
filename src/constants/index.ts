@@ -317,11 +317,12 @@ export const NivUniv_pharma_industrielle = [
 ];
 
 export const Categories = [
-  "Médecine",
-  "Chirurgie Dentaire",
-  "Pharmacie",
-  "Pharma Industrielle",
   
+    { dep: "Médecine", link: "medecine" },
+    { dep: "Chirurgie Dentaire", link: "chirugiedentaire" },
+    { dep: "Pharmacie", link: "pharmacie" },
+    { dep: "Pharma Industrielle", link: "pharmacieindustrielle" }
+    
 ];
 export const agentLinks = [
   {
