@@ -19,6 +19,7 @@ interface DepartmentSectionProps {
 }
 
 const DepartmentSection: React.FC<DepartmentSectionProps> = ({ title, courses, link }) => (
+  
   <section className="flex flex-col gap-5">
     <h1 className="text-xl font-bold text-black-1 dark:text-white-1">{title}</h1>
     <div className="Cours_grid">
@@ -43,12 +44,11 @@ const DepartmentSection: React.FC<DepartmentSectionProps> = ({ title, courses, l
 // Home component
 const Home = async () => {
   const courses = await fetchCourses();
-
   // Filter courses by department
   const departmentCourses = Categories.map((category) =>
     courses.filter((course) => course.Departement === category)
   );
-
+  
   return (
     <div className="mt-9 flex flex-col gap-9">
       {Categories.map((category, index) => (
@@ -56,7 +56,7 @@ const Home = async () => {
           key={index}
           title={`Département ${category}`}
           courses={departmentCourses[index]}
-          link={`/department/${category.toLowerCase()}`}
+          link={`/department/${category.toLowerCase().replace(/\s+/g, '')}`}
         />
       ))}
     </div>
