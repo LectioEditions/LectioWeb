@@ -17,7 +17,7 @@ interface ItemDetailPlayerProps {
   deleteItem: (id?: number) => Promise<number>;
   addCartItem: (item :Items , Quantite : number )=> Promise<CartItem | undefined>;
   getUserByClerkId: (clerkId: string | null | undefined) => Promise<User | undefined>;
-  agent: boolean;
+  agent: boolean | undefined;
 }
 
 const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
