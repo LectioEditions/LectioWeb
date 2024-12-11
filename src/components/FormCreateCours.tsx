@@ -189,8 +189,8 @@ if(Dep=== "Pharma Industrielle"){setNivUniv(NivUniv_pharma_industrielle);}
                 </SelectTrigger>
                 <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
                   {Categories.map((category) => (
-                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
-                      {category}
+                    <SelectItem key={category.link} value={category.dep} className="capitalize focus:bg-green-1">
+                      {category.dep}
                     </SelectItem>
                   ))}
                 </SelectContent>
