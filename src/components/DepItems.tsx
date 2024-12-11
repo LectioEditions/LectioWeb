@@ -53,7 +53,7 @@ const DepItems = ({ items }: { items: Items[] | undefined }) => {
 
   return (
     <div className="flex flex-col gap-9 py-10">
-      <Filter setModule={setModule} setNivUniv={setNivUniv} setunite={setunite} onFilter={handleFilter} Dep={Dep} />
+      <Filter setModule={setModule} setNivUniv_Med={setNivUniv} setunite={setunite} onFilter={handleFilter} Dep={Dep} />
       <div className='flex flex-col gap-9'>
         {items !== undefined ? (
           TD.length > 0 || livres.length > 0 || cours.length > 0 ? (
