@@ -46,7 +46,7 @@ const Home = async () => {
   const courses = await fetchCourses();
   // Filter courses by department
   const departmentCourses = Categories.map((category) =>
-    courses.filter((course) => course.Departement === category)
+    courses.filter((course) => course.Departement === category.dep)
   );
   
   return (
@@ -56,7 +56,7 @@ const Home = async () => {
           key={index}
           title={`Département ${category}`}
           courses={departmentCourses[index]}
-          link={`/department/${category.toLowerCase().replace(/\s+/g, '')}`}
+          link={`/department/${category.link}`}
         />
       ))}
     </div>
