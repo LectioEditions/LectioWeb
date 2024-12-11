@@ -8,16 +8,16 @@ import CoursCard from '@/src/components/CoursCard';
 import EmptyState from '@/src/components/EmptyState';
 import { CartItem, CartItems, Item, Items, User } from '@/src/types';
 import { deleteItem,getUserByClerkId } from '@/src/server/db';
-import { QueryResult } from '@vercel/postgres';
 import { auth, clerkClient } from '@clerk/nextjs/server';
 const CoursDetails = async({params}:{
   params:{id : number}
 }) => {
   const user = auth();
   if(!user.userId) return;
+  const {id} = await params;
   const agent = await clerkClient.users.getUser(user.userId);
   const isAgent  = agent.publicMetadata.agent === true;
-  const Item = await getItemById(params.id);
+  const Item = await getItemById(id);
   const similarItem = await getItemes();
   if(!Item) return(<div className='min-w-full min-h-screen flex justify-center items-center'>
     <Loader size={30} className="animate-spin  text-green-1"/>
