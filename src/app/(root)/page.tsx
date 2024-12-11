@@ -4,6 +4,7 @@ import Link from 'next/link'; // Assuming you're using Next.js
 import { getItemes } from '@/src/server/db';
 import "@/src/app/globals.css";
 import { Categories } from '@/src/constants';
+import { Item } from '@/src/types';
 
 // Fetch courses
 async function fetchCourses() {
@@ -11,7 +12,13 @@ async function fetchCourses() {
 }
 
 // Reusable component for Department Section
-const DepartmentSection = ({ title, courses, link }) => (
+interface DepartmentSectionProps {
+  title: string;
+  courses: Item[];
+  link: string;
+}
+
+const DepartmentSection: React.FC<DepartmentSectionProps> = ({ title, courses, link }) => (
   <section className="flex flex-col gap-5">
     <h1 className="text-xl font-bold text-black-1 dark:text-white-1">{title}</h1>
     <div className="Cours_grid">
