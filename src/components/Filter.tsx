@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from './ui/button';
@@ -10,29 +10,37 @@ import { z } from 'zod';
 
 const filterSchema = z.object({
   NivUniv_Med: z.string().refine((value) => NivUniv_Med.includes(value), {
-    message: "Please select a valid university level",
+    message: 'Please select a valid university level',
   }),
-  Module: z.object({
-    module: z.string(),
-    annee: z.string(),
-    departement: z.string(),
-    unite: z.string().optional(),
-  }).refine((value) => Modules.some(mod => mod.module === value.module && mod.annee === value.annee && mod.departement === value.departement && (!value.unite || mod.unite === value.unite)), {
-    message: "Please select a valid module",
-  }),
-  Unite: z.string(),
+  Module: z.string().optional(),
+  Unite: z.string().optional(),
 });
 
-const Filter = ({ setModule, setNivUniv_Med,setunite, onFilter ,Dep }: {
-  setModule: React.Dispatch<React.SetStateAction<string | undefined>>,
-  setNivUniv_Med: React.Dispatch<React.SetStateAction<string | undefined>>,
-  setunite: React.Dispatch<React.SetStateAction<string | undefined>>,
-  onFilter: () => void,
-  Dep:string
+const Filter = ({
+  setModule,
+  setNivUniv_Med,
+  setunite,
+  onFilter,
+  Dep,
+}: {
+  setModule: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setNivUniv_Med: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setunite: React.Dispatch<React.SetStateAction<string | undefined>>;
+  onFilter: () => void;
+  Dep: string;
 }) => {
-  const { handleSubmit, setValue, formState: { errors } } = useForm({
+  const {
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
     resolver: zodResolver(filterSchema),
   });
+
+  const [niv, setNiv] = useState<string | undefined>(undefined);
+  const [modules, setModules] = useState(
+    Modules.filter((mod) => mod.departement === Dep && (!niv || mod.annee === niv))
+  );
 
   const handleFormSubmit = (data: any) => {
     setModule(data.Module);
@@ -41,16 +49,29 @@ const Filter = ({ setModule, setNivUniv_Med,setunite, onFilter ,Dep }: {
     onFilter(); // Call the onFilter function to trigger filtering
   };
 
+  useEffect(() => {
+    setModules(Modules.filter((mod) => mod.departement === Dep && (!niv || mod.annee === niv)));
+  }, [niv, Dep]);
+
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full h-fit Cours_grid">
       {/* Niveau Universitaire Field */}
       <div className="flex justify-between items-center gap-2.5 min-w-[200px]">
         <Label className="text-16 font-bold whitespace-nowrap text-black-1 dark:text-white-1">
-          Niveau 
+          Niveau
         </Label>
 
-        <Select onValueChange={(value) => setValue("NivUniv_Med", value)}>
-          <SelectTrigger className={cn('text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+        <Select
+          onValueChange={(value) => {
+            setValue('NivUniv_Med', value);
+            setNiv(value);
+          }}
+        >
+          <SelectTrigger
+            className={cn(
+              'text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1'
+            )}
+          >
             <SelectValue placeholder="Select university level" className="placeholder:text-gray-1" />
           </SelectTrigger>
           <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
@@ -62,36 +83,44 @@ const Filter = ({ setModule, setNivUniv_Med,setunite, onFilter ,Dep }: {
           </SelectContent>
         </Select>
       </div>
-      {Dep==="Medecine" && <div className="flex justify-between items-center gap-2.5 min-w-[200px]">
-              <Label className="text-16 font-bold text-black-1 dark:text-white-1">
-                Unité
-              </Label>
 
-              <Select onValueChange={(value) => setValue("Unite",value)} >
-                <SelectTrigger className={cn('text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
-                  <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
-                </SelectTrigger>
-                <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-                  {Unites.map((category) => (
-                    <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>}
+      {Dep === 'Medecine' && (
+        <div className="flex justify-between items-center gap-2.5 min-w-[200px]">
+          <Label className="text-16 font-bold text-black-1 dark:text-white-1">Unité</Label>
+
+          <Select onValueChange={(value) => setValue('Unite', value)}>
+            <SelectTrigger
+              className={cn(
+                'text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1'
+              )}
+            >
+              <SelectValue placeholder="Select Cours category" className="placeholder:text-gray-1 " />
+            </SelectTrigger>
+            <SelectContent className="text-16 border-none bg-white-6  dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
+              {Unites.map((category) => (
+                <SelectItem key={category} value={category} className="capitalize focus:bg-green-1">
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       {/* Module Field */}
       <div className="flex justify-between items-center gap-2.5 min-w-[200px]">
-        <Label className="text-16 font-bold text-black-1 dark:text-white-1">
-          Module
-        </Label>
+        <Label className="text-16 font-bold text-black-1 dark:text-white-1">Module</Label>
 
-        <Select onValueChange={(value) => setValue("Module", value)}>
-          <SelectTrigger className={cn('text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
+        <Select onValueChange={(value) => setValue('Module', value)}>
+          <SelectTrigger
+            className={cn(
+              'text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1'
+            )}
+          >
             <SelectValue placeholder="Select a module" className="placeholder:text-gray-1" />
           </SelectTrigger>
           <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-            {Modules.map((Module) => (
+            {modules.map((Module) => (
               <SelectItem key={Module.module} value={Module.module} className="capitalize focus:bg-green-1">
                 {Module.module}
               </SelectItem>
