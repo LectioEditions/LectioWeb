@@ -54,7 +54,7 @@ const Home = async () => {
       {Categories.map((category, index) => (
         <DepartmentSection
           key={index}
-          title={`Département ${category}`}
+          title={`Département ${category.dep}`}
           courses={departmentCourses[index]}
           link={`/department/${category.link}`}
         />
