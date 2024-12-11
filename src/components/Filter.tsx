@@ -3,24 +3,29 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
-import { Categories, Modules, NivUniv, Unites } from '../constants';
+import { Categories, Modules, NivUniv_Med, Unites } from '../constants';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Label } from './ui/label';
 import { z } from 'zod';
 
 const filterSchema = z.object({
-  NivUniv: z.string().refine((value) => NivUniv.includes(value), {
+  NivUniv_Med: z.string().refine((value) => NivUniv_Med.includes(value), {
     message: "Please select a valid university level",
   }),
-  Module: z.string().refine((value) => Modules.includes(value), {
+  Module: z.object({
+    module: z.string(),
+    annee: z.string(),
+    departement: z.string(),
+    unite: z.string().optional(),
+  }).refine((value) => Modules.some(mod => mod.module === value.module && mod.annee === value.annee && mod.departement === value.departement && (!value.unite || mod.unite === value.unite)), {
     message: "Please select a valid module",
   }),
   Unite: z.string(),
 });
 
-const Filter = ({ setModule, setNivUniv,setunite, onFilter ,Dep }: {
+const Filter = ({ setModule, setNivUniv_Med,setunite, onFilter ,Dep }: {
   setModule: React.Dispatch<React.SetStateAction<string | undefined>>,
-  setNivUniv: React.Dispatch<React.SetStateAction<string | undefined>>,
+  setNivUniv_Med: React.Dispatch<React.SetStateAction<string | undefined>>,
   setunite: React.Dispatch<React.SetStateAction<string | undefined>>,
   onFilter: () => void,
   Dep:string
@@ -31,7 +36,7 @@ const Filter = ({ setModule, setNivUniv,setunite, onFilter ,Dep }: {
 
   const handleFormSubmit = (data: any) => {
     setModule(data.Module);
-    setNivUniv(data.NivUniv);
+    setNivUniv_Med(data.NivUniv_Med);
     setunite(data.Unite);
     onFilter(); // Call the onFilter function to trigger filtering
   };
@@ -44,12 +49,12 @@ const Filter = ({ setModule, setNivUniv,setunite, onFilter ,Dep }: {
           Niveau 
         </Label>
 
-        <Select onValueChange={(value) => setValue("NivUniv", value)}>
+        <Select onValueChange={(value) => setValue("NivUniv_Med", value)}>
           <SelectTrigger className={cn('text-16 w-full border-none max-w-[300px] bg-white-6 dark:bg-black-6 text-gray-1 focus-visible:ring-offset-green-1')}>
             <SelectValue placeholder="Select university level" className="placeholder:text-gray-1" />
           </SelectTrigger>
           <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
-            {NivUniv.map((Niv) => (
+            {NivUniv_Med.map((Niv) => (
               <SelectItem key={Niv} value={Niv} className="capitalize focus:bg-green-1">
                 {Niv}
               </SelectItem>
@@ -87,8 +92,8 @@ const Filter = ({ setModule, setNivUniv,setunite, onFilter ,Dep }: {
           </SelectTrigger>
           <SelectContent className="text-16 border-none bg-white-6 dark:bg-black-6 font-bold text-black-1 dark:text-white-1 focus:ring-green-1">
             {Modules.map((Module) => (
-              <SelectItem key={Module} value={Module} className="capitalize focus:bg-green-1">
-                {Module}
+              <SelectItem key={Module.module} value={Module.module} className="capitalize focus:bg-green-1">
+                {Module.module}
               </SelectItem>
             ))}
           </SelectContent>
