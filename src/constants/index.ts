@@ -319,6 +319,7 @@ export const NivUniv_pharma_industrielle = [
 export const Categories = [
   
     { dep: "Médecine", link: "medecine" },
+  { dep: "Médecine Tipaza", link: "medecine-tipaza" },
     { dep: "Chirurgie Dentaire", link: "chirugiedentaire" },
     { dep: "Pharmacie", link: "pharmacie" },
     { dep: "Pharma Industrielle", link: "pharmacieindustrielle" }
