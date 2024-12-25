@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Loader } from "lucide-react";
 
-import { getCartItemsByOrderId, getItemById, getOrderByIdentifier, insertCartItem, updateOrder } from '@/src/server/db'
+import { deleteOrder, getCartItemsByOrderId, getItemById, getOrderByIdentifier, insertCartItem, updateOrder } from '@/src/server/db'
 import { CartItem, CartItems, Item, Items, MergedItemCart, Orders, User } from '@/src/types';
 import { deleteItem, getUserByClerkId,isAgent } from '@/src/server/db';
 import { QueryResult } from '@vercel/postgres';
@@ -17,7 +17,13 @@ const editOrder= async (order :Orders)=>{
    return order;
 }
 
-
+const DeleteCommande= async (order :Orders)=>{
+  "use server";
+ console.log("order",order);
+  const newOrder = await deleteOrder(order.id);
+   if(!newOrder) return;
+   return order.id;
+}
 const Page = async({ params }: { params: { id: string } }) => {
   const user = auth();
   if (!user.userId) return;
@@ -52,7 +58,6 @@ const Page = async({ params }: { params: { id: string } }) => {
       return {
         id: item.id,
         Titre: item.Titre,
-        Category: item.Category,
         Annee: item.Annee,
         Module: item.Module,
         Type: item.Type,
@@ -76,6 +81,7 @@ const Page = async({ params }: { params: { id: string } }) => {
         order={order} 
         archive={false} 
         editOrder={editOrder}
+        handleDelete={DeleteCommande}
       />
     </section>
   );
