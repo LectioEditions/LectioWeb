@@ -23,7 +23,8 @@ const OrderDetails = ({ MergedItemCart, order, editOrder ,handleDelete , archive
   MergedItemCart: MergedItemCart[],
   order: Orders,
   archive:boolean,
-  editOrder: (order: Orders) => Promise<Orders | undefined>
+  editOrder: (order: Orders) => Promise<Orders | undefined>,
+  handleDelete: (order: Orders) => Promise<number | undefined>
 }) => {
   const router = useRouter();
 
@@ -34,13 +35,31 @@ const OrderDetails = ({ MergedItemCart, order, editOrder ,handleDelete , archive
       Temps: '', // Set the default value of the form field
     }
   });
+ const deleteOrder=async(order :Orders)=>{
+   const toastId = toast.loading("Entrain dd supprimer la commande...");
+  try{    
 
+      const delted =await handleDelete(order);
+      if(delted){
+        
+        toast.success("Commande supprimé avec succeé!");
+        router.push("/orders");
+      } }
+      catch (error) {
+        toast.error("An error occurred while submitting the Cours.");
+        console.error("Submission error:", error);
+      } finally {
+        toast.dismiss(toastId);
+      }
+  
+ }
   // Submit handler
   const onSubmit = async (data: OrderFormValues) => {
     const toastId = toast.loading("Entrain d'ajouter l'Item...");
     try {
       order.Temps = data.Temps;
       order.Traite = true;
+
       const newOrder = await editOrder(order);
       if (!newOrder) throw new Error("dbProblem");
       toast.success("Item submitted successfully!");
@@ -56,9 +75,9 @@ const OrderDetails = ({ MergedItemCart, order, editOrder ,handleDelete , archive
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center '>
         <div className='bg-white-6 dark:bg-black-4 w-3/4 p-5 rounded-xl gap-5'>
-       <div>
+       <div className='flex justify-between items-center'>
           <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Les detailles de la Commande</h1>
-       <Button onClick={()=>handleDelete();}> Delete</Button>
+       <Button className='bg-red-500 text-white-1' onClick={()=>deleteOrder(order)}> Delete</Button>
        </div>
       {MergedItemCart.map((item, index) => (
         <figure key={index} className='flex justify-around items-center  bg-inherit py-5 rounded-xl text-black-1 dark:text-white-1 w-full'>
