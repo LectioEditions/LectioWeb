@@ -19,7 +19,7 @@ const orderSchema = z.object({
 
 type OrderFormValues = z.infer<typeof orderSchema>
 
-const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
+const OrderDetails = ({ MergedItemCart, order, editOrder ,handleDelete , archive}: {
   MergedItemCart: MergedItemCart[],
   order: Orders,
   archive:boolean,
@@ -56,7 +56,10 @@ const OrderDetails = ({ MergedItemCart, order, editOrder  , archive}: {
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center '>
         <div className='bg-white-6 dark:bg-black-4 w-3/4 p-5 rounded-xl gap-5'>
-         <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Les detailles de la Commande</h1>
+       <div>
+          <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Les detailles de la Commande</h1>
+       <Button onClick={()=>handleDelete();}> Delete</Button>
+       </div>
       {MergedItemCart.map((item, index) => (
         <figure key={index} className='flex justify-around items-center  bg-inherit py-5 rounded-xl text-black-1 dark:text-white-1 w-full'>
           <Image
