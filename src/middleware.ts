@@ -1,24 +1,21 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-const isProtectedRoute = createRouteMatcher([
-  '/create-item',
-  '/discover',
-  /^\/items\/[^/]+$/, // Matches /items/:id where :id is any non-empty segment
-  '/profile',
-  '/ordering',
-  '/orders'
+
+// Create route matcher for public routes
+const isPublicRoute = createRouteMatcher([
+  '/', // Public homepage
+  '/api', // Public API routes (if needed)
+  '/(api|trpc)(.*)', // Match API and trpc routes
 ]);
 
-
 export default clerkMiddleware((auth, req) => {
-  if (!auth().userId && isProtectedRoute(req)) {
-
-    // Add custom logic to run before redirecting
-
+  // Check if user is authenticated and if the route is not public
+  if (!auth().userId && !isPublicRoute(req.url)) {
+    // Add custom logic here if necessary before redirecting
     return auth().redirectToSignIn();
   }
+  return null;
 });
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'], // Match all routes except assets and Next.js internal routes
 };
-
