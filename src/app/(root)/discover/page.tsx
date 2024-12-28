@@ -5,14 +5,18 @@ import { getItemBySearch, getItemes } from '@/src/server/db';
 import { Loader } from 'lucide-react';
 import React from 'react'
 import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
+import { Loader } from 'lucide-react';
 
 const Discover = async ({searchParams: {search}}:{searchParams:{search : string}}) => {
   const courss= await getItemBySearch(search ? search : '');
   const discover = await getItemes();
   const user=await auth();
   if (!user.userId) {
-   return redirect('/sign-in')
+   return(
+        <section className='w-full'>
+            <Loader/>
+        </section>
+      ) 
   }
   return (
     <div className=" flex flex-col gap-9">
