@@ -3,11 +3,13 @@ import { getOrders } from '@/src/server/db';
 import { Loader } from 'lucide-react';
 import React from 'react'
 import OrderCard from '@/src/components/OrderCard';
+import { auth } from '@clerk/nextjs/server';
 
 const Page = async () => {
   const orders= await getOrders();
-  if(!orders) return <Loader size={50} className='mx-auto'/>;
-
+  const user = await auth();
+  if(!orders || !user) return <Loader size={50} className='mx-auto'/>;
+  
   return (
     <section className=" w-full min-h-screen py-10">
       <div className='flex flex-col gap-9 '>
