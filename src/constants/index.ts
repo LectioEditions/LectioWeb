@@ -134,6 +134,13 @@ export const Modules = [
   { module: "Embryologie", unite: "Unité 05", annee: "1ère Année", departement: "Médecine" },
 
   // Deuxième année
+  { module: "Cardio-respiratoire et hématopoïétique", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
+{ module: "Appareil digestif", unite: "Unité 02", annee: "2ème Année", departement: "Médecine" },
+{ module: "Appareil urinaire", unite: "Unité 03", annee: "2ème Année", departement: "Médecine" },
+{ module: "Appareil endocrinien, reproduction", unite: "Unité 04", annee: "2ème Année", departement: "Médecine" },
+{ module: "Appareils nerveux et organes de sens", unite: "Unité 05", annee: "2ème Année", departement: "Médecine" },
+{ module: "Immunologie", unite: "Unité 06", annee: "2ème Année", departement: "Médecine" },
+{ module: "Génétique", unite: "Unité 06", annee: "2ème Année", departement: "Médecine" },
   { module: "Anatomie", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
   { module: "Physiologie", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
   { module: "Histologie", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
