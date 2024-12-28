@@ -9,7 +9,7 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware((auth, req) => {
   // Check if user is authenticated and if the route is not public
-  if (!auth().userId && !isPublicRoute(req.url)) {
+  if (!auth().userId && !isPublicRoute(req)) {
     // Add custom logic here if necessary before redirecting
     return auth().redirectToSignIn();
   }
