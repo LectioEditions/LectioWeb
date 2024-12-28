@@ -25,4 +25,4 @@ const Page = async ({params}:{ params:{depNom : string}}) => {
 
 export default Page
 
-const Page = async () => {
+
