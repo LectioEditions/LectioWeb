@@ -5,8 +5,7 @@ import { getItemBySearch, getItemes } from '@/src/server/db';
 import { Loader } from 'lucide-react';
 import React from 'react'
 import { auth } from '@clerk/nextjs/server';
-import { Loader } from 'lucide-react';
-
+ 
 const Discover = async ({searchParams: {search}}:{searchParams:{search : string}}) => {
   const courss= await getItemBySearch(search ? search : '');
   const discover = await getItemes();
