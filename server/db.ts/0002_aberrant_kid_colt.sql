@@ -1,0 +1,1 @@
+ALTER TABLE "lection_users" RENAME COLUMN "podcastCount" TO "CoursCount";

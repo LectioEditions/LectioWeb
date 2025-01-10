@@ -1,0 +1,1 @@
+ALTER TABLE "lection_Order" DROP COLUMN IF EXISTS "etat";
