@@ -132,7 +132,11 @@ export const Modules = [
   { module: "Histologie", unite: "Unité 03", annee: "1ère Année", departement: "Médecine" },
   { module: "Physiologie", unite: "Unité 04", annee: "1ère Année", departement: "Médecine" },
   { module: "Embryologie", unite: "Unité 05", annee: "1ère Année", departement: "Médecine" },
-
+   { module: "Chimie", unite: "Unité 01", annee: "1ère Année", departement: "Médecine" },
+  { module: "SSH", unite: "Unité 02", annee: "1ère Année", departement: "Médecine" },
+  { module: "Cytologie", unite: "Unité 03", annee: "1ère Année", departement: "Médecine" },
+  { module: "Biophysique", unite: "Unité 04", annee: "1ère Année", departement: "Médecine" },
+  
   // Deuxième année
   { module: "Cardio-respiratoire et hématopoïétique", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
 { module: "Appareil digestif", unite: "Unité 02", annee: "2ème Année", departement: "Médecine" },
@@ -141,34 +145,7 @@ export const Modules = [
 { module: "Appareils nerveux et organes de sens", unite: "Unité 05", annee: "2ème Année", departement: "Médecine" },
 { module: "Immunologie", unite: "Unité 06", annee: "2ème Année", departement: "Médecine" },
 { module: "Génétique", unite: "Unité 06", annee: "2ème Année", departement: "Médecine" },
-  { module: "Anatomie", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
-  { module: "Physiologie", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
-  { module: "Histologie", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
-  { module: "Biophysique", unite: "Unité 01", annee: "2ème Année", departement: "Médecine" },
-
-  { module: "Anatomie", unite: "Unité 02", annee: "2ème Année", departement: "Médecine" },
-  { module: "Physiologie", unite: "Unité 02", annee: "2ème Année", departement: "Médecine" },
-  { module: "Histologie", unite: "Unité 02", annee: "2ème Année", departement: "Médecine" },
-  { module: "Biochimie", unite: "Unité 02", annee: "2ème Année", departement: "Médecine" },
-
-  { module: "Anatomie", unite: "Unité 03", annee: "2ème Année", departement: "Médecine" },
-  { module: "Physiologie", unite: "Unité 03", annee: "2ème Année", departement: "Médecine" },
-  { module: "Histologie", unite: "Unité 03", annee: "2ème Année", departement: "Médecine" },
-  { module: "Biochimie", unite: "Unité 03", annee: "2ème Année", departement: "Médecine" },
-
-  { module: "Anatomie", unite: "Unité 04", annee: "2ème Année", departement: "Médecine" },
-  { module: "Physiologie", unite: "Unité 04", annee: "2ème Année", departement: "Médecine" },
-  { module: "Histologie", unite: "Unité 04", annee: "2ème Année", departement: "Médecine" },
-  { module: "Biochimie", unite: "Unité 04", annee: "2ème Année", departement: "Médecine" },
-
-  { module: "Anatomie", unite: "Unité 05", annee: "2ème Année", departement: "Médecine" },
-  { module: "Physiologie", unite: "Unité 05", annee: "2ème Année", departement: "Médecine" },
-  { module: "Histologie", unite: "Unité 05", annee: "2ème Année", departement: "Médecine" },
-  { module: "Biophysique", unite: "Unité 05", annee: "2ème Année", departement: "Médecine" },
-
-  { module: "Génétique", unite: "Unité 06", annee: "2ème Année", departement: "Médecine" },
-  { module: "Immunologie", unite: "Unité 07", annee: "2ème Année", departement: "Médecine" },
-
+ 
   // Troisième année
   { module: "Sémiologie", unite: "Unité 01", annee: "3ème Année", departement: "Médecine" },
   { module: "Radiologie", unite: "Unité 01", annee: "3ème Année", departement: "Médecine" },
