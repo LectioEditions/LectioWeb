@@ -2,11 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 import { Loader } from "lucide-react";
 
-import { deleteOrder, getCartItemsByOrderId, getItemById, getOrderByIdentifier, insertCartItem, updateOrder } from '@/src/server/db'
-import { CartItem, CartItems, Item, Items, MergedItemCart, Orders, User } from '@/src/types';
-import { deleteItem, getUserByClerkId,isAgent } from '@/src/server/db';
-import { QueryResult } from '@vercel/postgres';
-import { auth, clerkClient } from '@clerk/nextjs/server';
+import { deleteOrder, getCartItemsByOrderId, getItemById, getOrderByIdentifier,   updateOrder } from '@/src/server/db'
+import {   Items, MergedItemCart, Orders } from '@/src/types';
+import {  isAgent } from '@/src/server/db';
+ import { auth  } from '@clerk/nextjs/server';
 import OrderDetails from '@/src/components/OrderDetailes';
 
 const editOrder= async (order :Orders)=>{
@@ -14,9 +13,8 @@ const editOrder= async (order :Orders)=>{
 
   const newOrder = await updateOrder(order);
    if(!newOrder) return;
-   return order;
+   return order.id;
 }
-
 const DeleteCommande= async (order :Orders)=>{
   "use server";
  console.log("order",order);
@@ -81,8 +79,8 @@ const Page = async({ params }: { params: { id: string } }) => {
         order={order} 
         archive={false} 
         ready={true}
-        editOrder={editOrder}
-        handleDelete={DeleteCommande}
+        onEditOrder={editOrder}
+        onDeleteOrder={DeleteCommande}
       />
     </section>
   );
