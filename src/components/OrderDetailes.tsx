@@ -104,7 +104,7 @@ export default function OrderDetails({
         {ready && (
           <Button 
             onClick={() => handleOrderAction('update', 'Terminé')} 
-            className='bg-green-1 text-white font-semibold text-lg w-full py-3 mt-8'
+            className='bg-green-1 dark:bg-green-1 text-white font-semibold text-lg w-full py-3 mt-8'
           >
             <Image
               src="/icons/check.svg"
