@@ -15,7 +15,7 @@ import ClientOrderDetails from '@/src/components/ClientOrderDetailes';
 
   const newOrder = await updateOrder(order);
    if(!newOrder) return;
-   return order;
+   return order.id;
 }
 const DeleteCommande= async (order :Orders)=>{
   "use server";
@@ -81,8 +81,9 @@ const Page = async({ params }: { params: { id: string } }) => {
         MergedItemCart={mergedItemsCart} 
         order={order} 
         archive={true} 
-        editOrder={editOrder}
-        handleDelete={DeleteCommande}
+        ready={false}
+        onEditOrder={editOrder}
+        onDeleteOrder={DeleteCommande}
       />:<ClientOrderDetails 
         MergedItemCart={mergedItemsCart}
         order={order}
