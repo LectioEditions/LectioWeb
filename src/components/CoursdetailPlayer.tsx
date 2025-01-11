@@ -11,6 +11,7 @@ import { Button } from "./ui/button";
 import { QueryResult } from "@vercel/postgres";
 import { toast } from "sonner";
 import QuantityForm from "./QuantityForm";
+import Link from "next/link";
 
 interface ItemDetailPlayerProps {
   Item: Items;
@@ -98,7 +99,9 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
               />
               <h2 className="text-16 font-normal text-black-1 dark:text-white-3 ">{owner.name}</h2>
             </figure>
+           <div className="flex justify-between items-center w-full">
             <h1 className="text-16 font-normal text-black-1 dark:text-white-1">Prix unitair: {Item.Prix}</h1>
+            <Link href={Item.PdfUrl} className="px-4 py-2 bg-green-1 text-white-1 rounded-sm font-semibold">Voir le PDF</Link></div>
           </article>
 
         { !showBtn &&  <QuantityForm addToCart={addCartItem} Item={Item} />}

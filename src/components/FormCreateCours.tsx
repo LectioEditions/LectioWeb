@@ -346,7 +346,7 @@ if(Dep=== "Pharma Industrielle"){setNivUniv(NivUniv_pharma_industrielle);}
                 </FormItem>
               )}
             />
-            {Type !=="Livre" && <FormField
+              <FormField
               control={form.control}
               name="CoursURL"
               render={({ field }) => (
@@ -363,13 +363,13 @@ if(Dep=== "Pharma Industrielle"){setNivUniv(NivUniv_pharma_industrielle);}
                   <FormMessage className="text-black-1 dark:text-white-1" />
                 </FormItem>
               )}
-            />}
-           {Type === "Livre" && <div>
+            /> 
+             <div>
            <MyDropzone 
               setImageURL={setImageURL} 
               
             />
-            </div>}
+            </div> 
           <div className="flex flex-col">
             <div className="">
               <Button
