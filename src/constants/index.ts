@@ -228,7 +228,67 @@ export const Modules = [
   { module: "Gestes sanitaires", annee: "3ème Année", departement: "Pharma Industrielle" },
   { module: "Langues étrangères", annee: "3ème Année", departement: "Pharma Industrielle" },
   { module: "Insertion professionnelle", annee: "3ème Année", departement: "Pharma Industrielle" },
-  { module: "Techniques de rédaction", annee: "3ème Année", departement: "Pharma Industrielle" }
+  { module: "Techniques de rédaction", annee: "3ème Année", departement: "Pharma Industrielle" },
+
+
+
+  { module: "Biochimie", unite: "Unité 01", annee: "1ère Année", departement: "Médecine Tipaza" },
+{ module: "Anatomie humaine", unite: "Unité 02", annee: "1ère Année", departement: "Médecine Tipaza" },
+{ module: "Histologie", unite: "Unité 03", annee: "1ère Année", departement: "Médecine Tipaza" },
+{ module: "Physiologie", unite: "Unité 04", annee: "1ère Année", departement: "Médecine Tipaza" },
+{ module: "Embryologie", unite: "Unité 05", annee: "1ère Année", departement: "Médecine Tipaza" },
+ { module: "Chimie", unite: "Unité 01", annee: "1ère Année", departement: "Médecine Tipaza" },
+{ module: "SSH", unite: "Unité 02", annee: "1ère Année", departement: "Médecine Tipaza" },
+{ module: "Cytologie", unite: "Unité 03", annee: "1ère Année", departement: "Médecine Tipaza" },
+{ module: "Biophysique", unite: "Unité 04", annee: "1ère Année", departement: "Médecine Tipaza" },
+
+// Deuxième année
+{ module: "Cardio-respiratoire et hématopoïétique", unite: "Unité 01", annee: "2ème Année", departement: "Médecine Tipaza" },
+{ module: "Appareil digestif", unite: "Unité 02", annee: "2ème Année", departement: "Médecine Tipaza" },
+{ module: "Appareil urinaire", unite: "Unité 03", annee: "2ème Année", departement: "Médecine Tipaza" },
+{ module: "Appareil endocrinien, reproduction", unite: "Unité 04", annee: "2ème Année", departement: "Médecine Tipaza" },
+{ module: "Appareils nerveux et organes de sens", unite: "Unité 05", annee: "2ème Année", departement: "Médecine Tipaza" },
+{ module: "Immunologie", unite: "Unité 06", annee: "2ème Année", departement: "Médecine Tipaza" },
+{ module: "Génétique", unite: "Unité 06", annee: "2ème Année", departement: "Médecine Tipaza" },
+
+// Troisième année
+{ module: "Sémiologie", unite: "Unité 01", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Radiologie", unite: "Unité 02", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Biochimie", unite: "Unité 03", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Physio-pathologie", unite: "Unité 04", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Physiologie Médicale", unite: "Unité 04", annee: "3ème Année", departement: "Médecine Tipaza" },
+
+
+{ module: "Parasitologie", unite: "Unité 05", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Pharmacologie Clinique", unite: "Unité 06", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Microbiologie", unite: "Unité 07", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Immunologie", unite: "Unité 08", annee: "3ème Année", departement: "Médecine Tipaza" },
+{ module: "Anatomopathologie", unite: "Unité 09", annee: "3ème Année", departement: "Médecine Tipaza" },
+
+// Quatrième année
+{ module: "Cardiologie", unite: "Unité 01", annee: "4ème Année", departement: "Médecine Tipaza" },
+{ module: "Neurologie", unite: "Unité 02", annee: "4ème Année", departement: "Médecine Tipaza" },
+{ module: "Infectiologie", unite: "Unité 03", annee: "4ème Année", departement: "Médecine Tipaza" },
+{ module: "Gastro-Entérologie", unite: "Unité 04", annee: "4ème Année", departement: "Médecine Tipaza" },
+{ module: "Onco-hématologie", unite: "Unité 05", annee: "4ème Année", departement: "Médecine Tipaza" },
+{ module: "Pneumologie", unite: "Unité 06", annee: "4ème Année", departement: "Médecine Tipaza" },
+
+// Cinquième année
+{ module: "Gynécologie-Obstétrique", unite: "Unité 01", annee: "5ème Année", departement: "Médecine Tipaza" },
+{ module: "Néphrologie et Urologie", unite: "Unité 02", annee: "5ème Année", departement: "Médecine Tipaza" },
+{ module: "Endocrinologie", unite: "Unité 03", annee: "5ème Année", departement: "Médecine Tipaza" },
+{ module: "Pédiatrie", unite: "Unité 04", annee: "5ème Année", departement: "Médecine Tipaza" },
+{ module: "Appareil Locomoteur", unite: "Unité 05", annee: "5ème Année", departement: "Médecine Tipaza" },
+{ module: "Psychiatrie", unite: "Unité 06", annee: "5ème Année", departement: "Médecine Tipaza" },
+
+// Sixième année
+{ module: "Ophtalmologie", unite: "Unité 01", annee: "6ème Année", departement: "Médecine Tipaza" },
+{ module: "Urgence médico-chirurgicale", unite: "Unité 02", annee: "6ème Année", departement: "Médecine Tipaza" },
+{ module: "Epidémiologie", unite: "Unité 03", annee: "6ème Année", departement: "Médecine Tipaza" },
+{ module: "Oto-rhino-laryngologie", unite: "Unité 04", annee: "6ème Année", departement: "Médecine Tipaza" },
+{ module: "Médecine du travail", unite: "Unité 05", annee: "6ème Année", departement: "Médecine Tipaza" },
+{ module: "Médecine Légale", unite: "Unité 06", annee: "6ème Année", departement: "Médecine Tipaza" },
+{ module: "Dermatologie", unite: "Unité 07", annee: "6ème Année", departement: "Médecine Tipaza" },
 
   
 
