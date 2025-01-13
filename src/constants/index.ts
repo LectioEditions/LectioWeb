@@ -147,19 +147,23 @@ export const Modules = [
 { module: "Génétique", unite: "Unité 06", annee: "2ème Année", departement: "Médecine" },
  
   // Troisième année
-  { module: "Sémiologie", unite: "Unité 01", annee: "3ème Année", departement: "Médecine" },
-  { module: "Radiologie", unite: "Unité 02", annee: "3ème Année", departement: "Médecine" },
-  { module: "Biochimie", unite: "Unité 03", annee: "3ème Année", departement: "Médecine" },
-  { module: "Physio-pathologie", unite: "Unité 04", annee: "3ème Année", departement: "Médecine" },
-  { module: "Physiologie Médicale", unite: "Unité 04", annee: "3ème Année", departement: "Médecine" },
- 
+  
 
-  { module: "Parasitologie", unite: "Unité 05", annee: "3ème Année", departement: "Médecine" },
-  { module: "Pharmacologie Clinique", unite: "Unité 06", annee: "3ème Année", departement: "Médecine" },
-  { module: "Microbiologie", unite: "Unité 07", annee: "3ème Année", departement: "Médecine" },
-  { module: "Immunologie", unite: "Unité 08", annee: "3ème Année", departement: "Médecine" },
-  { module: "Anatomopathologie", unite: "Unité 09", annee: "3ème Année", departement: "Médecine" },
 
+  { module: "Cardio-respiratoire", unite: "Unité 01", annee: "3ème Année", departement: "Médecine" },
+  { module: "ACP", unite: "Unité 01", annee: "3ème Année", departement: "Médecine" },
+  { module: "Immunologie", unite: "Unité 01", annee: "3ème Année", departement: "Médecine" },
+  { module: "Appareil neurologique, locomoteur et cutané", unite: "Unité 02", annee: "3ème Année", departement: "Médecine" },
+  { module: "ACP", unite: "Unité 02", annee: "3ème Année", departement: "Médecine" },
+  { module: "Immunologie", unite: "Unité 02", annee: "3ème Année", departement: "Médecine" },
+  { module: "Appareil endocrinien, reproduction et urinaire", unite: "Unité 03", annee: "3ème Année", departement: "Médecine" },
+  { module: "Microbiologie", unite: "Unité 03", annee: "3ème Année", departement: "Médecine" },
+  { module: "Parasitologie", unite: "Unité 03", annee: "3ème Année", departement: "Médecine" },
+  { module: "Pharmacologie", unite: "Unité 03", annee: "3ème Année", departement: "Médecine" },
+  { module: "Appareil endocrinien, reproduction et urinaire (suite)", unite: "Unité 04", annee: "3ème Année", departement: "Médecine" },
+  { module: "Microbiologie", unite: "Unité 04", annee: "3ème Année", departement: "Médecine" },
+  { module: "Parasitologie", unite: "Unité 04", annee: "3ème Année", departement: "Médecine" },
+  { module: "Pharmacologie", unite: "Unité 04", annee: "3ème Année", departement: "Médecine" },
   // Quatrième année
   { module: "Cardiologie", unite: "Unité 01", annee: "4ème Année", departement: "Médecine" },
   { module: "Neurologie", unite: "Unité 02", annee: "4ème Année", departement: "Médecine" },
