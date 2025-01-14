@@ -6,14 +6,14 @@ import OrderCard from '@/src/components/OrderCard';
 import { auth } from '@clerk/nextjs/server';
 
 const Page = async () => {
-  const orders= await getOrders("prête");
+  const orders= await getOrders("En cours de traitement");
   const user = await auth();
   if(!orders || !user) return <Loader size={50} className='mx-auto'/>;
   
   return (
     <section className=" w-full min-h-screen py-10">
       <div className='flex flex-col gap-9 '>
-      <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Commandes prêtes</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Commandes En cours de traitement</h1>
       {orders.length > 0 ? <div className='Cours_grid'>
         {orders.map((cours,index) => (
           <OrderCard route={"orders-ready"} idSimple={cours.id}   key={index} id={cours.identifier} Prix={cours.Prix}  CreatedAt={cours.createdAt}/>))}
