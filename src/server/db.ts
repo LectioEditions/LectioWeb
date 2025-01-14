@@ -339,7 +339,7 @@ export async function getAllOrders() {
     return orders;
   }
 
-  const orders = await db.select().from(schema.Order).where(eq(schema.Order.Status, "Terminé"));
+  const orders = await db.select().from(schema.Order).where(eq(schema.Order.Status, "prête"));
    
   return orders;
 }
