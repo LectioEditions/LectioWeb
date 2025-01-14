@@ -55,9 +55,7 @@ const ClientOrderDetails = ({ MergedItemCart, order  }: {
             <h2 className='text-16 font-normal text-black-1 dark:text-white-1'>ID du Commande : {order.id}</h2>
             <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Prix Total: {order.Prix}</h1>
             <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Wilaya: {order.Wilaya}</h1>
-            <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Commune: {order.Commune}</h1>
-
-            <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Adress: {order.Adress}</h1>
+            <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Status: {order.Status}</h1>
 
             <h1 className='text-16 font-normal text-black-1 dark:text-white-1'>Telephone: {order.NumTel}</h1>
           </div>
