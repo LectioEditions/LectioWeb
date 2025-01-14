@@ -73,7 +73,7 @@ export default function OrderDetails({
     const toastId = toast.loading("Entrain d'ajouter l'Item...");
     try {
       order.Temps = data.Temps;
-      order.Status = "prête";
+      order.Status = "En cours de traitement";
       const newOrder = await onEditOrder(order);
       if (!newOrder) throw new Error("dbProblem");
       toast.success("Item submitted successfully!");
@@ -155,7 +155,7 @@ export default function OrderDetails({
       </FormProvider>}
         {ready && (
           <Button 
-            onClick={() => handleOrderAction('update', 'Terminé')} 
+            onClick={() => handleOrderAction('update', 'prête')} 
             className='bg-green-1 text-white font-semibold text-lg w-full py-3 mt-8'
           >
             <Image
