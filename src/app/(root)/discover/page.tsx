@@ -8,7 +8,18 @@ import { auth } from '@clerk/nextjs/server';
  
 const Discover = async ({searchParams: {search}}:{searchParams:{search : string}}) => {
   const courss= await getItemBySearch(search ? search : '');
+  const sortedCourss = discover.sort((a, b) => {
+ const dateA = new Date(a.createdAt);
+  const dateB = new Date(b.createdAt);
+  return dateB.getTime() - dateA.getTime(); // descending order
+}); 
   const discover = await getItemes();
+ const sortedDiscover = discover.sort((a, b) => {
+  const dateA = new Date(a.createdAt);
+  const dateB = new Date(b.createdAt);
+  return dateB.getTime() - dateA.getTime(); // descending order
+});
+
   const user=await auth();
   if (!user.userId) {
    return(
@@ -23,12 +34,12 @@ const Discover = async ({searchParams: {search}}:{searchParams:{search : string}
       <div className='flex flex-col gap-9'>
       <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Discover</h1>
        {courss ? <>
-       {courss.length > 0 ? <div className='Cours_grid'>
-        {courss.map(cours => (
+       {sortedCourss.length > 0 ? <div className='Cours_grid'>
+        {sortedCourss.map(cours => (
           <CoursCard id={cours.id} imgURL={cours.imageURL} title={cours.Titre}  description={cours.description}/>))}
         </div>:<EmptyState title={'No Results found'}/>}
        </> : <>{ discover && !courss ? <div className='Cours_grid'>
-        {discover.map(cours => (
+        {sortedDiscover.map(cours => (
           <CoursCard id={cours.id} imgURL={cours.imageURL} title={cours.Titre}  description={cours.description}/>))}
        </div> : <Loader size={50} className='mx-auto'/>}
       </>
