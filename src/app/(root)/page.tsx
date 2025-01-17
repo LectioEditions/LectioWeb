@@ -44,9 +44,14 @@ const DepartmentSection: React.FC<DepartmentSectionProps> = ({ title, courses, l
 // Home component
 const Home = async () => {
   const courses = await fetchCourses();
-  // Filter courses by department
+  const sortedCourses = courses.sort((a, b) => {
+  const dateA = new Date(a.createdAt);
+  const dateB = new Date(b.createdAt);
+  return dateB.getTime() - dateA.getTime(); // descending order
+});
+
   const departmentCourses = Categories.map((category) =>
-    courses.filter((course) => course.Departement === category.dep)
+    sortedCourses.filter((course) => course.Departement === category.dep)
   );
   
   return (
