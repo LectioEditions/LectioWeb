@@ -14,7 +14,12 @@ const RightSideBar = async () => {
     getTopUserByItemCount(),
     getItemes()  // Ensure you have the correct function name here
   ]);
-  
+  const sortedItems = Cours.sort((a, b) => {
+  const dateA = new Date(a.createdAt);
+  const dateB = new Date(b.createdAt);
+  return dateB.getTime() - dateA.getTime(); // descending order
+});
+
   if (user.userId) var userData= await getUserByClerkId(user.userId);
   if(!topUsers || !Cours) return(<div className='w-full h-screen flex justify-center items-center'>
     <Loader size={30} className="animate-spin  text-green-1"/>
@@ -40,7 +45,7 @@ const RightSideBar = async () => {
       </SignedIn>
       <section>
         <Header headerTitle='Nos derniers ouvrages' titleClassName=''/>
-        <Carousel TopUsers={topUsers} Cours={Cours}/>
+        <Carousel TopUsers={topUsers} Cours={sortedItems}/>
 
       </section>
       
