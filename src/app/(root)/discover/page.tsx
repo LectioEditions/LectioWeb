@@ -13,7 +13,7 @@ const Discover = async ({searchParams: {search}}:{searchParams:{search : string}
 
 
   const user=await auth();
-  if (!user.userId || courss === undefined || discover === undefined) {
+  if (!user.userId || courss === undefined && discover === undefined) {
    return(
         <section className='w-full'>
             <Loader/>
