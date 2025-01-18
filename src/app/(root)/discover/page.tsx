@@ -8,26 +8,29 @@ import { auth } from '@clerk/nextjs/server';
  
 const Discover = async ({searchParams: {search}}:{searchParams:{search : string}}) => {
   const courss= await getItemBySearch(search ? search : '');
-  const sortedCourss = courss.sort((a, b) => {
- const dateA = new Date(a.createdAt);
-  const dateB = new Date(b.createdAt);
-  return dateB.getTime() - dateA.getTime(); // descending order
-}); 
+ 
   const discover = await getItemes();
- const sortedDiscover = discover.sort((a, b) => {
-  const dateA = new Date(a.createdAt);
-  const dateB = new Date(b.createdAt);
-  return dateB.getTime() - dateA.getTime(); // descending order
-});
+
 
   const user=await auth();
-  if (!user.userId) {
+  if (!user.userId || courss === undefined || discover === undefined) {
    return(
         <section className='w-full'>
             <Loader/>
         </section>
       ) 
   }
+
+  const sortedDiscover = discover.sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    return dateB.getTime() - dateA.getTime(); // descending order
+  });
+  const sortedCourss = courss.sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+     const dateB = new Date(b.createdAt);
+     return dateB.getTime() - dateA.getTime(); // descending order
+   });
   return (
     <div className=" flex flex-col gap-9">
       <SearchBar/>
