@@ -23,7 +23,7 @@ const DepartmentSection: React.FC<DepartmentSectionProps> = ({ title, courses, l
   <section className="flex flex-col gap-5">
     <h1 className="text-xl font-bold text-black-1 dark:text-white-1">{title}</h1>
     <div className="Cours_grid">
-      {courses.slice(0, 3).map((course, index) => (
+      {courses.slice(0, 2).map((course, index) => (
         <CoursCard
           key={index}
           title={course.Titre}
