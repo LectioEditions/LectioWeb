@@ -8,7 +8,7 @@ import { auth } from '@clerk/nextjs/server';
  
 const Discover = async ({searchParams: {search}}:{searchParams:{search : string}}) => {
   const courss= await getItemBySearch(search ? search : '');
-  const sortedCourss = discover.sort((a, b) => {
+  const sortedCourss = courss.sort((a, b) => {
  const dateA = new Date(a.createdAt);
   const dateB = new Date(b.createdAt);
   return dateB.getTime() - dateA.getTime(); // descending order
