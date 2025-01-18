@@ -15,7 +15,7 @@ const Discover = async ({searchParams: {search}}:{searchParams:{search : string}
   const user=await auth();
   if (!user.userId || courss === undefined && discover === undefined) {
    return(
-        <section className='w-full'>
+        <section className='w-full h-full flex justify-center items-center'>
             <Loader/>
         </section>
       ) 
@@ -26,11 +26,11 @@ const Discover = async ({searchParams: {search}}:{searchParams:{search : string}
     const dateB = new Date(b.createdAt);
     return dateB.getTime() - dateA.getTime(); // descending order
   });
-  const sortedCourss = courss.sort((a, b) => {
+   const sortedCourss = courss ? courss.sort((a, b) => {
     const dateA = new Date(a.createdAt);
      const dateB = new Date(b.createdAt);
      return dateB.getTime() - dateA.getTime(); // descending order
-   });
+   }) : [];
   return (
     <div className=" flex flex-col gap-9">
       <SearchBar/>
