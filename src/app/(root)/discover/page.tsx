@@ -35,7 +35,7 @@ const Discover = async ({searchParams: {search}}:{searchParams:{search : string}
     <div className=" flex flex-col gap-9">
       <SearchBar/>
       <div className='flex flex-col gap-9'>
-      <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Discover</h1>
+      <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Découvrir</h1>
        {courss ? <>
        {sortedCourss.length > 0 ? <div className='Cours_grid'>
         {sortedCourss.map(cours => (
