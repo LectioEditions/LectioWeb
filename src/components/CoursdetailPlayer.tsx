@@ -99,7 +99,7 @@ const ItemDetailPlayer: React.FC<ItemDetailPlayerProps> = ({
               />
               <h2 className="text-16 font-normal text-black-1 dark:text-white-3 ">{owner.name}</h2>
             </figure>
-           <div className="flex flex-col md:flex-row gap-4 lg:justify-between items-center w-full">
+           <div className="flex flex-col md:flex-row gap-4 lg:justify-between items-start lg:items-center w-full">
             <h1 className="text-16 font-normal text-black-1 dark:text-white-1">Prix unitair: {Item.Prix}</h1>
             <Link href={Item.PdfUrl} className="px-4 py-2 bg-green-1 text-white-1 rounded-sm font-semibold">Voir le PDF</Link></div>
           </article>
