@@ -27,12 +27,12 @@ const ClientOrderDetails = ({ MergedItemCart, order  }: {
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center '>
         <div className='bg-white-6 dark:bg-black-4 w-3/4 p-5 rounded-xl gap-5'>
-       <div className='flex justify-between items-center'>
-          <h1 className='text-xl font-bold text-black-1 dark:text-white-1'>Les detailles de la Commande</h1>
+       <div className='flex flex-col lg:flex-row lg:justify-between items-center'>
+          <h1 className='text-sm lg:text-xl font-bold text-black-1 dark:text-white-1'>Les detailles de la Commande</h1>
         <h1 className={`px-4 py-2 rounded-sm ${order.Temps === "0" ? "bg-red-500 bg-opacity-50 ": ""}`}>{order.Temps === "0" ? "En attente ": ""}</h1>
         </div>
       {MergedItemCart.map((item, index) => (
-        <figure key={index} className='flex justify-around items-center  bg-inherit py-5 rounded-xl text-black-1 dark:text-white-1 w-full'>
+        <figure key={index} className='flex flex-col lg:flex-row lg:justify-around gap-4 items-center  bg-inherit py-5 rounded-xl text-black-1 dark:text-white-1 w-full'>
           <Image
             src={item.imageURL ? item.imageURL : ""}
             alt={item.Titre ? item.Titre : "placeholder"}
